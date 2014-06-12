@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Coffeecup on I/O </title>
+      <generator uri="https://hugo.spf13.com">Hugo</generator>
+    <link>http://localhost:1313/tags/coffeecup/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Mon, 01 Jan 0001 00:00:00 UTC</updated>
+    
+    <item>
+      <title>DocPad</title>
+      <link>http://localhost:1313/post/docpad</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/post/docpad</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

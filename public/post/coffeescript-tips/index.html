@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>map[]</title>
+  <link href="/css/gisty.css" rel="stylesheet">
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-48719488-1');
+  ga('send', 'pageview');
+  </script>
+</head>
+<body>
+  <div class="wrapper">
+    <header class="header">
+      <div class="container">
+        <h1><a href="/">map[]</a></h1>
+      </div>
+    </header>
+    <div class="body">
+      <div class="container">
+
+  <article class="article">
+    <h1 class="article-title">CoffeeScript Tips</h1>
+    <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 0001-01-01</small></p> <hr/>
+    <div class="article-content">
+      
+
+<h2 id="toc_0">即時関数の引数に別名をつける</h2>
+
+<p>jQuery のプラグイン書くときとかに使う。
+<code>coffeescript
+do ($ = jQuery) -&gt;
+  console.log $
+</code>
+↓コンパイル
+<code>javascript
+(function($) {
+  return console.log($);
+})(jQuery);
+</code></p>
+
+<h2 id="toc_1">オブジェクトリテラルでオブジェクトを作る</h2>
+
+<pre><code class="coffeescript">a = 3
+b = true
+c = 'bar'
+console.log { a, b, c }  # =&gt; { a: 3, b: true, c: 'bar' }
+</code></pre>
+
+<h2 id="toc_2">分解代入で纏めて変数宣言</h2>
+
+<pre><code class="coffeescript">a = b = c = null
+</code></pre>
+
+<p>の代わりに下記のように書くことができる。
+<code>coffeescript
+[ a, b, c ] = []
+</code>
+↓コンパイル
+```javascript
+var a, b, c, _ref;</p>
+
+<p>_ref = [], a = _ref[0], b = _ref[1], c = _ref[2];
+```</p>
+
+<h2 id="toc_3">superを引数付きでコールする</h2>
+
+<p><code>super()</code>ではなく<code>super</code>と書くことで引数を引き継いでコールしてくれる。
+<code>coffeescript
+class Foo
+  constructor: (@a) -&gt;
+class Bar extends Foo
+  constructor: -&gt;
+    super
+bar = new Bar 3
+console.log bar.a  # =&gt; 3
+</code>
+便利な反面、<code>super</code>と書いた時点で継承元の関数が実行されることに気をつけなければならない。
+<code>coffeescript
+class Foo
+  func: -&gt;
+    console.log 'executed!!'
+    'foo'
+class Bar extends Foo
+  func: -&gt;
+    @superFunc = super
+    console.log @superFunc
+bar = new Bar()
+bar.func()  # =&gt; 'executed!!'
+            # =&gt; 'foo'
+</code>
+このように<code>super</code>を<code>@superFunc</code>に格納するつもりで書いたコードを実行すると、
+<code>super</code>を実行した戻りが<code>@superFunc</code>に格納されることになる。</p>
+
+<h2 id="toc_4">比較演算子</h2>
+
+<p>比較が捗る。
+<code>coffeescript
+a &lt;= b &lt; c
+</code>
+↓コンパイル
+<code>javascript
+(a &lt;= b &amp;&amp; b &lt; c);
+</code></p>
+
+<h2 id="toc_5">分解代入とクラスのthis代入の合わせ技</h2>
+
+<pre><code class="coffeescript">class Foo
+  constructor: ({@a})-&gt;
+
+foo = new Foo a: 3
+console.log foo.a  # =&gt; 3
+</code></pre>
+
+<h2 id="toc_6">Array comprehensionsのシュガー</h2>
+
+<p>ワンライナーで。
+<code>coffeescript
+countdown = (num for num in [10..1])
+</code>
+即時関数で。
+<code>coffeescript
+countdown = do -&gt; num for num in [10..1]
+</code></p>
+
+<h2 id="toc_7">引数の並置</h2>
+
+<pre><code class="coffeescript">a 1, 2, 3
+a 1,
+  2,
+  3
+a 1,
+  2
+  3
+</code></pre>
+
+<p>↓コンパイル
+<code>javascript
+a(1, 2, 3);
+</code></p>
+
+    </div>
+  </article>
+
+  <a href="https://twitter.com/share" class="twitter-share-button " data-size="small" data-count="none">Tweet</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+  <ul class="post-pagination">
+    <li class="prev"><a rel="prev" href="http://localhost:1313/post/backbone-tips">Backbone Tips</a></li>
+    <li class="next"><a rel="next" href="http://localhost:1313/post/development-atom-package">AtomEditorのパッケージ開発</a></li>
+  </ul>
+
+
+
+    </ul>
+    </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

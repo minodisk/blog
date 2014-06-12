@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Javascript on I/O </title>
+      <generator uri="https://hugo.spf13.com">Hugo</generator>
+    <link>http://localhost:1313/tags/javascript/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Mon, 01 Jan 0001 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Backbone Tips</title>
+      <link>http://localhost:1313/post/backbone-tips</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/post/backbone-tips</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;Backbone.history 関連&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Backbone.history.start()&lt;/code&gt; を実行したかどうかの判定には &lt;code&gt;Backbone.History.started&lt;/code&gt; を使う &lt;a href=&#34;https://github.com/jashkenas/backbone/blob/1.1.2/backbone.js#L1386&#34;&gt;backbone/backbone.js at 1.1.2 · jashkenas/backbone&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>YouTube JavaScript API</title>
+      <link>http://localhost:1313/post/youtube-javascript-api</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/post/youtube-javascript-api</guid>
+      <description>
+
+&lt;p&gt;YouTubeをembedするとJavaScriptのAPIが使えるようになります。
+&lt;script type=&#34;text/javascript&#34; src=&#34;http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js&#34;&gt;&lt;/script&gt;
+&lt;div id=&#34;ytapiplayer&#34;&gt;
+  You need Flash player 8+ and JavaScript enabled to view this video.
+&lt;/div&gt;
+&lt;div id=&#34;log&#34; style=&#34;height:150px;overflow-y:scroll;white-space:pre-wrap;font-family:monospace;font-size:12px;line-height:16px;&#34;&gt;
+&lt;/div&gt;
+&lt;script type=&#34;text/javascript&#34;&gt;
+var STATES = {
+  &amp;lsquo;-1&amp;rsquo;: &amp;lsquo;未開始&amp;rsquo;,
+  &amp;lsquo;0&amp;rsquo;: &amp;lsquo;終了&amp;rsquo;,
+  &amp;lsquo;1&amp;rsquo;: &amp;lsquo;再生中&amp;rsquo;,
+  &amp;lsquo;2&amp;rsquo;: &amp;lsquo;一時停止中&amp;rsquo;,
+  &amp;lsquo;3&amp;rsquo;: &amp;lsquo;バッファリング中&amp;rsquo;,
+  &amp;lsquo;5&amp;rsquo;: &amp;lsquo;頭出し済み&amp;rsquo;
+};
+var params = { allowScriptAccess: &amp;ldquo;always&amp;rdquo; };
+var atts = { id: &amp;ldquo;myytplayer&amp;rdquo; };
+swfobject.embedSWF(
+  &amp;ldquo;&lt;a href=&#34;http://www.youtube.com/v/u1zgFlCw8Aw?enablejsapi=1&amp;amp;playerapiid=ytplayer&amp;quot;&#34;&gt;http://www.youtube.com/v/u1zgFlCw8Aw?enablejsapi=1&amp;amp;playerapiid=ytplayer&amp;quot;&lt;/a&gt;,
+  &amp;ldquo;ytapiplayer&amp;rdquo;, &amp;ldquo;425&amp;rdquo;, &amp;ldquo;356&amp;rdquo;, &amp;ldquo;8&amp;rdquo;, null, null, params, atts
+  );
+var $log = $(&amp;lsquo;#log&amp;rsquo;);&lt;/p&gt;
+
+&lt;p&gt;function onYouTubePlayerReady(playerId) {
+  var ytplayer = document.getElementById(&amp;ldquo;myytplayer&amp;rdquo;);
+  ytplayer.addEventListener(&amp;lsquo;onStateChange&amp;rsquo;, &amp;lsquo;onStateChange&amp;rsquo;);
+}
+function onStateChange(state) {
+  log(&amp;lsquo;onStateChange:&amp;lsquo;, state, &amp;lsquo;=&amp;rsquo;, STATES[&amp;rdquo; + state]);
+}
+function log() {
+  $log
+    .text($log.text() + Array.prototype.join.call(arguments, &amp;lsquo; &amp;lsquo;) + &amp;lsquo;\n&amp;rsquo;)
+    .scrollTop($log.prop(&amp;lsquo;scrollHeight&amp;rsquo;));
+}
+&lt;/script&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;ExternalInterface に関する Tips&lt;/h2&gt;
+
+&lt;p&gt;YouTube JavaScript API からは &lt;code&gt;ExternalInterface.call&lt;/code&gt; 経由で JavaScript がコールされる。
+このAPIに限らず &lt;code&gt;ExternalInterface.call&lt;/code&gt; を使う際に共通の注意点だが、FlashPlayer は JavaScript のメソッドのその戻りを待っている間レンダリングをやめてしまう。
+対策として、JavaScript から何も返さない場合は次のイベントループで処理を行い、関数自体は &lt;code&gt;return&lt;/code&gt; して FlashPlayer のレンダリングを再開させてあげるのがスムーズに見える。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;javascript&#34;&gt;function onStateChange(state) {
+  setTimeout(function () {
+    log();
+  });
+  return;
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Access to title in IE8</title>
+      <link>http://localhost:1313/post/access-to-title-in-ie8</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/post/access-to-title-in-ie8</guid>
+      <description>&lt;p&gt;jQueryではIE8で&lt;code&gt;title&lt;/code&gt;へのアクセスができないので直接アクセスする。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;javascript&#34;&gt;$(&#39;title&#39;).text(&#39;foo&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;javascript&#34;&gt;document.title = &#39;foo&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Path Animation</title>
+      <link>http://localhost:1313/post/path-animation</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/post/path-animation</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;パスアニメーションとは&lt;/h2&gt;
+
+&lt;p&gt;パスに沿ってオブジェクトを移動させるアニメーションのことです。
+今回はSnap.svgでSVGをパースし、Illustratorで引いたパスに沿ってDOMを動かしてみます。&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;要点&lt;/h2&gt;
+
+&lt;p&gt;Snap.svgはSVGで絵を書くだけではなく、外部SVGのパースを行うことが可能。
+使用するライブラリの役割は以下のとおり。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;jQuery: DOM操作&lt;/li&gt;
+&lt;li&gt;jQuery Transit: アニメーション&lt;/li&gt;
+&lt;li&gt;Snap.svg: svgのパース&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;toc_2&#34;&gt;実装&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;javascript&#34;&gt;var fragment
+  , ready = _.after(2, function () {
+      var path = fragment.select(&#39;g&#39;).select(&#39;*&#39;)
+        , totalLength = path.getTotalLength()
+        , i = 0
+        , point
+        , $car = $(&#39;.car&#39;)
+        ;
+
+      // ダミー要素のtopを0からパスの全長までanimateします。
+      // setIntervalを使って独自にアニメーションするよりも熟れたコードになり、
+      // イージングを掛けられるようになるので表現の幅も容易に広がります。
+      $(&#39;&amp;lt;div&amp;gt;&#39;)
+        .animate({
+          top: path.getTotalLength()  // パスの全長を取得
+        }, {
+          easing: &#39;easeOut&#39;,
+          step: function (length) {
+            var point = path.getPointAtLength(length)  // パスの現在の長さに対する座標を取得
+              , x = point.x                            // x座標
+              , y = point.y                            // y座標
+              , alpha = point.alpha                    // パスの進む方向
+              ;
+            $car
+              .css({
+                x: x
+                y: y
+                rotate: alpha
+              });
+          })
+        });
+    })
+    ;
+})
+;
+
+// DOMのロード
+$(document).one(&#39;ready&#39;, ready);
+// SVGのロード
+Snap.load(&#39;/data/2014-03-07-path-animation.svg&#39;, function (f) {
+  fragment = f;
+  ready();
+});
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

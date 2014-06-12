@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Recent Content on I/O </title>
+      <generator uri="https://hugo.spf13.com">Hugo</generator>
+    <link>http://localhost:1313/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Thu, 12 Jun 2014 08:32:47 UTC</updated>
+    
+    <item>
+      <title>test</title>
+      <link>http://localhost:1313/post/test</link>
+      <pubDate>Thu, 12 Jun 2014 08:32:47 UTC</pubDate>
+      
+      <guid>http://localhost:1313/post/test</guid>
+      <description>&lt;p&gt;abc&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>about</title>
+      <link>http://localhost:1313/about</link>
+      <pubDate>Thu, 12 Jun 2014 07:37:22 UTC</pubDate>
+      
+      <guid>http://localhost:1313/about</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;Me&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://twitter.com/minodisk&#34;&gt;Twitter&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://plus.google.com/117361242608765720862/posts&#34;&gt;Google+&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/minodisk&#34;&gt;GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Backbone Tips</title>
+      <link>http://localhost:1313/post/backbone-tips</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/post/backbone-tips</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;Backbone.history 関連&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Backbone.history.start()&lt;/code&gt; を実行したかどうかの判定には &lt;code&gt;Backbone.History.started&lt;/code&gt; を使う &lt;a href=&#34;https://github.com/jashkenas/backbone/blob/1.1.2/backbone.js#L1386&#34;&gt;backbone/backbone.js at 1.1.2 · jashkenas/backbone&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>CoffeeScript Tips</title>
+      <link>http://localhost:1313/post/coffeescript-tips</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/post/coffeescript-tips</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;即時関数の引数に別名をつける&lt;/h2&gt;
+
+&lt;p&gt;jQuery のプラグイン書くときとかに使う。
+&lt;code&gt;coffeescript
+do ($ = jQuery) -&amp;gt;
+  console.log $
+&lt;/code&gt;
+↓コンパイル
+&lt;code&gt;javascript
+(function($) {
+  return console.log($);
+})(jQuery);
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;オブジェクトリテラルでオブジェクトを作る&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;coffeescript&#34;&gt;a = 3
+b = true
+c = &#39;bar&#39;
+console.log { a, b, c }  # =&amp;gt; { a: 3, b: true, c: &#39;bar&#39; }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;toc_2&#34;&gt;分解代入で纏めて変数宣言&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;coffeescript&#34;&gt;a = b = c = null
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;の代わりに下記のように書くことができる。
+&lt;code&gt;coffeescript
+[ a, b, c ] = []
+&lt;/code&gt;
+↓コンパイル
+```javascript
+var a, b, c, _ref;&lt;/p&gt;
+
+&lt;p&gt;_ref = [], a = _ref[0], b = _ref[1], c = _ref[2];
+```&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_3&#34;&gt;superを引数付きでコールする&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;super()&lt;/code&gt;ではなく&lt;code&gt;super&lt;/code&gt;と書くことで引数を引き継いでコールしてくれる。
+&lt;code&gt;coffeescript
+class Foo
+  constructor: (@a) -&amp;gt;
+class Bar extends Foo
+  constructor: -&amp;gt;
+    super
+bar = new Bar 3
+console.log bar.a  # =&amp;gt; 3
+&lt;/code&gt;
+便利な反面、&lt;code&gt;super&lt;/code&gt;と書いた時点で継承元の関数が実行されることに気をつけなければならない。
+&lt;code&gt;coffeescript
+class Foo
+  func: -&amp;gt;
+    console.log &#39;executed!!&#39;
+    &#39;foo&#39;
+class Bar extends Foo
+  func: -&amp;gt;
+    @superFunc = super
+    console.log @superFunc
+bar = new Bar()
+bar.func()  # =&amp;gt; &#39;executed!!&#39;
+            # =&amp;gt; &#39;foo&#39;
+&lt;/code&gt;
+このように&lt;code&gt;super&lt;/code&gt;を&lt;code&gt;@superFunc&lt;/code&gt;に格納するつもりで書いたコードを実行すると、
+&lt;code&gt;super&lt;/code&gt;を実行した戻りが&lt;code&gt;@superFunc&lt;/code&gt;に格納されることになる。&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_4&#34;&gt;比較演算子&lt;/h2&gt;
+
+&lt;p&gt;比較が捗る。
+&lt;code&gt;coffeescript
+a &amp;lt;= b &amp;lt; c
+&lt;/code&gt;
+↓コンパイル
+&lt;code&gt;javascript
+(a &amp;lt;= b &amp;amp;&amp;amp; b &amp;lt; c);
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_5&#34;&gt;分解代入とクラスのthis代入の合わせ技&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;coffeescript&#34;&gt;class Foo
+  constructor: ({@a})-&amp;gt;
+
+foo = new Foo a: 3
+console.log foo.a  # =&amp;gt; 3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;toc_6&#34;&gt;Array comprehensionsのシュガー&lt;/h2&gt;
+
+&lt;p&gt;ワンライナーで。
+&lt;code&gt;coffeescript
+countdown = (num for num in [10..1])
+&lt;/code&gt;
+即時関数で。
+&lt;code&gt;coffeescript
+countdown = do -&amp;gt; num for num in [10..1]
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_7&#34;&gt;引数の並置&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;coffeescript&#34;&gt;a 1, 2, 3
+a 1,
+  2,
+  3
+a 1,
+  2
+  3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;↓コンパイル
+&lt;code&gt;javascript
+a(1, 2, 3);
+&lt;/code&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>AtomEditorのパッケージ開発</title>
+      <link>http://localhost:1313/post/development-atom-package</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/post/development-atom-package</guid>
+      <description>
+
+&lt;p&gt;逆引き的ななにか。&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;Package書くときに使う&lt;/h2&gt;
+
+&lt;h3 id=&#34;toc_1&#34;&gt;パッケージのSettingsにチェックボックスを表示する&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;coffeescript&#34;&gt;module.exports =
+  configDefaults:
+    highlightReference: true
+    highlightError    : true
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;toc_2&#34;&gt;文法がCoffeeScriptかを調べる&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Grammar::scopeName&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;coffeescript&#34;&gt;editor = atom.workspaceView.getActiveEditor()
+scopeName = @editor.getGrammar().scopeName
+console.log scopeName is &#39;source.coffee&#39; or scopeName is &#39;source.litcoffee&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;toc_3&#34;&gt;カーソル下の単語の範囲の取得する&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Cursor::getCurrentWordBufferRange()&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;coffeescript&#34;&gt;editor = atom.workspaceView.getActiveEditor()
+cursor = editor.cursors[0]
+range = cursor.getCurrentWordBufferRange includeNonWordCharacters: false
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;toc_4&#34;&gt;WorkspaceView#commandをoffする&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;WorkspaceView#command()&lt;/code&gt;では&lt;code&gt;WorkspaceView.data(&#39;documentation&#39;)&lt;/code&gt;にeventName/docStringを登録してるだけで、イベント自体はjQueryの&lt;code&gt;on()&lt;/code&gt;で聞いてる。
+よってoffしたい時は普通に&lt;code&gt;WorkspaceView#off()&lt;/code&gt;すればよい。
+&lt;code&gt;coffeescript
+atom.workspaceView.command &#39;hoge:action&#39;, handler
+atom.workspaceView.off &#39;hoge:action&#39;, handler
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_5&#34;&gt;Spec書く時に使う&lt;/h2&gt;
+
+&lt;h3 id=&#34;toc_6&#34;&gt;CoffeeScriptの言語パッケージをロードする&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;PackageManager::resolvePackagePath(packageName)&lt;/code&gt;: パッケージ名からパッケージのパスを取得する&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Syntax::loadGrammarSync(grammarPath)&lt;/code&gt;: 言語パッケージをロードする&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;coffeescript&#34;&gt;languageCoffeeScriptPath = atom.packages.resolvePackagePath &#39;language-coffee-script&#39;
+grammarDir = path.resolve languageCoffeeScriptPath, &#39;grammars&#39;
+for filename in fs.readdirSync grammarDir
+  atom.syntax.loadGrammarSync path.resolve grammarDir, filename
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;toc_7&#34;&gt;参考サイト&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://atom.io/docs/api/&#34;&gt;Atom API Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://gist.github.com/ardcore/9262498&#34;&gt;atom.io events&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Install node-canvas</title>
+      <link>http://localhost:1313/post/install-node-canvas</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/post/install-node-canvas</guid>
+      <description>
+
+&lt;p&gt;依存バッケージをインストールしておかないと&lt;code&gt;node-canvas&lt;/code&gt;のインストールでコケる。&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;CentOS&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;bash&#34;&gt;yum install cairo cairo-devel cairomm-devel libjpeg-turbo-devel pango pango-devel pangomm pangomm-devel giflib-devel
+npm install canvas
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;MacOSX&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;bash&#34;&gt;brew install cairo
+export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig
+npm install canvas
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>YouTube JavaScript API</title>
+      <link>http://localhost:1313/post/youtube-javascript-api</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/post/youtube-javascript-api</guid>
+      <description>
+
+&lt;p&gt;YouTubeをembedするとJavaScriptのAPIが使えるようになります。
+&lt;script type=&#34;text/javascript&#34; src=&#34;http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js&#34;&gt;&lt;/script&gt;
+&lt;div id=&#34;ytapiplayer&#34;&gt;
+  You need Flash player 8+ and JavaScript enabled to view this video.
+&lt;/div&gt;
+&lt;div id=&#34;log&#34; style=&#34;height:150px;overflow-y:scroll;white-space:pre-wrap;font-family:monospace;font-size:12px;line-height:16px;&#34;&gt;
+&lt;/div&gt;
+&lt;script type=&#34;text/javascript&#34;&gt;
+var STATES = {
+  &amp;lsquo;-1&amp;rsquo;: &amp;lsquo;未開始&amp;rsquo;,
+  &amp;lsquo;0&amp;rsquo;: &amp;lsquo;終了&amp;rsquo;,
+  &amp;lsquo;1&amp;rsquo;: &amp;lsquo;再生中&amp;rsquo;,
+  &amp;lsquo;2&amp;rsquo;: &amp;lsquo;一時停止中&amp;rsquo;,
+  &amp;lsquo;3&amp;rsquo;: &amp;lsquo;バッファリング中&amp;rsquo;,
+  &amp;lsquo;5&amp;rsquo;: &amp;lsquo;頭出し済み&amp;rsquo;
+};
+var params = { allowScriptAccess: &amp;ldquo;always&amp;rdquo; };
+var atts = { id: &amp;ldquo;myytplayer&amp;rdquo; };
+swfobject.embedSWF(
+  &amp;ldquo;&lt;a href=&#34;http://www.youtube.com/v/u1zgFlCw8Aw?enablejsapi=1&amp;amp;playerapiid=ytplayer&amp;quot;&#34;&gt;http://www.youtube.com/v/u1zgFlCw8Aw?enablejsapi=1&amp;amp;playerapiid=ytplayer&amp;quot;&lt;/a&gt;,
+  &amp;ldquo;ytapiplayer&amp;rdquo;, &amp;ldquo;425&amp;rdquo;, &amp;ldquo;356&amp;rdquo;, &amp;ldquo;8&amp;rdquo;, null, null, params, atts
+  );
+var $log = $(&amp;lsquo;#log&amp;rsquo;);&lt;/p&gt;
+
+&lt;p&gt;function onYouTubePlayerReady(playerId) {
+  var ytplayer = document.getElementById(&amp;ldquo;myytplayer&amp;rdquo;);
+  ytplayer.addEventListener(&amp;lsquo;onStateChange&amp;rsquo;, &amp;lsquo;onStateChange&amp;rsquo;);
+}
+function onStateChange(state) {
+  log(&amp;lsquo;onStateChange:&amp;lsquo;, state, &amp;lsquo;=&amp;rsquo;, STATES[&amp;rdquo; + state]);
+}
+function log() {
+  $log
+    .text($log.text() + Array.prototype.join.call(arguments, &amp;lsquo; &amp;lsquo;) + &amp;lsquo;\n&amp;rsquo;)
+    .scrollTop($log.prop(&amp;lsquo;scrollHeight&amp;rsquo;));
+}
+&lt;/script&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;ExternalInterface に関する Tips&lt;/h2&gt;
+
+&lt;p&gt;YouTube JavaScript API からは &lt;code&gt;ExternalInterface.call&lt;/code&gt; 経由で JavaScript がコールされる。
+このAPIに限らず &lt;code&gt;ExternalInterface.call&lt;/code&gt; を使う際に共通の注意点だが、FlashPlayer は JavaScript のメソッドのその戻りを待っている間レンダリングをやめてしまう。
+対策として、JavaScript から何も返さない場合は次のイベントループで処理を行い、関数自体は &lt;code&gt;return&lt;/code&gt; して FlashPlayer のレンダリングを再開させてあげるのがスムーズに見える。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;javascript&#34;&gt;function onStateChange(state) {
+  setTimeout(function () {
+    log();
+  });
+  return;
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>DocPad</title>
+      <link>http://localhost:1313/post/docpad</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/post/docpad</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CoffeeScript Compiler</title>
+      <link>http://localhost:1313/post/coffeescript-compiler</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/post/coffeescript-compiler</guid>
+      <description>
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/minodisk/coffee-refactor&#34;&gt;minodisk/coffee-refactor&lt;/a&gt;を作成中に&lt;a href=&#34;http://coffeescript.org/documentation/docs/&#34;&gt;index.coffee&lt;/a&gt;を読んでわかったことのメモ。&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;nodes.coffee&lt;/h2&gt;
+
+&lt;h3 id=&#34;toc_1&#34;&gt;Code#compileNode()&lt;/h3&gt;
+
+&lt;p&gt;ノードをコンパイルする。
+コンパイルの過程で&lt;code&gt;Scope&lt;/code&gt;インスタンスが作成される。
+オプションに親のスコープを渡すと&lt;code&gt;variables&lt;/code&gt;は親のスコープ内で宣言された変数を考慮した変数のリストとなる。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;coffeescript&#34;&gt;options =
+  scope: parent.scope
+  indent: &#39;&#39;
+code.compileNode options
+scope = options.scope
+console.log scope.variables
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;toc_2&#34;&gt;scope.coffee&lt;/h2&gt;
+
+&lt;h3 id=&#34;toc_3&#34;&gt;Scope#declaredVariables()&lt;/h3&gt;
+
+&lt;p&gt;スコープ内で&lt;code&gt;var&lt;/code&gt;で宣言される変数の配列を返す。パラメータは含まれない。&lt;/p&gt;
+
+&lt;p&gt;スコープ内で定義される全ての名前空間を取得するためには、さらにパラメータを含む必要が有るため下記のコードを使う。
+&lt;code&gt;coffeescript
+declaredSymbols = (scope) -&amp;gt;
+  realVars = []
+  tempVars = []
+  for v in @variables when v.type is &#39;var&#39; or v.type is &#39;param&#39;
+    (if v.name.charAt(0) is &#39;_&#39; then tempVars else realVars).push v.name
+  realVars.sort().concat tempVars.sort()
+&lt;/code&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Access to title in IE8</title>
+      <link>http://localhost:1313/post/access-to-title-in-ie8</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/post/access-to-title-in-ie8</guid>
+      <description>&lt;p&gt;jQueryではIE8で&lt;code&gt;title&lt;/code&gt;へのアクセスができないので直接アクセスする。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;javascript&#34;&gt;$(&#39;title&#39;).text(&#39;foo&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;javascript&#34;&gt;document.title = &#39;foo&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Path Animation</title>
+      <link>http://localhost:1313/post/path-animation</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/post/path-animation</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;パスアニメーションとは&lt;/h2&gt;
+
+&lt;p&gt;パスに沿ってオブジェクトを移動させるアニメーションのことです。
+今回はSnap.svgでSVGをパースし、Illustratorで引いたパスに沿ってDOMを動かしてみます。&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;要点&lt;/h2&gt;
+
+&lt;p&gt;Snap.svgはSVGで絵を書くだけではなく、外部SVGのパースを行うことが可能。
+使用するライブラリの役割は以下のとおり。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;jQuery: DOM操作&lt;/li&gt;
+&lt;li&gt;jQuery Transit: アニメーション&lt;/li&gt;
+&lt;li&gt;Snap.svg: svgのパース&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;toc_2&#34;&gt;実装&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;javascript&#34;&gt;var fragment
+  , ready = _.after(2, function () {
+      var path = fragment.select(&#39;g&#39;).select(&#39;*&#39;)
+        , totalLength = path.getTotalLength()
+        , i = 0
+        , point
+        , $car = $(&#39;.car&#39;)
+        ;
+
+      // ダミー要素のtopを0からパスの全長までanimateします。
+      // setIntervalを使って独自にアニメーションするよりも熟れたコードになり、
+      // イージングを掛けられるようになるので表現の幅も容易に広がります。
+      $(&#39;&amp;lt;div&amp;gt;&#39;)
+        .animate({
+          top: path.getTotalLength()  // パスの全長を取得
+        }, {
+          easing: &#39;easeOut&#39;,
+          step: function (length) {
+            var point = path.getPointAtLength(length)  // パスの現在の長さに対する座標を取得
+              , x = point.x                            // x座標
+              , y = point.y                            // y座標
+              , alpha = point.alpha                    // パスの進む方向
+              ;
+            $car
+              .css({
+                x: x
+                y: y
+                rotate: alpha
+              });
+          })
+        });
+    })
+    ;
+})
+;
+
+// DOMのロード
+$(document).one(&#39;ready&#39;, ready);
+// SVGのロード
+Snap.load(&#39;/data/2014-03-07-path-animation.svg&#39;, function (f) {
+  fragment = f;
+  ready();
+});
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

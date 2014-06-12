@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>map[]</title>
+  <link href="/css/gisty.css" rel="stylesheet">
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-48719488-1');
+  ga('send', 'pageview');
+  </script>
+</head>
+<body>
+  <div class="wrapper">
+    <header class="header">
+      <div class="container">
+        <h1><a href="/">map[]</a></h1>
+      </div>
+    </header>
+    <div class="body">
+      <div class="container">
+
+  <article class="article">
+    <h1 class="article-title">YouTube JavaScript API</h1>
+    <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 0001-01-01</small></p> <hr/>
+    <div class="article-content">
+      
+
+<p>YouTubeをembedするとJavaScriptのAPIが使えるようになります。
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+<div id="ytapiplayer">
+  You need Flash player 8+ and JavaScript enabled to view this video.
+</div>
+<div id="log" style="height:150px;overflow-y:scroll;white-space:pre-wrap;font-family:monospace;font-size:12px;line-height:16px;">
+</div>
+<script type="text/javascript">
+var STATES = {
+  &lsquo;-1&rsquo;: &lsquo;未開始&rsquo;,
+  &lsquo;0&rsquo;: &lsquo;終了&rsquo;,
+  &lsquo;1&rsquo;: &lsquo;再生中&rsquo;,
+  &lsquo;2&rsquo;: &lsquo;一時停止中&rsquo;,
+  &lsquo;3&rsquo;: &lsquo;バッファリング中&rsquo;,
+  &lsquo;5&rsquo;: &lsquo;頭出し済み&rsquo;
+};
+var params = { allowScriptAccess: &ldquo;always&rdquo; };
+var atts = { id: &ldquo;myytplayer&rdquo; };
+swfobject.embedSWF(
+  &ldquo;<a href="http://www.youtube.com/v/u1zgFlCw8Aw?enablejsapi=1&amp;playerapiid=ytplayer&quot;">http://www.youtube.com/v/u1zgFlCw8Aw?enablejsapi=1&amp;playerapiid=ytplayer&quot;</a>,
+  &ldquo;ytapiplayer&rdquo;, &ldquo;425&rdquo;, &ldquo;356&rdquo;, &ldquo;8&rdquo;, null, null, params, atts
+  );
+var $log = $(&lsquo;#log&rsquo;);</p>
+
+<p>function onYouTubePlayerReady(playerId) {
+  var ytplayer = document.getElementById(&ldquo;myytplayer&rdquo;);
+  ytplayer.addEventListener(&lsquo;onStateChange&rsquo;, &lsquo;onStateChange&rsquo;);
+}
+function onStateChange(state) {
+  log(&lsquo;onStateChange:&lsquo;, state, &lsquo;=&rsquo;, STATES[&rdquo; + state]);
+}
+function log() {
+  $log
+    .text($log.text() + Array.prototype.join.call(arguments, &lsquo; &lsquo;) + &lsquo;\n&rsquo;)
+    .scrollTop($log.prop(&lsquo;scrollHeight&rsquo;));
+}
+</script></p>
+
+<h2 id="toc_0">ExternalInterface に関する Tips</h2>
+
+<p>YouTube JavaScript API からは <code>ExternalInterface.call</code> 経由で JavaScript がコールされる。
+このAPIに限らず <code>ExternalInterface.call</code> を使う際に共通の注意点だが、FlashPlayer は JavaScript のメソッドのその戻りを待っている間レンダリングをやめてしまう。
+対策として、JavaScript から何も返さない場合は次のイベントループで処理を行い、関数自体は <code>return</code> して FlashPlayer のレンダリングを再開させてあげるのがスムーズに見える。</p>
+
+<pre><code class="javascript">function onStateChange(state) {
+  setTimeout(function () {
+    log();
+  });
+  return;
+}
+</code></pre>
+
+    </div>
+  </article>
+
+  <a href="https://twitter.com/share" class="twitter-share-button " data-size="small" data-count="none">Tweet</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+  <ul class="post-pagination">
+    <li class="prev"><a rel="prev" href="http://localhost:1313/post/install-node-canvas">Install node-canvas</a></li>
+    <li class="next"><a rel="next" href="http://localhost:1313/post/docpad">DocPad</a></li>
+  </ul>
+
+
+
+    </ul>
+    </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

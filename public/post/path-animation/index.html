@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>map[]</title>
+  <link href="/css/gisty.css" rel="stylesheet">
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-48719488-1');
+  ga('send', 'pageview');
+  </script>
+</head>
+<body>
+  <div class="wrapper">
+    <header class="header">
+      <div class="container">
+        <h1><a href="/">map[]</a></h1>
+      </div>
+    </header>
+    <div class="body">
+      <div class="container">
+
+  <article class="article">
+    <h1 class="article-title">Path Animation</h1>
+    <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 0001-01-01</small></p> <hr/>
+    <div class="article-content">
+      
+
+<h2 id="toc_0">パスアニメーションとは</h2>
+
+<p>パスに沿ってオブジェクトを移動させるアニメーションのことです。
+今回はSnap.svgでSVGをパースし、Illustratorで引いたパスに沿ってDOMを動かしてみます。</p>
+
+<h2 id="toc_1">要点</h2>
+
+<p>Snap.svgはSVGで絵を書くだけではなく、外部SVGのパースを行うことが可能。
+使用するライブラリの役割は以下のとおり。</p>
+
+<ul>
+<li>jQuery: DOM操作</li>
+<li>jQuery Transit: アニメーション</li>
+<li>Snap.svg: svgのパース</li>
+</ul>
+
+<h2 id="toc_2">実装</h2>
+
+<pre><code class="javascript">var fragment
+  , ready = _.after(2, function () {
+      var path = fragment.select('g').select('*')
+        , totalLength = path.getTotalLength()
+        , i = 0
+        , point
+        , $car = $('.car')
+        ;
+
+      // ダミー要素のtopを0からパスの全長までanimateします。
+      // setIntervalを使って独自にアニメーションするよりも熟れたコードになり、
+      // イージングを掛けられるようになるので表現の幅も容易に広がります。
+      $('&lt;div&gt;')
+        .animate({
+          top: path.getTotalLength()  // パスの全長を取得
+        }, {
+          easing: 'easeOut',
+          step: function (length) {
+            var point = path.getPointAtLength(length)  // パスの現在の長さに対する座標を取得
+              , x = point.x                            // x座標
+              , y = point.y                            // y座標
+              , alpha = point.alpha                    // パスの進む方向
+              ;
+            $car
+              .css({
+                x: x
+                y: y
+                rotate: alpha
+              });
+          })
+        });
+    })
+    ;
+})
+;
+
+// DOMのロード
+$(document).one('ready', ready);
+// SVGのロード
+Snap.load('/data/2014-03-07-path-animation.svg', function (f) {
+  fragment = f;
+  ready();
+});
+</code></pre>
+
+    </div>
+  </article>
+
+  <a href="https://twitter.com/share" class="twitter-share-button " data-size="small" data-count="none">Tweet</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+  <ul class="post-pagination">
+    <li class="prev"><a rel="prev" href="http://localhost:1313/post/access-to-title-in-ie8">Access to title in IE8</a></li>
+    
+  </ul>
+
+
+
+    </ul>
+    </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

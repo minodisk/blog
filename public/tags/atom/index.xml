@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Atom on I/O </title>
+      <generator uri="https://hugo.spf13.com">Hugo</generator>
+    <link>http://localhost:1313/tags/atom/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Mon, 01 Jan 0001 00:00:00 UTC</updated>
+    
+    <item>
+      <title>AtomEditorのパッケージ開発</title>
+      <link>http://localhost:1313/post/development-atom-package</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/post/development-atom-package</guid>
+      <description>
+
+&lt;p&gt;逆引き的ななにか。&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;Package書くときに使う&lt;/h2&gt;
+
+&lt;h3 id=&#34;toc_1&#34;&gt;パッケージのSettingsにチェックボックスを表示する&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;coffeescript&#34;&gt;module.exports =
+  configDefaults:
+    highlightReference: true
+    highlightError    : true
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;toc_2&#34;&gt;文法がCoffeeScriptかを調べる&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Grammar::scopeName&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;coffeescript&#34;&gt;editor = atom.workspaceView.getActiveEditor()
+scopeName = @editor.getGrammar().scopeName
+console.log scopeName is &#39;source.coffee&#39; or scopeName is &#39;source.litcoffee&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;toc_3&#34;&gt;カーソル下の単語の範囲の取得する&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Cursor::getCurrentWordBufferRange()&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;coffeescript&#34;&gt;editor = atom.workspaceView.getActiveEditor()
+cursor = editor.cursors[0]
+range = cursor.getCurrentWordBufferRange includeNonWordCharacters: false
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;toc_4&#34;&gt;WorkspaceView#commandをoffする&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;WorkspaceView#command()&lt;/code&gt;では&lt;code&gt;WorkspaceView.data(&#39;documentation&#39;)&lt;/code&gt;にeventName/docStringを登録してるだけで、イベント自体はjQueryの&lt;code&gt;on()&lt;/code&gt;で聞いてる。
+よってoffしたい時は普通に&lt;code&gt;WorkspaceView#off()&lt;/code&gt;すればよい。
+&lt;code&gt;coffeescript
+atom.workspaceView.command &#39;hoge:action&#39;, handler
+atom.workspaceView.off &#39;hoge:action&#39;, handler
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_5&#34;&gt;Spec書く時に使う&lt;/h2&gt;
+
+&lt;h3 id=&#34;toc_6&#34;&gt;CoffeeScriptの言語パッケージをロードする&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;PackageManager::resolvePackagePath(packageName)&lt;/code&gt;: パッケージ名からパッケージのパスを取得する&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Syntax::loadGrammarSync(grammarPath)&lt;/code&gt;: 言語パッケージをロードする&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;coffeescript&#34;&gt;languageCoffeeScriptPath = atom.packages.resolvePackagePath &#39;language-coffee-script&#39;
+grammarDir = path.resolve languageCoffeeScriptPath, &#39;grammars&#39;
+for filename in fs.readdirSync grammarDir
+  atom.syntax.loadGrammarSync path.resolve grammarDir, filename
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;toc_7&#34;&gt;参考サイト&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://atom.io/docs/api/&#34;&gt;Atom API Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://gist.github.com/ardcore/9262498&#34;&gt;atom.io events&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

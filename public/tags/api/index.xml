@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Api on I/O </title>
+      <generator uri="https://hugo.spf13.com">Hugo</generator>
+    <link>http://localhost:1313/tags/api/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Mon, 01 Jan 0001 00:00:00 UTC</updated>
+    
+    <item>
+      <title>YouTube JavaScript API</title>
+      <link>http://localhost:1313/post/youtube-javascript-api</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/post/youtube-javascript-api</guid>
+      <description>
+
+&lt;p&gt;YouTubeをembedするとJavaScriptのAPIが使えるようになります。
+&lt;script type=&#34;text/javascript&#34; src=&#34;http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js&#34;&gt;&lt;/script&gt;
+&lt;div id=&#34;ytapiplayer&#34;&gt;
+  You need Flash player 8+ and JavaScript enabled to view this video.
+&lt;/div&gt;
+&lt;div id=&#34;log&#34; style=&#34;height:150px;overflow-y:scroll;white-space:pre-wrap;font-family:monospace;font-size:12px;line-height:16px;&#34;&gt;
+&lt;/div&gt;
+&lt;script type=&#34;text/javascript&#34;&gt;
+var STATES = {
+  &amp;lsquo;-1&amp;rsquo;: &amp;lsquo;未開始&amp;rsquo;,
+  &amp;lsquo;0&amp;rsquo;: &amp;lsquo;終了&amp;rsquo;,
+  &amp;lsquo;1&amp;rsquo;: &amp;lsquo;再生中&amp;rsquo;,
+  &amp;lsquo;2&amp;rsquo;: &amp;lsquo;一時停止中&amp;rsquo;,
+  &amp;lsquo;3&amp;rsquo;: &amp;lsquo;バッファリング中&amp;rsquo;,
+  &amp;lsquo;5&amp;rsquo;: &amp;lsquo;頭出し済み&amp;rsquo;
+};
+var params = { allowScriptAccess: &amp;ldquo;always&amp;rdquo; };
+var atts = { id: &amp;ldquo;myytplayer&amp;rdquo; };
+swfobject.embedSWF(
+  &amp;ldquo;&lt;a href=&#34;http://www.youtube.com/v/u1zgFlCw8Aw?enablejsapi=1&amp;amp;playerapiid=ytplayer&amp;quot;&#34;&gt;http://www.youtube.com/v/u1zgFlCw8Aw?enablejsapi=1&amp;amp;playerapiid=ytplayer&amp;quot;&lt;/a&gt;,
+  &amp;ldquo;ytapiplayer&amp;rdquo;, &amp;ldquo;425&amp;rdquo;, &amp;ldquo;356&amp;rdquo;, &amp;ldquo;8&amp;rdquo;, null, null, params, atts
+  );
+var $log = $(&amp;lsquo;#log&amp;rsquo;);&lt;/p&gt;
+
+&lt;p&gt;function onYouTubePlayerReady(playerId) {
+  var ytplayer = document.getElementById(&amp;ldquo;myytplayer&amp;rdquo;);
+  ytplayer.addEventListener(&amp;lsquo;onStateChange&amp;rsquo;, &amp;lsquo;onStateChange&amp;rsquo;);
+}
+function onStateChange(state) {
+  log(&amp;lsquo;onStateChange:&amp;lsquo;, state, &amp;lsquo;=&amp;rsquo;, STATES[&amp;rdquo; + state]);
+}
+function log() {
+  $log
+    .text($log.text() + Array.prototype.join.call(arguments, &amp;lsquo; &amp;lsquo;) + &amp;lsquo;\n&amp;rsquo;)
+    .scrollTop($log.prop(&amp;lsquo;scrollHeight&amp;rsquo;));
+}
+&lt;/script&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;ExternalInterface に関する Tips&lt;/h2&gt;
+
+&lt;p&gt;YouTube JavaScript API からは &lt;code&gt;ExternalInterface.call&lt;/code&gt; 経由で JavaScript がコールされる。
+このAPIに限らず &lt;code&gt;ExternalInterface.call&lt;/code&gt; を使う際に共通の注意点だが、FlashPlayer は JavaScript のメソッドのその戻りを待っている間レンダリングをやめてしまう。
+対策として、JavaScript から何も返さない場合は次のイベントループで処理を行い、関数自体は &lt;code&gt;return&lt;/code&gt; して FlashPlayer のレンダリングを再開させてあげるのがスムーズに見える。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;javascript&#34;&gt;function onStateChange(state) {
+  setTimeout(function () {
+    log();
+  });
+  return;
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

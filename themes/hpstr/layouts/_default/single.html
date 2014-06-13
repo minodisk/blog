@@ -56,27 +56,19 @@
     {{ end }}
 
     <div class="read-more">
-      <div class="read-more-header">
-        <a href="{{ .Site.BaseUrl }}/sample-link-post/" class="read-more-btn">Read More</a>
-      </div>
-      <!-- <div class="read-more-content">
-        <h3><a href="{{ .Site.BaseUrl }}/background-image/" title="Post with a Background Image">Post with a Background Image</a></h3>
-        <p>Sample post with a background image CSS override. <a href="{{ .Site.BaseUrl }}/background-image/">Continue reading</a></p>
-      </div> -->
-
       <div class="read-more-list">
-        {{with .Prev}}
+        {{ with .Prev }}
         <div class="list-item">
-          <h4><a href="{{.Permalink}}" title="Sample Link Post">{{.Title}}</a></h4>
+          <h4><a href="{{.Permalink}}" title="Sample Link Post">{{ .Title }}</a></h4>
           <span>Published on {{ .Date.Format .Site.Params.PublishedDateFormat }}</span>
         </div>
-        {{end}}
-        {{with .Next}}
+        {{ end }}
+        {{ with .Next }}
         <div class="list-item">
-          <h4><a href="{{.Permalink}}" title="A Post with a Video">{{.Title}}</a></h4>
+          <h4><a href="{{.Permalink}}" title="A Post with a Video">{{ .Title }}</a></h4>
           <span>Published on {{ .Date.Format .Site.Params.PublishedDateFormat }}</span>
         </div>
-        {{end}}
+        {{ end }}
       </div>
     </div>
 

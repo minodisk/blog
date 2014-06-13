@@ -2,38 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>map[]</title>
+  <title>I/O</title>
   <link href="/css/gisty.css" rel="stylesheet">
-  <script>
+
+<script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-48719488-1');
+  ga('create', '{ [] [97 98 99 10] \x3cp\x3eabc\x3c\/p\x3e\n abc  false abc \n  map[]  true 0001-01-01 00:00:00 \x2b0000 UTC [] 0xc2102c4140  true   [43 43 43 10 100 97 116 101 32 61 32 50 48 49 52 45 48 54 45 49 50 84 48 56 58 51 50 58 52 55 90 10 100 114 97 102 116 32 61 32 116 114 117 101 10 116 105 116 108 101 32 61 32 34 116 101 115 116 34 10 10 43 43 43 10] [] [] {1 100 1 0} {test.md html post\/} {\x3cnil\x3e 0xc21068b080} { 0xc2105c8728 map[] test  [] map[] 2014-06-12 08:32:47 \x2b0000 UTC { -1} {   post}}}');
   ga('send', 'pageview');
-  </script>
+</script>
+
+
 </head>
 <body>
   <div class="wrapper">
     <header class="header">
       <div class="container">
-        <h1><a href="/">map[]</a></h1>
+        <h1><a href="http://localhost:1313">I/O</a></h1>
       </div>
     </header>
     <div class="body">
       <div class="container">
 
-  <article class="article">
-    <h1 class="article-title">test</h1>
-    <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 2014-06-12</small></p> <hr/>
-    <div class="article-content">
-      <p>abc</p>
+<article class="article">
+  <h1 class="article-title">test</h1>
+  <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 2014-06-12</small></p> <hr/>
+  <div class="article-content">
+    <p>abc</p>
 
-    </div>
-  </article>
+  </div>
+</article>
 
-  <a href="https://twitter.com/share" class="twitter-share-button " data-size="small" data-count="none">Tweet</a>
-  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<a href="https://twitter.com/share" class="twitter-share-button " data-size="small" data-count="none">Tweet</a>
+<script>
+!function(d,s,id){
+  var js
+  ,fjs=d.getElementsByTagName(s)[0]
+  ,p=/^http:/.test(d.location)?'http':'https'
+  ;
+  if (!d.getElementById(id)) {
+    js=d.createElement(s);
+    js.id=id;
+    js.src=p+'://platform.twitter.com/widgets.js';
+    fjs.parentNode.insertBefore(js,fjs);
+  }
+}(document, 'script', 'twitter-wjs');
+</script>
+
 
   <ul class="post-pagination">
     
@@ -47,6 +64,9 @@
       </div>
     </div>
   </div>
-</body>
+<script>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
 </html>
 

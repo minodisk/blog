@@ -1,3 +1,8 @@
-baseurl = "http://dsk.mn"
+baseurl = "http://dsk.mn/"
 languageCode = "en-us"
 title = "I/O"
+
+pygmentsuseclasses = true
+
+[params]
+GoogleAnalitics = "UA-48719488-1"

@@ -17,14 +17,14 @@ tags:
 コンパイルの過程で`Scope`インスタンスが作成される。
 オプションに親のスコープを渡すと`variables`は親のスコープ内で宣言された変数を考慮した変数のリストとなる。
 
-```coffeescript
+{{% highlight coffeescript %}}
 options =
   scope: parent.scope
   indent: ''
 code.compileNode options
 scope = options.scope
 console.log scope.variables
-```
+{{% /highlight %}}
 
 ## scope.coffee
 
@@ -33,11 +33,11 @@ console.log scope.variables
 スコープ内で`var`で宣言される変数の配列を返す。パラメータは含まれない。
 
 スコープ内で定義される全ての名前空間を取得するためには、さらにパラメータを含む必要が有るため下記のコードを使う。
-```coffeescript
+{{% highlight coffeescript %}}
 declaredSymbols = (scope) ->
   realVars = []
   tempVars = []
   for v in @variables when v.type is 'var' or v.type is 'param'
     (if v.name.charAt(0) is '_' then tempVars else realVars).push v.name
   realVars.sort().concat tempVars.sort()
-```
+{{% /highlight %}}

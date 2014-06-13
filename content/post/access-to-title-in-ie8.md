@@ -10,9 +10,9 @@ tags:
 
 jQueryではIE8で`title`へのアクセスができないので直接アクセスする。
 
-```javascript
+{{% highlight javascript %}}
 $('title').text('foo');
-```
-```javascript
+{{% /highlight %}}
+{{% highlight javascript %}}
 document.title = 'foo';
-```
+{{% /highlight %}}

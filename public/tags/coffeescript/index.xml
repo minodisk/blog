@@ -10,130 +10,6 @@
     <updated>Mon, 01 Jan 0001 00:00:00 UTC</updated>
     
     <item>
-      <title>CoffeeScript Tips</title>
-      <link>http://localhost:1313/post/coffeescript-tips</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
-      
-      <guid>http://localhost:1313/post/coffeescript-tips</guid>
-      <description>
-
-&lt;h2 id=&#34;toc_0&#34;&gt;即時関数の引数に別名をつける&lt;/h2&gt;
-
-&lt;p&gt;jQuery のプラグイン書くときとかに使う。
-&lt;code&gt;coffeescript
-do ($ = jQuery) -&amp;gt;
-  console.log $
-&lt;/code&gt;
-↓コンパイル
-&lt;code&gt;javascript
-(function($) {
-  return console.log($);
-})(jQuery);
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_1&#34;&gt;オブジェクトリテラルでオブジェクトを作る&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;coffeescript&#34;&gt;a = 3
-b = true
-c = &#39;bar&#39;
-console.log { a, b, c }  # =&amp;gt; { a: 3, b: true, c: &#39;bar&#39; }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;toc_2&#34;&gt;分解代入で纏めて変数宣言&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;coffeescript&#34;&gt;a = b = c = null
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;の代わりに下記のように書くことができる。
-&lt;code&gt;coffeescript
-[ a, b, c ] = []
-&lt;/code&gt;
-↓コンパイル
-```javascript
-var a, b, c, _ref;&lt;/p&gt;
-
-&lt;p&gt;_ref = [], a = _ref[0], b = _ref[1], c = _ref[2];
-```&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_3&#34;&gt;superを引数付きでコールする&lt;/h2&gt;
-
-&lt;p&gt;&lt;code&gt;super()&lt;/code&gt;ではなく&lt;code&gt;super&lt;/code&gt;と書くことで引数を引き継いでコールしてくれる。
-&lt;code&gt;coffeescript
-class Foo
-  constructor: (@a) -&amp;gt;
-class Bar extends Foo
-  constructor: -&amp;gt;
-    super
-bar = new Bar 3
-console.log bar.a  # =&amp;gt; 3
-&lt;/code&gt;
-便利な反面、&lt;code&gt;super&lt;/code&gt;と書いた時点で継承元の関数が実行されることに気をつけなければならない。
-&lt;code&gt;coffeescript
-class Foo
-  func: -&amp;gt;
-    console.log &#39;executed!!&#39;
-    &#39;foo&#39;
-class Bar extends Foo
-  func: -&amp;gt;
-    @superFunc = super
-    console.log @superFunc
-bar = new Bar()
-bar.func()  # =&amp;gt; &#39;executed!!&#39;
-            # =&amp;gt; &#39;foo&#39;
-&lt;/code&gt;
-このように&lt;code&gt;super&lt;/code&gt;を&lt;code&gt;@superFunc&lt;/code&gt;に格納するつもりで書いたコードを実行すると、
-&lt;code&gt;super&lt;/code&gt;を実行した戻りが&lt;code&gt;@superFunc&lt;/code&gt;に格納されることになる。&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_4&#34;&gt;比較演算子&lt;/h2&gt;
-
-&lt;p&gt;比較が捗る。
-&lt;code&gt;coffeescript
-a &amp;lt;= b &amp;lt; c
-&lt;/code&gt;
-↓コンパイル
-&lt;code&gt;javascript
-(a &amp;lt;= b &amp;amp;&amp;amp; b &amp;lt; c);
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_5&#34;&gt;分解代入とクラスのthis代入の合わせ技&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;coffeescript&#34;&gt;class Foo
-  constructor: ({@a})-&amp;gt;
-
-foo = new Foo a: 3
-console.log foo.a  # =&amp;gt; 3
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;toc_6&#34;&gt;Array comprehensionsのシュガー&lt;/h2&gt;
-
-&lt;p&gt;ワンライナーで。
-&lt;code&gt;coffeescript
-countdown = (num for num in [10..1])
-&lt;/code&gt;
-即時関数で。
-&lt;code&gt;coffeescript
-countdown = do -&amp;gt; num for num in [10..1]
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_7&#34;&gt;引数の並置&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code class=&#34;coffeescript&#34;&gt;a 1, 2, 3
-a 1,
-  2,
-  3
-a 1,
-  2
-  3
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;↓コンパイル
-&lt;code&gt;javascript
-a(1, 2, 3);
-&lt;/code&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>CoffeeScript Compiler</title>
       <link>http://localhost:1313/post/coffeescript-compiler</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
@@ -151,13 +27,13 @@ a(1, 2, 3);
 コンパイルの過程で&lt;code&gt;Scope&lt;/code&gt;インスタンスが作成される。
 オプションに親のスコープを渡すと&lt;code&gt;variables&lt;/code&gt;は親のスコープ内で宣言された変数を考慮した変数のリストとなる。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;coffeescript&#34;&gt;options =
-  scope: parent.scope
-  indent: &#39;&#39;
-code.compileNode options
-scope = options.scope
-console.log scope.variables
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nv&#34;&gt;options =&lt;/span&gt;
+  &lt;span class=&#34;nv&#34;&gt;scope: &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;parent&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;scope&lt;/span&gt;
+  &lt;span class=&#34;nv&#34;&gt;indent: &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;code&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;compileNode&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;options&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;scope = &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;options&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;scope&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;scope&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;variables&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id=&#34;toc_2&#34;&gt;scope.coffee&lt;/h2&gt;
 
@@ -166,14 +42,132 @@ console.log scope.variables
 &lt;p&gt;スコープ内で&lt;code&gt;var&lt;/code&gt;で宣言される変数の配列を返す。パラメータは含まれない。&lt;/p&gt;
 
 &lt;p&gt;スコープ内で定義される全ての名前空間を取得するためには、さらにパラメータを含む必要が有るため下記のコードを使う。
-&lt;code&gt;coffeescript
-declaredSymbols = (scope) -&amp;gt;
-  realVars = []
-  tempVars = []
-  for v in @variables when v.type is &#39;var&#39; or v.type is &#39;param&#39;
-    (if v.name.charAt(0) is &#39;_&#39; then tempVars else realVars).push v.name
-  realVars.sort().concat tempVars.sort()
-&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nv&#34;&gt;declaredSymbols = &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;(scope) -&amp;gt;&lt;/span&gt;
+  &lt;span class=&#34;nv&#34;&gt;realVars = &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[]&lt;/span&gt;
+  &lt;span class=&#34;nv&#34;&gt;tempVars = &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[]&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;v&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;@variables&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;when&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;v&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;type&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;is&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#39;var&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;or&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;v&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;type&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;is&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#39;param&amp;#39;&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;v&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;charAt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;is&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#39;_&amp;#39;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;then&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;tempVars&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;realVars&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;push&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;v&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;name&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;realVars&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;sort&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;concat&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;tempVars&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;sort&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>CoffeeScript Tips</title>
+      <link>http://localhost:1313/post/coffeescript-tips</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://localhost:1313/post/coffeescript-tips</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;即時関数の引数に別名をつける&lt;/h2&gt;
+
+&lt;p&gt;jQuery のプラグイン書くときとかに使う。
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nx&#34;&gt;do&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;($ = jQuery) -&amp;gt;&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;$&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;↓コンパイル
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;})(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;jQuery&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;オブジェクトリテラルでオブジェクトを作る&lt;/h2&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nv&#34;&gt;a = &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;b = &lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;c = &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#39;bar&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# =&amp;gt; { a: 3, b: true, c: &amp;#39;bar&amp;#39; }&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&#34;toc_2&#34;&gt;分解代入で纏めて変数宣言&lt;/h2&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nv&#34;&gt;a = b = c = &lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;null&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;の代わりに下記のように書くことができる。
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;↓コンパイル
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;_ref&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span class=&#34;nx&#34;&gt;_ref&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[],&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;_ref&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;_ref&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;_ref&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_3&#34;&gt;superを引数付きでコールする&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;super()&lt;/code&gt;ではなく&lt;code&gt;super&lt;/code&gt;と書くことで引数を引き継いでコールしてくれる。
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Foo&lt;/span&gt;
+  &lt;span class=&#34;nv&#34;&gt;constructor: &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;(@a) -&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Bar&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;extends&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Foo&lt;/span&gt;
+  &lt;span class=&#34;nv&#34;&gt;constructor: &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;-&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;super&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;bar = &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Bar&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;bar&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;a&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# =&amp;gt; 3&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;便利な反面、&lt;code&gt;super&lt;/code&gt;と書いた時点で継承元の関数が実行されることに気をつけなければならない。
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Foo&lt;/span&gt;
+  &lt;span class=&#34;nv&#34;&gt;func: &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;-&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#39;executed!!&amp;#39;&lt;/span&gt;
+    &lt;span class=&#34;s&#34;&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Bar&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;extends&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Foo&lt;/span&gt;
+  &lt;span class=&#34;nv&#34;&gt;func: &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;-&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;vi&#34;&gt;@superFunc = &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;super&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;@superFunc&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;bar = &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Bar&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;bar&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;func&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# =&amp;gt; &amp;#39;executed!!&amp;#39;&lt;/span&gt;
+            &lt;span class=&#34;c1&#34;&gt;# =&amp;gt; &amp;#39;foo&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;このように&lt;code&gt;super&lt;/code&gt;を&lt;code&gt;@superFunc&lt;/code&gt;に格納するつもりで書いたコードを実行すると、
+&lt;code&gt;super&lt;/code&gt;を実行した戻りが&lt;code&gt;@superFunc&lt;/code&gt;に格納されることになる。&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_4&#34;&gt;比較演算子&lt;/h2&gt;
+
+&lt;p&gt;比較が捗る。
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nx&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;c&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;↓コンパイル
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;b&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_5&#34;&gt;分解代入とクラスのthis代入の合わせ技&lt;/h2&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Foo&lt;/span&gt;
+  &lt;span class=&#34;nv&#34;&gt;constructor: &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;({@a})-&amp;gt;&lt;/span&gt;
+
+&lt;span class=&#34;nv&#34;&gt;foo = &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Foo&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;a: &lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;foo&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;a&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# =&amp;gt; 3&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&#34;toc_6&#34;&gt;Array comprehensionsのシュガー&lt;/h2&gt;
+
+&lt;p&gt;ワンライナーで。
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nv&#34;&gt;countdown = &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;num&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;num&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;..&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+
+&lt;p&gt;即時関数で。
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nv&#34;&gt;countdown = &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;do&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;num&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;num&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;..&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_7&#34;&gt;引数の並置&lt;/h2&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nx&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;
+  &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;↓コンパイル
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nx&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
 </description>
     </item>
     

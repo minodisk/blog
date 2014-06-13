@@ -1,14 +1,6 @@
 {{ template "theme/partials/header.html" . }}
-  <article class="article">
-    <h1 class="article-title">{{ .Title }}</h1>
-    <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> {{ .Date.Format  "2006-01-02" }}</small></p> <hr/>
-    <div class="article-content">
-      {{ .Content }}
-    </div>
-  </article>
-
-  <a href="https://twitter.com/share" class="twitter-share-button " data-size="small" data-count="none">Tweet</a>
-  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+{{ template "theme/partials/article.html" . }}
+{{ template "theme/partials/sns.html" . }}
 
   <ul class="post-pagination">
     {{with .Prev}}<li class="prev"><a rel="prev" href="{{.Permalink}}">{{.Title}}</a></li>{{end}}
@@ -19,4 +11,4 @@
 
     </ul>
     </div>
-{{ template "theme/partials/footer.html" }}
+{{ template "theme/partials/footer.html" . }}

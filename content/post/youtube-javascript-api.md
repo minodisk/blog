@@ -49,11 +49,11 @@ YouTube JavaScript API からは `ExternalInterface.call` 経由で JavaScript �
 このAPIに限らず `ExternalInterface.call` を使う際に共通の注意点だが、FlashPlayer は JavaScript のメソッドのその戻りを待っている間レンダリングをやめてしまう。
 対策として、JavaScript から何も返さない場合は次のイベントループで処理を行い、関数自体は `return` して FlashPlayer のレンダリングを再開させてあげるのがスムーズに見える。
 
-```javascript
+{{% highlight javascript %}}
 function onStateChange(state) {
   setTimeout(function () {
     log();
   });
   return;
 }
-```
+{{% /highlight %}}

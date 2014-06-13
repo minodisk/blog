@@ -13,38 +13,38 @@ tags:
 ## Package書くときに使う
 
 ### パッケージのSettingsにチェックボックスを表示する
-```coffeescript
+{{% highlight coffeescript %}}
 module.exports =
   configDefaults:
     highlightReference: true
     highlightError    : true
-```
+{{% /highlight %}}
 
 ### 文法がCoffeeScriptかを調べる
 * `Grammar::scopeName`
 
-```coffeescript
+{{% highlight coffeescript %}}
 editor = atom.workspaceView.getActiveEditor()
 scopeName = @editor.getGrammar().scopeName
 console.log scopeName is 'source.coffee' or scopeName is 'source.litcoffee'
-```
+{{% /highlight %}}
 
 ### カーソル下の単語の範囲の取得する
 * `Cursor::getCurrentWordBufferRange()`
 
-```coffeescript
+{{% highlight coffeescript %}}
 editor = atom.workspaceView.getActiveEditor()
 cursor = editor.cursors[0]
 range = cursor.getCurrentWordBufferRange includeNonWordCharacters: false
-```
+{{% /highlight %}}
 
 ### WorkspaceView#commandをoffする
 `WorkspaceView#command()`では`WorkspaceView.data('documentation')`にeventName/docStringを登録してるだけで、イベント自体はjQueryの`on()`で聞いてる。
 よってoffしたい時は普通に`WorkspaceView#off()`すればよい。
-```coffeescript
+{{% highlight coffeescript %}}
 atom.workspaceView.command 'hoge:action', handler
 atom.workspaceView.off 'hoge:action', handler
-```
+{{% /highlight %}}
 
 
 ## Spec書く時に使う
@@ -53,12 +53,12 @@ atom.workspaceView.off 'hoge:action', handler
 * `PackageManager::resolvePackagePath(packageName)`: パッケージ名からパッケージのパスを取得する
 * `Syntax::loadGrammarSync(grammarPath)`: 言語パッケージをロードする
 
-```coffeescript
+{{% highlight coffeescript %}}
 languageCoffeeScriptPath = atom.packages.resolvePackagePath 'language-coffee-script'
 grammarDir = path.resolve languageCoffeeScriptPath, 'grammars'
 for filename in fs.readdirSync grammarDir
   atom.syntax.loadGrammarSync path.resolve grammarDir, filename
-```
+{{% /highlight %}}
 
 
 ## 参考サイト

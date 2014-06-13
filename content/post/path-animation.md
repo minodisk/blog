@@ -22,7 +22,7 @@ Snap.svgはSVGで絵を書くだけではなく、外部SVGのパースを行う
 - Snap.svg: svgのパース
 
 ## 実装
-```javascript
+{{% highlight javascript %}}
 var fragment
   , ready = _.after(2, function () {
       var path = fragment.select('g').select('*')
@@ -66,4 +66,4 @@ Snap.load('/data/2014-03-07-path-animation.svg', function (f) {
   fragment = f;
   ready();
 });
-```
+{{% /highlight %}}

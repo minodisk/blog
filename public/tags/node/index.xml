@@ -21,16 +21,16 @@
 
 &lt;h2 id=&#34;toc_0&#34;&gt;CentOS&lt;/h2&gt;
 
-&lt;pre&gt;&lt;code class=&#34;bash&#34;&gt;yum install cairo cairo-devel cairomm-devel libjpeg-turbo-devel pango pango-devel pangomm pangomm-devel giflib-devel
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;yum install cairo cairo-devel cairomm-devel libjpeg-turbo-devel pango pango-devel pangomm pangomm-devel giflib-devel
 npm install canvas
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id=&#34;toc_1&#34;&gt;MacOSX&lt;/h2&gt;
 
-&lt;pre&gt;&lt;code class=&#34;bash&#34;&gt;brew install cairo
-export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;brew install cairo
+&lt;span class=&#34;nb&#34;&gt;export &lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;PKG_CONFIG_PATH&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/opt/X11/lib/pkgconfig
 npm install canvas
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;&lt;/div&gt;
 </description>
     </item>
     

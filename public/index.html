@@ -26,15 +26,14 @@
 <nav id="dl-menu" class="dl-menuwrapper" role="navigation">
   <button class="dl-trigger">Open Menu</button>
   <ul class="dl-menu">
-    <li><a href="http://localhost:1313/">Home</a></li>
+    <li><a href="http://localhost:1313">Home</a></li>
     <li>
       <a href="#">About</a>
       <ul class="dl-submenu">
-        <li class="dl-back"><a href="#">back</a></li>
         <li>
-          <img src="" alt="minodisk photo" class="author-photo">
+          
           <h4>minodisk</h4>
-          <p></p>
+          
         </li>
         <li><a href="http://localhost:1313/about/">Learn More</a></li>
         <li><a href="mailto:daisuke.mino@gmail.com"><i class="fa fa-envelope"></i> Email</a></li>
@@ -46,13 +45,10 @@
     <li>
       <a href="#">Posts</a>
       <ul class="dl-submenu">
-        <li class="dl-back"><a href="#">back</a></li>
         <li><a href="http://localhost:1313//post/">All Posts</a></li>
         <li><a href="http://localhost:1313//tags/">All Tags</a></li>
       </ul>
     </li>
-    <li><a href="http://localhost:1313//theme-setup">Theme Setup</a></li>
-    <li><a href="http://mademistakes.com">External Link</a></li>
   </ul>
 </nav>
 
@@ -124,19 +120,12 @@
           <span class="author vcard"><span class="fn"><a href="http://localhost:1313/about/" title="About minodisk">minodisk</a></span></span>
           
           •<span class="entry-comments"><a href="#disqus_thread">Comment</a></span>
-          <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time 1 minute</span>
+          <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time 0 minute</span>
         </div>
-        <h1 class="entry-title"><a href="http://localhost:1313/post/backbone-tips" rel="bookmark" title="Backbone Tips" itemprop="url">Backbone Tips</a></h1>
+        <h1 class="entry-title"><a href="http://localhost:1313/post/docpad" rel="bookmark" title="DocPad" itemprop="url">DocPad</a></h1>
       </header>
       <div class="entry-content">
         
-
-<h2 id="toc_0">Backbone.history 関連</h2>
-
-<ul>
-<li><code>Backbone.history.start()</code> を実行したかどうかの判定には <code>Backbone.History.started</code> を使う <a href="https://github.com/jashkenas/backbone/blob/1.1.2/backbone.js#L1386">backbone/backbone.js at 1.1.2 · jashkenas/backbone</a></li>
-</ul>
-
       </div>
     </article>
     
@@ -253,30 +242,6 @@ npm install canvas
           •<span class="entry-comments"><a href="#disqus_thread">Comment</a></span>
           <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time 1 minute</span>
         </div>
-        <h1 class="entry-title"><a href="http://localhost:1313/post/access-to-title-in-ie8" rel="bookmark" title="Access to title in IE8" itemprop="url">Access to title in IE8</a></h1>
-      </header>
-      <div class="entry-content">
-        <p>jQueryではIE8で<code>title</code>へのアクセスができないので直接アクセスする。</p>
-
-<div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">);</span>
-</pre></div>
-
-<div class="highlight"><pre><span class="nb">document</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span><span class="p">;</span>
-</pre></div>
-
-      </div>
-    </article>
-    
-    <article class="hentry">
-      <header>
-        <div class="entry-meta">
-          <span class="entry-date date published updated"><time datetime="2013-10-26T00:00:00-04:00">0001-01-01</time></span>
-          
-          <span class="author vcard"><span class="fn"><a href="http://localhost:1313/about/" title="About minodisk">minodisk</a></span></span>
-          
-          •<span class="entry-comments"><a href="#disqus_thread">Comment</a></span>
-          <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time 1 minute</span>
-        </div>
         <h1 class="entry-title"><a href="http://localhost:1313/post/coffeescript-compiler" rel="bookmark" title="CoffeeScript Compiler" itemprop="url">CoffeeScript Compiler</a></h1>
       </header>
       <div class="entry-content">
@@ -314,6 +279,30 @@ npm install canvas
     <span class="p">(</span><span class="k">if</span> <span class="nx">v</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">is</span> <span class="s">&#39;_&#39;</span> <span class="k">then</span> <span class="nx">tempVars</span> <span class="k">else</span> <span class="nx">realVars</span><span class="p">).</span><span class="nx">push</span> <span class="nx">v</span><span class="p">.</span><span class="nx">name</span>
   <span class="nx">realVars</span><span class="p">.</span><span class="nx">sort</span><span class="p">().</span><span class="nx">concat</span> <span class="nx">tempVars</span><span class="p">.</span><span class="nx">sort</span><span class="p">()</span>
 </pre></div></p>
+
+      </div>
+    </article>
+    
+    <article class="hentry">
+      <header>
+        <div class="entry-meta">
+          <span class="entry-date date published updated"><time datetime="2013-10-26T00:00:00-04:00">0001-01-01</time></span>
+          
+          <span class="author vcard"><span class="fn"><a href="http://localhost:1313/about/" title="About minodisk">minodisk</a></span></span>
+          
+          •<span class="entry-comments"><a href="#disqus_thread">Comment</a></span>
+          <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time 1 minute</span>
+        </div>
+        <h1 class="entry-title"><a href="http://localhost:1313/post/access-to-title-in-ie8" rel="bookmark" title="Access to title in IE8" itemprop="url">Access to title in IE8</a></h1>
+      </header>
+      <div class="entry-content">
+        <p>jQueryではIE8で<code>title</code>へのアクセスができないので直接アクセスする。</p>
+
+<div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">);</span>
+</pre></div>
+
+<div class="highlight"><pre><span class="nb">document</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span><span class="p">;</span>
+</pre></div>
 
       </div>
     </article>
@@ -616,12 +605,19 @@ npm install canvas
           <span class="author vcard"><span class="fn"><a href="http://localhost:1313/about/" title="About minodisk">minodisk</a></span></span>
           
           •<span class="entry-comments"><a href="#disqus_thread">Comment</a></span>
-          <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time 0 minute</span>
+          <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time 1 minute</span>
         </div>
-        <h1 class="entry-title"><a href="http://localhost:1313/post/docpad" rel="bookmark" title="DocPad" itemprop="url">DocPad</a></h1>
+        <h1 class="entry-title"><a href="http://localhost:1313/post/backbone-tips" rel="bookmark" title="Backbone Tips" itemprop="url">Backbone Tips</a></h1>
       </header>
       <div class="entry-content">
         
+
+<h2 id="toc_0">Backbone.history 関連</h2>
+
+<ul>
+<li><code>Backbone.history.start()</code> を実行したかどうかの判定には <code>Backbone.History.started</code> を使う <a href="https://github.com/jashkenas/backbone/blob/1.1.2/backbone.js#L1386">backbone/backbone.js at 1.1.2 · jashkenas/backbone</a></li>
+</ul>
+
       </div>
     </article>
     

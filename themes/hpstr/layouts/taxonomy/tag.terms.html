@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+{{ template "theme/partials/head.html" . }}
+<body id="post-index">
+{{ template "theme/partials/nav.html" . }}
+
+  <div class="entry-header">
+    <div class="header-title">
+      <div class="header-title-wrap">
+        <h1>{{ .Site.Title }}</h1>
+        <h2>{{ .Title }}<span class="length">{{ len .Data.Terms }}</span></h2>
+      </div>
+    </div>
+  </div>
+
+  <div id="main" role="main">
+    {{ $baseUrl := .Site.BaseUrl }}
+    {{ $data := .Data }}
+    <ul class="entry-meta inline-list">
+      {{ range $key, $value := .Data.Terms }}
+      <li><a class="tag" href="#{{ $key | urlize }}">{{ $key }}<span>{{ len $value }}</span></a></li>
+      {{ end }}
+    </ul>
+    {{ range $key, $value := .Data.Terms }}
+    <article>
+      <h2 id="{{ $key }}">{{ $key }}</h2>
+      {{ range $value }}
+      {{ with .Page }}
+      <li class="entry-title"><a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a></li>
+      {{ end }}
+      {{ end }}
+    </article>
+    {{ end }}
+  </div>
+
+{{ template "theme/partials/footer.html" . }}
+</body>
+</html>

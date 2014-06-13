@@ -117,7 +117,7 @@
 &lt;p&gt;&lt;code&gt;WorkspaceView#command()&lt;/code&gt;では&lt;code&gt;WorkspaceView.data(&#39;documentation&#39;)&lt;/code&gt;にeventName/docStringを登録してるだけで、イベント自体はjQueryの&lt;code&gt;on()&lt;/code&gt;で聞いてる。
 よってoffしたい時は普通に&lt;code&gt;WorkspaceView#off()&lt;/code&gt;すればよい。
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nx&#34;&gt;atom&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;workspaceView&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;command&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#39;hoge:action&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;handler&lt;/span&gt;
-&lt;span class=&#34;nx&#34;&gt;atom&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;workspaceView&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;off&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#39;hoge:action&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;handler&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;atom&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;workspaceView&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;off&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#39;hoge:action&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;handler&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;toc_5&#34;&gt;Spec書く時に使う&lt;/h2&gt;
@@ -308,7 +308,7 @@ npm install canvas
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Foo&lt;/span&gt;
   &lt;span class=&#34;nv&#34;&gt;constructor: &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;(@a) -&amp;gt;&lt;/span&gt;
 &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Bar&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;extends&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Foo&lt;/span&gt;
-  &lt;span class=&#34;nv&#34;&gt;constructor: &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;-&amp;gt;&lt;/span&gt;
+  &lt;span class=&#34;nv&#34;&gt;constructor: &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;
     &lt;span class=&#34;k&#34;&gt;super&lt;/span&gt;
 &lt;span class=&#34;nv&#34;&gt;bar = &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Bar&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;
 &lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;bar&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;a&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# =&amp;gt; 3&lt;/span&gt;
@@ -316,11 +316,11 @@ npm install canvas
 
 &lt;p&gt;便利な反面、&lt;code&gt;super&lt;/code&gt;と書いた時点で継承元の関数が実行されることに気をつけなければならない。
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Foo&lt;/span&gt;
-  &lt;span class=&#34;nv&#34;&gt;func: &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;-&amp;gt;&lt;/span&gt;
+  &lt;span class=&#34;nv&#34;&gt;func: &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;
     &lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#39;executed!!&amp;#39;&lt;/span&gt;
     &lt;span class=&#34;s&#34;&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;
 &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Bar&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;extends&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Foo&lt;/span&gt;
-  &lt;span class=&#34;nv&#34;&gt;func: &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;-&amp;gt;&lt;/span&gt;
+  &lt;span class=&#34;nv&#34;&gt;func: &lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;
     &lt;span class=&#34;vi&#34;&gt;@superFunc = &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;super&lt;/span&gt;
     &lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;@superFunc&lt;/span&gt;
 &lt;span class=&#34;nv&#34;&gt;bar = &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Bar&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
@@ -357,7 +357,7 @@ npm install canvas
 &lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
 
 &lt;p&gt;即時関数で。
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nv&#34;&gt;countdown = &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;do&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;num&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;num&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;..&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nv&#34;&gt;countdown = &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;do&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;num&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;num&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;..&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;toc_7&#34;&gt;引数の並置&lt;/h2&gt;

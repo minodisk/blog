@@ -1,4 +1,0 @@
-hugoThemes
-==========
-
-All Themes Hugo

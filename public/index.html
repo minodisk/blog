@@ -199,7 +199,7 @@
 <p><code>WorkspaceView#command()</code>では<code>WorkspaceView.data('documentation')</code>にeventName/docStringを登録してるだけで、イベント自体はjQueryの<code>on()</code>で聞いてる。
 よってoffしたい時は普通に<code>WorkspaceView#off()</code>すればよい。
 <div class="highlight"><pre><span class="nx">atom</span><span class="p">.</span><span class="nx">workspaceView</span><span class="p">.</span><span class="nx">command</span> <span class="s">&#39;hoge:action&#39;</span><span class="p">,</span> <span class="nx">handler</span>
-<span class="nx">atom</span><span class="p">.</span><span class="nx">workspaceView</span><span class="p">.</span><span class="nx">off</span> <span class="s">&#39;hoge:action&#39;</span><span class="p">,</span> <span class="nx">handler</span>
+<span class="nx">atom</span><span class="p">.</span><span class="nx">workspaceView</span><span class="p">.</span><span class="kc">off</span> <span class="s">&#39;hoge:action&#39;</span><span class="p">,</span> <span class="nx">handler</span>
 </pre></div></p>
 
 <h2 id="toc_5">Spec書く時に使う</h2>
@@ -422,7 +422,7 @@ npm install canvas
 <div class="highlight"><pre><span class="k">class</span> <span class="nx">Foo</span>
   <span class="nv">constructor: </span><span class="nf">(@a) -&gt;</span>
 <span class="k">class</span> <span class="nx">Bar</span> <span class="k">extends</span> <span class="nx">Foo</span>
-  <span class="nv">constructor: </span><span class="nf">-&gt;</span>
+  <span class="nv">constructor: </span><span class="o">-&gt;</span>
     <span class="k">super</span>
 <span class="nv">bar = </span><span class="k">new</span> <span class="nx">Bar</span> <span class="mi">3</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">bar</span><span class="p">.</span><span class="nx">a</span>  <span class="c1"># =&gt; 3</span>
@@ -430,11 +430,11 @@ npm install canvas
 
 <p>便利な反面、<code>super</code>と書いた時点で継承元の関数が実行されることに気をつけなければならない。
 <div class="highlight"><pre><span class="k">class</span> <span class="nx">Foo</span>
-  <span class="nv">func: </span><span class="nf">-&gt;</span>
+  <span class="nv">func: </span><span class="o">-&gt;</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&#39;executed!!&#39;</span>
     <span class="s">&#39;foo&#39;</span>
 <span class="k">class</span> <span class="nx">Bar</span> <span class="k">extends</span> <span class="nx">Foo</span>
-  <span class="nv">func: </span><span class="nf">-&gt;</span>
+  <span class="nv">func: </span><span class="o">-&gt;</span>
     <span class="vi">@superFunc = </span><span class="k">super</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">@superFunc</span>
 <span class="nv">bar = </span><span class="k">new</span> <span class="nx">Bar</span><span class="p">()</span>
@@ -471,7 +471,7 @@ npm install canvas
 </pre></div></p>
 
 <p>即時関数で。
-<div class="highlight"><pre><span class="nv">countdown = </span><span class="nx">do</span> <span class="nf">-&gt;</span> <span class="nx">num</span> <span class="k">for</span> <span class="nx">num</span> <span class="k">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">..</span><span class="mi">1</span><span class="p">]</span>
+<div class="highlight"><pre><span class="nv">countdown = </span><span class="nx">do</span> <span class="o">-&gt;</span> <span class="nx">num</span> <span class="k">for</span> <span class="nx">num</span> <span class="k">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">..</span><span class="mi">1</span><span class="p">]</span>
 </pre></div></p>
 
 <h2 id="toc_7">引数の並置</h2>

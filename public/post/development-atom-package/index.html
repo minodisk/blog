@@ -114,7 +114,7 @@
 <p><code>WorkspaceView#command()</code>では<code>WorkspaceView.data('documentation')</code>にeventName/docStringを登録してるだけで、イベント自体はjQueryの<code>on()</code>で聞いてる。
 よってoffしたい時は普通に<code>WorkspaceView#off()</code>すればよい。
 <div class="highlight"><pre><span class="nx">atom</span><span class="p">.</span><span class="nx">workspaceView</span><span class="p">.</span><span class="nx">command</span> <span class="s">&#39;hoge:action&#39;</span><span class="p">,</span> <span class="nx">handler</span>
-<span class="nx">atom</span><span class="p">.</span><span class="nx">workspaceView</span><span class="p">.</span><span class="nx">off</span> <span class="s">&#39;hoge:action&#39;</span><span class="p">,</span> <span class="nx">handler</span>
+<span class="nx">atom</span><span class="p">.</span><span class="nx">workspaceView</span><span class="p">.</span><span class="kc">off</span> <span class="s">&#39;hoge:action&#39;</span><span class="p">,</span> <span class="nx">handler</span>
 </pre></div></p>
 
 <h2 id="toc_5">Spec書く時に使う</h2>

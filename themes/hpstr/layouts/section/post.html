@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+{{ template "theme/partials/head.html" . }}
+<body id="post-index">
+{{ template "theme/partials/nav.html" . }}
+
+  <div class="entry-header">
+    <div class="header-title">
+      <div class="header-title-wrap">
+        <h1>{{ .Site.Title }}</h1>
+        <h2>{{ .Title }}<span class="length">{{ len .Data.Pages }}</span></h2>
+      </div>
+    </div>
+  </div>
+
+  <div id="main" role="main">
+    {{ range .Data.Pages.ByDate }}
+    <article>
+      <h2 id="ref-{{ .Date.Year }}">{{ .Date.Year }}</h2>
+      <ul>
+        <li class="entry-title"><a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a></li>
+      </ul>
+    </article>
+    {{ end }}
+    <script src="{{ .Site.BaseUrl }}/js/posts.js"></script>
+  </div>
+
+{{ template "theme/partials/footer.html" . }}
+</body>
+</html>

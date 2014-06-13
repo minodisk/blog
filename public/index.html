@@ -120,12 +120,76 @@
           <span class="author vcard"><span class="fn"><a href="http://localhost:1313/about/" title="About minodisk">minodisk</a></span></span>
           
           •<span class="entry-comments"><a href="#disqus_thread">Comment</a></span>
-          <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time 0 minute</span>
+          <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time 1 minute</span>
         </div>
-        <h1 class="entry-title"><a href="http://localhost:1313/post/docpad" rel="bookmark" title="DocPad" itemprop="url">DocPad</a></h1>
+        <h1 class="entry-title"><a href="http://localhost:1313/post/path-animation" rel="bookmark" title="Path Animation" itemprop="url">Path Animation</a></h1>
       </header>
       <div class="entry-content">
         
+
+<h2 id="toc_0">パスアニメーションとは</h2>
+
+<p>パスに沿ってオブジェクトを移動させるアニメーションのことです。
+今回はSnap.svgでSVGをパースし、Illustratorで引いたパスに沿ってDOMを動かしてみます。</p>
+
+<h2 id="toc_1">要点</h2>
+
+<p>Snap.svgはSVGで絵を書くだけではなく、外部SVGのパースを行うことが可能。
+使用するライブラリの役割は以下のとおり。</p>
+
+<ul>
+<li>jQuery: DOM操作</li>
+<li>jQuery Transit: アニメーション</li>
+<li>Snap.svg: svgのパース</li>
+</ul>
+
+<h2 id="toc_2">実装</h2>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">fragment</span>
+  <span class="p">,</span> <span class="nx">ready</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">fragment</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">).</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">)</span>
+        <span class="p">,</span> <span class="nx">totalLength</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">getTotalLength</span><span class="p">()</span>
+        <span class="p">,</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="p">,</span> <span class="nx">point</span>
+        <span class="p">,</span> <span class="nx">$car</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.car&#39;</span><span class="p">)</span>
+        <span class="p">;</span>
+
+      <span class="c1">// ダミー要素のtopを0からパスの全長までanimateします。</span>
+      <span class="c1">// setIntervalを使って独自にアニメーションするよりも熟れたコードになり、</span>
+      <span class="c1">// イージングを掛けられるようになるので表現の幅も容易に広がります。</span>
+      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;div&gt;&#39;</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">animate</span><span class="p">({</span>
+          <span class="nx">top</span><span class="o">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">getTotalLength</span><span class="p">()</span>  <span class="c1">// パスの全長を取得</span>
+        <span class="p">},</span> <span class="p">{</span>
+          <span class="nx">easing</span><span class="o">:</span> <span class="s1">&#39;easeOut&#39;</span><span class="p">,</span>
+          <span class="nx">step</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">point</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">getPointAtLength</span><span class="p">(</span><span class="nx">length</span><span class="p">)</span>  <span class="c1">// パスの現在の長さに対する座標を取得</span>
+              <span class="p">,</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">point</span><span class="p">.</span><span class="nx">x</span>                            <span class="c1">// x座標</span>
+              <span class="p">,</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">point</span><span class="p">.</span><span class="nx">y</span>                            <span class="c1">// y座標</span>
+              <span class="p">,</span> <span class="nx">alpha</span> <span class="o">=</span> <span class="nx">point</span><span class="p">.</span><span class="nx">alpha</span>                    <span class="c1">// パスの進む方向</span>
+              <span class="p">;</span>
+            <span class="nx">$car</span>
+              <span class="p">.</span><span class="nx">css</span><span class="p">({</span>
+                <span class="nx">x</span><span class="o">:</span> <span class="nx">x</span>
+                <span class="nx">y</span><span class="o">:</span> <span class="nx">y</span>
+                <span class="nx">rotate</span><span class="o">:</span> <span class="nx">alpha</span>
+              <span class="p">});</span>
+          <span class="p">})</span>
+        <span class="p">});</span>
+    <span class="p">})</span>
+    <span class="p">;</span>
+<span class="p">})</span>
+<span class="p">;</span>
+
+<span class="c1">// DOMのロード</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">one</span><span class="p">(</span><span class="s1">&#39;ready&#39;</span><span class="p">,</span> <span class="nx">ready</span><span class="p">);</span>
+<span class="c1">// SVGのロード</span>
+<span class="nx">Snap</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="s1">&#39;/data/2014-03-07-path-animation.svg&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">f</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">fragment</span> <span class="o">=</span> <span class="nx">f</span><span class="p">;</span>
+  <span class="nx">ready</span><span class="p">();</span>
+<span class="p">});</span>
+</pre></div>
+
       </div>
     </article>
     
@@ -242,30 +306,6 @@ npm install canvas
           •<span class="entry-comments"><a href="#disqus_thread">Comment</a></span>
           <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time 1 minute</span>
         </div>
-        <h1 class="entry-title"><a href="http://localhost:1313/post/access-to-title-in-ie8" rel="bookmark" title="Access to title in IE8" itemprop="url">Access to title in IE8</a></h1>
-      </header>
-      <div class="entry-content">
-        <p>jQueryではIE8で<code>title</code>へのアクセスができないので直接アクセスする。</p>
-
-<div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">);</span>
-</pre></div>
-
-<div class="highlight"><pre><span class="nb">document</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span><span class="p">;</span>
-</pre></div>
-
-      </div>
-    </article>
-    
-    <article class="hentry">
-      <header>
-        <div class="entry-meta">
-          <span class="entry-date date published updated"><time datetime="2013-10-26T00:00:00-04:00">0001-01-01</time></span>
-          
-          <span class="author vcard"><span class="fn"><a href="http://localhost:1313/about/" title="About minodisk">minodisk</a></span></span>
-          
-          •<span class="entry-comments"><a href="#disqus_thread">Comment</a></span>
-          <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time 1 minute</span>
-        </div>
         <h1 class="entry-title"><a href="http://localhost:1313/post/coffeescript-compiler" rel="bookmark" title="CoffeeScript Compiler" itemprop="url">CoffeeScript Compiler</a></h1>
       </header>
       <div class="entry-content">
@@ -303,6 +343,30 @@ npm install canvas
     <span class="p">(</span><span class="k">if</span> <span class="nx">v</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">is</span> <span class="s">&#39;_&#39;</span> <span class="k">then</span> <span class="nx">tempVars</span> <span class="k">else</span> <span class="nx">realVars</span><span class="p">).</span><span class="nx">push</span> <span class="nx">v</span><span class="p">.</span><span class="nx">name</span>
   <span class="nx">realVars</span><span class="p">.</span><span class="nx">sort</span><span class="p">().</span><span class="nx">concat</span> <span class="nx">tempVars</span><span class="p">.</span><span class="nx">sort</span><span class="p">()</span>
 </pre></div></p>
+
+      </div>
+    </article>
+    
+    <article class="hentry">
+      <header>
+        <div class="entry-meta">
+          <span class="entry-date date published updated"><time datetime="2013-10-26T00:00:00-04:00">0001-01-01</time></span>
+          
+          <span class="author vcard"><span class="fn"><a href="http://localhost:1313/about/" title="About minodisk">minodisk</a></span></span>
+          
+          •<span class="entry-comments"><a href="#disqus_thread">Comment</a></span>
+          <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time 1 minute</span>
+        </div>
+        <h1 class="entry-title"><a href="http://localhost:1313/post/access-to-title-in-ie8" rel="bookmark" title="Access to title in IE8" itemprop="url">Access to title in IE8</a></h1>
+      </header>
+      <div class="entry-content">
+        <p>jQueryではIE8で<code>title</code>へのアクセスができないので直接アクセスする。</p>
+
+<div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">);</span>
+</pre></div>
+
+<div class="highlight"><pre><span class="nb">document</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span><span class="p">;</span>
+</pre></div>
 
       </div>
     </article>
@@ -526,73 +590,16 @@ npm install canvas
           •<span class="entry-comments"><a href="#disqus_thread">Comment</a></span>
           <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time 1 minute</span>
         </div>
-        <h1 class="entry-title"><a href="http://localhost:1313/post/path-animation" rel="bookmark" title="Path Animation" itemprop="url">Path Animation</a></h1>
+        <h1 class="entry-title"><a href="http://localhost:1313/post/backbone-tips" rel="bookmark" title="Backbone Tips" itemprop="url">Backbone Tips</a></h1>
       </header>
       <div class="entry-content">
         
 
-<h2 id="toc_0">パスアニメーションとは</h2>
-
-<p>パスに沿ってオブジェクトを移動させるアニメーションのことです。
-今回はSnap.svgでSVGをパースし、Illustratorで引いたパスに沿ってDOMを動かしてみます。</p>
-
-<h2 id="toc_1">要点</h2>
-
-<p>Snap.svgはSVGで絵を書くだけではなく、外部SVGのパースを行うことが可能。
-使用するライブラリの役割は以下のとおり。</p>
+<h2 id="toc_0">Backbone.history 関連</h2>
 
 <ul>
-<li>jQuery: DOM操作</li>
-<li>jQuery Transit: アニメーション</li>
-<li>Snap.svg: svgのパース</li>
+<li><code>Backbone.history.start()</code> を実行したかどうかの判定には <code>Backbone.History.started</code> を使う <a href="https://github.com/jashkenas/backbone/blob/1.1.2/backbone.js#L1386">backbone/backbone.js at 1.1.2 · jashkenas/backbone</a></li>
 </ul>
-
-<h2 id="toc_2">実装</h2>
-
-<div class="highlight"><pre><span class="kd">var</span> <span class="nx">fragment</span>
-  <span class="p">,</span> <span class="nx">ready</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-      <span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">fragment</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">).</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">)</span>
-        <span class="p">,</span> <span class="nx">totalLength</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">getTotalLength</span><span class="p">()</span>
-        <span class="p">,</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="p">,</span> <span class="nx">point</span>
-        <span class="p">,</span> <span class="nx">$car</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.car&#39;</span><span class="p">)</span>
-        <span class="p">;</span>
-
-      <span class="c1">// ダミー要素のtopを0からパスの全長までanimateします。</span>
-      <span class="c1">// setIntervalを使って独自にアニメーションするよりも熟れたコードになり、</span>
-      <span class="c1">// イージングを掛けられるようになるので表現の幅も容易に広がります。</span>
-      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;div&gt;&#39;</span><span class="p">)</span>
-        <span class="p">.</span><span class="nx">animate</span><span class="p">({</span>
-          <span class="nx">top</span><span class="o">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">getTotalLength</span><span class="p">()</span>  <span class="c1">// パスの全長を取得</span>
-        <span class="p">},</span> <span class="p">{</span>
-          <span class="nx">easing</span><span class="o">:</span> <span class="s1">&#39;easeOut&#39;</span><span class="p">,</span>
-          <span class="nx">step</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nx">point</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">getPointAtLength</span><span class="p">(</span><span class="nx">length</span><span class="p">)</span>  <span class="c1">// パスの現在の長さに対する座標を取得</span>
-              <span class="p">,</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">point</span><span class="p">.</span><span class="nx">x</span>                            <span class="c1">// x座標</span>
-              <span class="p">,</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">point</span><span class="p">.</span><span class="nx">y</span>                            <span class="c1">// y座標</span>
-              <span class="p">,</span> <span class="nx">alpha</span> <span class="o">=</span> <span class="nx">point</span><span class="p">.</span><span class="nx">alpha</span>                    <span class="c1">// パスの進む方向</span>
-              <span class="p">;</span>
-            <span class="nx">$car</span>
-              <span class="p">.</span><span class="nx">css</span><span class="p">({</span>
-                <span class="nx">x</span><span class="o">:</span> <span class="nx">x</span>
-                <span class="nx">y</span><span class="o">:</span> <span class="nx">y</span>
-                <span class="nx">rotate</span><span class="o">:</span> <span class="nx">alpha</span>
-              <span class="p">});</span>
-          <span class="p">})</span>
-        <span class="p">});</span>
-    <span class="p">})</span>
-    <span class="p">;</span>
-<span class="p">})</span>
-<span class="p">;</span>
-
-<span class="c1">// DOMのロード</span>
-<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">one</span><span class="p">(</span><span class="s1">&#39;ready&#39;</span><span class="p">,</span> <span class="nx">ready</span><span class="p">);</span>
-<span class="c1">// SVGのロード</span>
-<span class="nx">Snap</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="s1">&#39;/data/2014-03-07-path-animation.svg&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">f</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">fragment</span> <span class="o">=</span> <span class="nx">f</span><span class="p">;</span>
-  <span class="nx">ready</span><span class="p">();</span>
-<span class="p">});</span>
-</pre></div>
 
       </div>
     </article>
@@ -605,19 +612,12 @@ npm install canvas
           <span class="author vcard"><span class="fn"><a href="http://localhost:1313/about/" title="About minodisk">minodisk</a></span></span>
           
           •<span class="entry-comments"><a href="#disqus_thread">Comment</a></span>
-          <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time 1 minute</span>
+          <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time 0 minute</span>
         </div>
-        <h1 class="entry-title"><a href="http://localhost:1313/post/backbone-tips" rel="bookmark" title="Backbone Tips" itemprop="url">Backbone Tips</a></h1>
+        <h1 class="entry-title"><a href="http://localhost:1313/post/docpad" rel="bookmark" title="DocPad" itemprop="url">DocPad</a></h1>
       </header>
       <div class="entry-content">
         
-
-<h2 id="toc_0">Backbone.history 関連</h2>
-
-<ul>
-<li><code>Backbone.history.start()</code> を実行したかどうかの判定には <code>Backbone.History.started</code> を使う <a href="https://github.com/jashkenas/backbone/blob/1.1.2/backbone.js#L1386">backbone/backbone.js at 1.1.2 · jashkenas/backbone</a></li>
-</ul>
-
       </div>
     </article>
     

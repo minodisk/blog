@@ -7,12 +7,12 @@
     <language>en-us</language>
     
     
-    <updated>Mon, 01 Jan 0001 00:00:00 UTC</updated>
+    <updated>Thu, 03 Apr 2014 05:29:57 UTC</updated>
     
     <item>
       <title>Access to title in IE8</title>
       <link>http://localhost:1313/post/access-to-title-in-ie8</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      <pubDate>Thu, 03 Apr 2014 05:29:57 UTC</pubDate>
       
       <guid>http://localhost:1313/post/access-to-title-in-ie8</guid>
       <description>&lt;p&gt;jQueryではIE8で&lt;code&gt;title&lt;/code&gt;へのアクセスができないので直接アクセスする。&lt;/p&gt;

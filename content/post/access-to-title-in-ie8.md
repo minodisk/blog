@@ -1,12 +1,11 @@
----
-layout: post
-title: "Access to title in IE8"
-date: 2014-04-03 14:29:57 +0900
-comments: true
-tags:
-- jQuery
-- JavaScript
----
++++
+date = 2014-04-03T05:29:57Z
+title = "Access to title in IE8"
+tags = [
+  "jQuery",
+  "JavaScript"
+]
++++
 
 jQueryではIE8で`title`へのアクセスができないので直接アクセスする。
 

@@ -1,11 +1,10 @@
----
-layout: post
-title: "CoffeeScript Compiler"
-date: 2014-05-02 10:37:03 +0900
-comments: true
-tags:
-- CoffeeScript
----
++++
+date = 2014-05-02T01:37:03Z
+title = "CoffeeScript Compiler"
+tags = [
+  "CoffeeScript"
+]
++++
 
 [minodisk/coffee-refactor](https://github.com/minodisk/coffee-refactor)を作成中に[index.coffee](http://coffeescript.org/documentation/docs/)を読んでわかったことのメモ。
 

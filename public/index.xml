@@ -7,17 +7,7 @@
     <language>en-us</language>
     
     
-    <updated>Thu, 12 Jun 2014 08:32:47 UTC</updated>
-    
-    <item>
-      <title>test</title>
-      <link>http://localhost:1313/post/test</link>
-      <pubDate>Thu, 12 Jun 2014 08:32:47 UTC</pubDate>
-      
-      <guid>http://localhost:1313/post/test</guid>
-      <description>&lt;p&gt;abc&lt;/p&gt;
-</description>
-    </item>
+    <updated>Thu, 12 Jun 2014 07:37:22 UTC</updated>
     
     <item>
       <title>about</title>
@@ -38,169 +28,9 @@
     </item>
     
     <item>
-      <title>Path Animation</title>
-      <link>http://localhost:1313/post/path-animation</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
-      
-      <guid>http://localhost:1313/post/path-animation</guid>
-      <description>
-
-&lt;h2 id=&#34;toc_0&#34;&gt;パスアニメーションとは&lt;/h2&gt;
-
-&lt;p&gt;パスに沿ってオブジェクトを移動させるアニメーションのことです。
-今回はSnap.svgでSVGをパースし、Illustratorで引いたパスに沿ってDOMを動かしてみます。&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_1&#34;&gt;要点&lt;/h2&gt;
-
-&lt;p&gt;Snap.svgはSVGで絵を書くだけではなく、外部SVGのパースを行うことが可能。
-使用するライブラリの役割は以下のとおり。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;jQuery: DOM操作&lt;/li&gt;
-&lt;li&gt;jQuery Transit: アニメーション&lt;/li&gt;
-&lt;li&gt;Snap.svg: svgのパース&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;toc_2&#34;&gt;実装&lt;/h2&gt;
-
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;fragment&lt;/span&gt;
-  &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ready&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;_&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;after&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-      &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;path&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;fragment&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;select&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;g&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;select&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;*&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-        &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;totalLength&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;getTotalLength&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
-        &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;
-        &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;point&lt;/span&gt;
-        &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;$car&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;.car&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-        &lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-
-      &lt;span class=&#34;c1&#34;&gt;// ダミー要素のtopを0からパスの全長までanimateします。&lt;/span&gt;
-      &lt;span class=&#34;c1&#34;&gt;// setIntervalを使って独自にアニメーションするよりも熟れたコードになり、&lt;/span&gt;
-      &lt;span class=&#34;c1&#34;&gt;// イージングを掛けられるようになるので表現の幅も容易に広がります。&lt;/span&gt;
-      &lt;span class=&#34;nx&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;lt;div&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-        &lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;animate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;({&lt;/span&gt;
-          &lt;span class=&#34;nx&#34;&gt;top&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;getTotalLength&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;// パスの全長を取得&lt;/span&gt;
-        &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-          &lt;span class=&#34;nx&#34;&gt;easing&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;easeOut&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
-          &lt;span class=&#34;nx&#34;&gt;step&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-            &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;point&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;getPointAtLength&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;// パスの現在の長さに対する座標を取得&lt;/span&gt;
-              &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;point&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;x&lt;/span&gt;                            &lt;span class=&#34;c1&#34;&gt;// x座標&lt;/span&gt;
-              &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;y&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;point&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;y&lt;/span&gt;                            &lt;span class=&#34;c1&#34;&gt;// y座標&lt;/span&gt;
-              &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;alpha&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;point&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;alpha&lt;/span&gt;                    &lt;span class=&#34;c1&#34;&gt;// パスの進む方向&lt;/span&gt;
-              &lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-            &lt;span class=&#34;nx&#34;&gt;$car&lt;/span&gt;
-              &lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;css&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;({&lt;/span&gt;
-                &lt;span class=&#34;nx&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;x&lt;/span&gt;
-                &lt;span class=&#34;nx&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;y&lt;/span&gt;
-                &lt;span class=&#34;nx&#34;&gt;rotate&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;alpha&lt;/span&gt;
-              &lt;span class=&#34;p&#34;&gt;});&lt;/span&gt;
-          &lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
-        &lt;span class=&#34;p&#34;&gt;});&lt;/span&gt;
-    &lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
-    &lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-
-&lt;span class=&#34;c1&#34;&gt;// DOMのロード&lt;/span&gt;
-&lt;span class=&#34;nx&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;document&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;one&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;ready&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ready&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;c1&#34;&gt;// SVGのロード&lt;/span&gt;
-&lt;span class=&#34;nx&#34;&gt;Snap&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;load&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/data/2014-03-07-path-animation.svg&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-  &lt;span class=&#34;nx&#34;&gt;fragment&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-  &lt;span class=&#34;nx&#34;&gt;ready&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;});&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>YouTube JavaScript API</title>
-      <link>http://localhost:1313/post/youtube-javascript-api</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
-      
-      <guid>http://localhost:1313/post/youtube-javascript-api</guid>
-      <description>
-
-&lt;p&gt;YouTubeをembedするとJavaScriptのAPIが使えるようになります。
-&lt;script type=&#34;text/javascript&#34; src=&#34;http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js&#34;&gt;&lt;/script&gt;
-&lt;div id=&#34;ytapiplayer&#34;&gt;
-  You need Flash player 8+ and JavaScript enabled to view this video.
-&lt;/div&gt;
-&lt;div id=&#34;log&#34; style=&#34;height:150px;overflow-y:scroll;white-space:pre-wrap;font-family:monospace;font-size:12px;line-height:16px;&#34;&gt;
-&lt;/div&gt;
-&lt;script type=&#34;text/javascript&#34;&gt;
-var STATES = {
-  &amp;lsquo;-1&amp;rsquo;: &amp;lsquo;未開始&amp;rsquo;,
-  &amp;lsquo;0&amp;rsquo;: &amp;lsquo;終了&amp;rsquo;,
-  &amp;lsquo;1&amp;rsquo;: &amp;lsquo;再生中&amp;rsquo;,
-  &amp;lsquo;2&amp;rsquo;: &amp;lsquo;一時停止中&amp;rsquo;,
-  &amp;lsquo;3&amp;rsquo;: &amp;lsquo;バッファリング中&amp;rsquo;,
-  &amp;lsquo;5&amp;rsquo;: &amp;lsquo;頭出し済み&amp;rsquo;
-};
-var params = { allowScriptAccess: &amp;ldquo;always&amp;rdquo; };
-var atts = { id: &amp;ldquo;myytplayer&amp;rdquo; };
-swfobject.embedSWF(
-  &amp;ldquo;&lt;a href=&#34;http://www.youtube.com/v/u1zgFlCw8Aw?enablejsapi=1&amp;amp;playerapiid=ytplayer&amp;quot;&#34;&gt;http://www.youtube.com/v/u1zgFlCw8Aw?enablejsapi=1&amp;amp;playerapiid=ytplayer&amp;quot;&lt;/a&gt;,
-  &amp;ldquo;ytapiplayer&amp;rdquo;, &amp;ldquo;425&amp;rdquo;, &amp;ldquo;356&amp;rdquo;, &amp;ldquo;8&amp;rdquo;, null, null, params, atts
-  );
-var $log = $(&amp;lsquo;#log&amp;rsquo;);&lt;/p&gt;
-
-&lt;p&gt;function onYouTubePlayerReady(playerId) {
-  var ytplayer = document.getElementById(&amp;ldquo;myytplayer&amp;rdquo;);
-  ytplayer.addEventListener(&amp;lsquo;onStateChange&amp;rsquo;, &amp;lsquo;onStateChange&amp;rsquo;);
-}
-function onStateChange(state) {
-  log(&amp;lsquo;onStateChange:&amp;lsquo;, state, &amp;lsquo;=&amp;rsquo;, STATES[&amp;rdquo; + state]);
-}
-function log() {
-  $log
-    .text($log.text() + Array.prototype.join.call(arguments, &amp;lsquo; &amp;lsquo;) + &amp;lsquo;\n&amp;rsquo;)
-    .scrollTop($log.prop(&amp;lsquo;scrollHeight&amp;rsquo;));
-}
-&lt;/script&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_0&#34;&gt;ExternalInterface に関する Tips&lt;/h2&gt;
-
-&lt;p&gt;YouTube JavaScript API からは &lt;code&gt;ExternalInterface.call&lt;/code&gt; 経由で JavaScript がコールされる。
-このAPIに限らず &lt;code&gt;ExternalInterface.call&lt;/code&gt; を使う際に共通の注意点だが、FlashPlayer は JavaScript のメソッドのその戻りを待っている間レンダリングをやめてしまう。
-対策として、JavaScript から何も返さない場合は次のイベントループで処理を行い、関数自体は &lt;code&gt;return&lt;/code&gt; して FlashPlayer のレンダリングを再開させてあげるのがスムーズに見える。&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;onStateChange&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;state&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-  &lt;span class=&#34;nx&#34;&gt;setTimeout&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-    &lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
-  &lt;span class=&#34;p&#34;&gt;});&lt;/span&gt;
-  &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Install node-canvas</title>
-      <link>http://localhost:1313/post/install-node-canvas</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
-      
-      <guid>http://localhost:1313/post/install-node-canvas</guid>
-      <description>
-
-&lt;p&gt;依存バッケージをインストールしておかないと&lt;code&gt;node-canvas&lt;/code&gt;のインストールでコケる。&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_0&#34;&gt;CentOS&lt;/h2&gt;
-
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;yum install cairo cairo-devel cairomm-devel libjpeg-turbo-devel pango pango-devel pangomm pangomm-devel giflib-devel
-npm install canvas
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2 id=&#34;toc_1&#34;&gt;MacOSX&lt;/h2&gt;
-
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;brew install cairo
-&lt;span class=&#34;nb&#34;&gt;export &lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;PKG_CONFIG_PATH&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/opt/X11/lib/pkgconfig
-npm install canvas
-&lt;/pre&gt;&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
       <title>CoffeeScript Compiler</title>
       <link>http://localhost:1313/post/coffeescript-compiler</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      <pubDate>Fri, 02 May 2014 01:37:03 UTC</pubDate>
       
       <guid>http://localhost:1313/post/coffeescript-compiler</guid>
       <description>
@@ -241,25 +71,9 @@ npm install canvas
     </item>
     
     <item>
-      <title>Access to title in IE8</title>
-      <link>http://localhost:1313/post/access-to-title-in-ie8</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
-      
-      <guid>http://localhost:1313/post/access-to-title-in-ie8</guid>
-      <description>&lt;p&gt;jQueryではIE8で&lt;code&gt;title&lt;/code&gt;へのアクセスができないので直接アクセスする。&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nx&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nb&#34;&gt;document&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;title&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
       <title>AtomEditorのパッケージ開発</title>
       <link>http://localhost:1313/post/development-atom-package</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      <pubDate>Thu, 03 Apr 2014 06:03:15 UTC</pubDate>
       
       <guid>http://localhost:1313/post/development-atom-package</guid>
       <description>
@@ -331,9 +145,123 @@ npm install canvas
     </item>
     
     <item>
+      <title>Access to title in IE8</title>
+      <link>http://localhost:1313/post/access-to-title-in-ie8</link>
+      <pubDate>Thu, 03 Apr 2014 05:29:57 UTC</pubDate>
+      
+      <guid>http://localhost:1313/post/access-to-title-in-ie8</guid>
+      <description>&lt;p&gt;jQueryではIE8で&lt;code&gt;title&lt;/code&gt;へのアクセスができないので直接アクセスする。&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nx&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nb&#34;&gt;document&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;title&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Install node-canvas</title>
+      <link>http://localhost:1313/post/install-node-canvas</link>
+      <pubDate>Tue, 25 Mar 2014 09:45:30 UTC</pubDate>
+      
+      <guid>http://localhost:1313/post/install-node-canvas</guid>
+      <description>
+
+&lt;p&gt;依存バッケージをインストールしておかないと&lt;code&gt;node-canvas&lt;/code&gt;のインストールでコケる。&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;CentOS&lt;/h2&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;yum install cairo cairo-devel cairomm-devel libjpeg-turbo-devel pango pango-devel pangomm pangomm-devel giflib-devel
+npm install canvas
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;MacOSX&lt;/h2&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;brew install cairo
+&lt;span class=&#34;nb&#34;&gt;export &lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;PKG_CONFIG_PATH&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/opt/X11/lib/pkgconfig
+npm install canvas
+&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Path Animation</title>
+      <link>http://localhost:1313/post/path-animation</link>
+      <pubDate>Fri, 07 Mar 2014 03:36:01 UTC</pubDate>
+      
+      <guid>http://localhost:1313/post/path-animation</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;パスアニメーションとは&lt;/h2&gt;
+
+&lt;p&gt;パスに沿ってオブジェクトを移動させるアニメーションのことです。
+今回はSnap.svgでSVGをパースし、Illustratorで引いたパスに沿ってDOMを動かしてみます。&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;要点&lt;/h2&gt;
+
+&lt;p&gt;Snap.svgはSVGで絵を書くだけではなく、外部SVGのパースを行うことが可能。
+使用するライブラリの役割は以下のとおり。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;jQuery: DOM操作&lt;/li&gt;
+&lt;li&gt;jQuery Transit: アニメーション&lt;/li&gt;
+&lt;li&gt;Snap.svg: svgのパース&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;toc_2&#34;&gt;実装&lt;/h2&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;fragment&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ready&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;_&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;after&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+      &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;path&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;fragment&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;select&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;g&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;select&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;*&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;totalLength&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;getTotalLength&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;point&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;$car&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;.car&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+      &lt;span class=&#34;c1&#34;&gt;// ダミー要素のtopを0からパスの全長までanimateします。&lt;/span&gt;
+      &lt;span class=&#34;c1&#34;&gt;// setIntervalを使って独自にアニメーションするよりも熟れたコードになり、&lt;/span&gt;
+      &lt;span class=&#34;c1&#34;&gt;// イージングを掛けられるようになるので表現の幅も容易に広がります。&lt;/span&gt;
+      &lt;span class=&#34;nx&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;lt;div&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;animate&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;({&lt;/span&gt;
+          &lt;span class=&#34;nx&#34;&gt;top&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;getTotalLength&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;// パスの全長を取得&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+          &lt;span class=&#34;nx&#34;&gt;easing&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;easeOut&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+          &lt;span class=&#34;nx&#34;&gt;step&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;point&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;getPointAtLength&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;length&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;// パスの現在の長さに対する座標を取得&lt;/span&gt;
+              &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;point&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;x&lt;/span&gt;                            &lt;span class=&#34;c1&#34;&gt;// x座標&lt;/span&gt;
+              &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;y&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;point&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;y&lt;/span&gt;                            &lt;span class=&#34;c1&#34;&gt;// y座標&lt;/span&gt;
+              &lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;alpha&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;point&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;alpha&lt;/span&gt;                    &lt;span class=&#34;c1&#34;&gt;// パスの進む方向&lt;/span&gt;
+              &lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+            &lt;span class=&#34;nx&#34;&gt;$car&lt;/span&gt;
+              &lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;css&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;({&lt;/span&gt;
+                &lt;span class=&#34;nx&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;x&lt;/span&gt;
+                &lt;span class=&#34;nx&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;y&lt;/span&gt;
+                &lt;span class=&#34;nx&#34;&gt;rotate&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;alpha&lt;/span&gt;
+              &lt;span class=&#34;p&#34;&gt;});&lt;/span&gt;
+          &lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;});&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;// DOMのロード&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;document&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;one&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;ready&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ready&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;// SVGのロード&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;Snap&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;load&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/data/2014-03-07-path-animation.svg&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;fragment&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;ready&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;});&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>CoffeeScript Tips</title>
       <link>http://localhost:1313/post/coffeescript-tips</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      <pubDate>Thu, 06 Mar 2014 03:32:49 UTC</pubDate>
       
       <guid>http://localhost:1313/post/coffeescript-tips</guid>
       <description>
@@ -450,18 +378,9 @@ npm install canvas
     </item>
     
     <item>
-      <title>DocPad</title>
-      <link>http://localhost:1313/post/docpad</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
-      
-      <guid>http://localhost:1313/post/docpad</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Backbone Tips</title>
       <link>http://localhost:1313/post/backbone-tips</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      <pubDate>Tue, 25 Feb 2014 03:09:55 UTC</pubDate>
       
       <guid>http://localhost:1313/post/backbone-tips</guid>
       <description>
@@ -471,6 +390,68 @@ npm install canvas
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;Backbone.history.start()&lt;/code&gt; を実行したかどうかの判定には &lt;code&gt;Backbone.History.started&lt;/code&gt; を使う &lt;a href=&#34;https://github.com/jashkenas/backbone/blob/1.1.2/backbone.js#L1386&#34;&gt;backbone/backbone.js at 1.1.2 · jashkenas/backbone&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>YouTube JavaScript API</title>
+      <link>http://localhost:1313/post/youtube-javascript-api</link>
+      <pubDate>Tue, 04 Feb 2014 16:38:53 UTC</pubDate>
+      
+      <guid>http://localhost:1313/post/youtube-javascript-api</guid>
+      <description>
+
+&lt;p&gt;YouTubeをembedするとJavaScriptのAPIが使えるようになります。
+&lt;script type=&#34;text/javascript&#34; src=&#34;http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js&#34;&gt;&lt;/script&gt;
+&lt;div id=&#34;ytapiplayer&#34;&gt;
+  You need Flash player 8+ and JavaScript enabled to view this video.
+&lt;/div&gt;
+&lt;div id=&#34;log&#34; style=&#34;height:150px;overflow-y:scroll;white-space:pre-wrap;font-family:monospace;font-size:12px;line-height:16px;&#34;&gt;
+&lt;/div&gt;
+&lt;script type=&#34;text/javascript&#34;&gt;
+var STATES = {
+  &amp;lsquo;-1&amp;rsquo;: &amp;lsquo;未開始&amp;rsquo;,
+  &amp;lsquo;0&amp;rsquo;: &amp;lsquo;終了&amp;rsquo;,
+  &amp;lsquo;1&amp;rsquo;: &amp;lsquo;再生中&amp;rsquo;,
+  &amp;lsquo;2&amp;rsquo;: &amp;lsquo;一時停止中&amp;rsquo;,
+  &amp;lsquo;3&amp;rsquo;: &amp;lsquo;バッファリング中&amp;rsquo;,
+  &amp;lsquo;5&amp;rsquo;: &amp;lsquo;頭出し済み&amp;rsquo;
+};
+var params = { allowScriptAccess: &amp;ldquo;always&amp;rdquo; };
+var atts = { id: &amp;ldquo;myytplayer&amp;rdquo; };
+swfobject.embedSWF(
+  &amp;ldquo;&lt;a href=&#34;http://www.youtube.com/v/u1zgFlCw8Aw?enablejsapi=1&amp;amp;playerapiid=ytplayer&amp;quot;&#34;&gt;http://www.youtube.com/v/u1zgFlCw8Aw?enablejsapi=1&amp;amp;playerapiid=ytplayer&amp;quot;&lt;/a&gt;,
+  &amp;ldquo;ytapiplayer&amp;rdquo;, &amp;ldquo;425&amp;rdquo;, &amp;ldquo;356&amp;rdquo;, &amp;ldquo;8&amp;rdquo;, null, null, params, atts
+  );
+var $log = $(&amp;lsquo;#log&amp;rsquo;);&lt;/p&gt;
+
+&lt;p&gt;function onYouTubePlayerReady(playerId) {
+  var ytplayer = document.getElementById(&amp;ldquo;myytplayer&amp;rdquo;);
+  ytplayer.addEventListener(&amp;lsquo;onStateChange&amp;rsquo;, &amp;lsquo;onStateChange&amp;rsquo;);
+}
+function onStateChange(state) {
+  log(&amp;lsquo;onStateChange:&amp;lsquo;, state, &amp;lsquo;=&amp;rsquo;, STATES[&amp;rdquo; + state]);
+}
+function log() {
+  $log
+    .text($log.text() + Array.prototype.join.call(arguments, &amp;lsquo; &amp;lsquo;) + &amp;lsquo;\n&amp;rsquo;)
+    .scrollTop($log.prop(&amp;lsquo;scrollHeight&amp;rsquo;));
+}
+&lt;/script&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;ExternalInterface に関する Tips&lt;/h2&gt;
+
+&lt;p&gt;YouTube JavaScript API からは &lt;code&gt;ExternalInterface.call&lt;/code&gt; 経由で JavaScript がコールされる。
+このAPIに限らず &lt;code&gt;ExternalInterface.call&lt;/code&gt; を使う際に共通の注意点だが、FlashPlayer は JavaScript のメソッドのその戻りを待っている間レンダリングをやめてしまう。
+対策として、JavaScript から何も返さない場合は次のイベントループで処理を行い、関数自体は &lt;code&gt;return&lt;/code&gt; して FlashPlayer のレンダリングを再開させてあげるのがスムーズに見える。&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;onStateChange&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;state&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;setTimeout&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;});&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 </description>
     </item>
     

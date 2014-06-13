@@ -6,11 +6,12 @@ pygmentsuseclasses = true
 disqusShortname = "dsk-mn"
 
 [Params]
+PublishedDateFormat = "2006-01-02"
+TimestampFormat = "2006-01-02T15:04:05Z07:00"
+
 Auther = "minodisk"
 EmailAddress = "daisuke.mino@gmail.com"
 TwitterId = "minodisk"
 GooglePlusId = "117361242608765720862"
 GitHubId = "minodisk"
-
-PublishedDateFormat = "2006-01-02"
 GoogleAnaliticsId = "UA-48719488-1"

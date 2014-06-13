@@ -1,10 +1,11 @@
----
-layout: post
-title: "Backbone Tips"
-date: 2014-02-25 12:09:55 +0900
-comments: true
-tags: [JavaScript, Backbone]
----
++++
+date = 2014-02-25T03:09:55Z
+title = "Backbone Tips"
+tags = [
+  "JavaScript",
+  "Backbone"
+]
++++
 
 ## Backbone.history 関連
 

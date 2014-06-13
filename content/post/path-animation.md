@@ -1,13 +1,12 @@
----
-layout: post
-title: "Path Animation"
-date: 2014-03-07 12:36:01 +0900
-comments: true
-ignored: true
-tags:
-- JavaScript
-- Snap.svg
----
++++
+date = 2014-03-07T03:36:01Z
+title = "Path Animation"
+draft = true
+tags = [
+  "JavaScript",
+  "Snap.svg"
+]
++++
 
 ## パスアニメーションとは
 パスに沿ってオブジェクトを移動させるアニメーションのことです。

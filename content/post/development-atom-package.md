@@ -1,11 +1,10 @@
----
-layout: post
-title: "AtomEditorのパッケージ開発"
-date: 2014-04-03 15:03:15 +0900
-comments: true
-tags:
-- Atom
----
++++
+date = 2014-04-03T06:03:15Z
+title = "AtomEditorのパッケージ開発"
+tags = [
+  "Atom"
+]
++++
 
 逆引き的ななにか。
 

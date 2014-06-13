@@ -1,11 +1,10 @@
----
-layout: post
-title: "Install node-canvas"
-date: 2014-03-25 18:45:30 +0900
-comments: true
-tags:
-- Node
----
++++
+date = 2014-03-25T09:45:30Z
+title = "Install node-canvas"
+tags = [
+  "Node"
+]
++++
 
 依存バッケージをインストールしておかないと`node-canvas`のインストールでコケる。
 

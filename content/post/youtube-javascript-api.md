@@ -1,10 +1,13 @@
----
-layout: post
-title: "YouTube JavaScript API"
-date: 2014-02-05 01:38:53 +0900
-comments: true
-tags: [JavaScript, YouTube, API]
----
++++
+date = 2014-02-04T16:38:53Z
+title = "YouTube JavaScript API"
+tags = [
+  "JavaScript",
+  "YouTube",
+  "API"
+]
++++
+
 YouTubeをembedするとJavaScriptのAPIが使えるようになります。
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
 <div id="ytapiplayer">

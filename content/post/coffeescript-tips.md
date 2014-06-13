@@ -1,12 +1,10 @@
----
-layout: post
-title: "CoffeeScript Tips"
-date: 2014-03-06 12:32:49 +0900
-comments: true
-tags:
-- CoffeeScript
-publish: false
----
++++
+date = 2014-03-06T03:32:49Z
+title = "CoffeeScript Tips"
+tags = [
+  "CoffeeScript"
+]
++++
 
 ## 即時関数の引数に別名をつける
 jQuery のプラグイン書くときとかに使う。

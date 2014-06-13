@@ -1,6 +1,86 @@
-{{ template "theme/partials/header.html" . }}
-{{ template "theme/partials/article.html" . }}
-{{ template "theme/partials/sns.html" . }}
-{{ template "theme/partials/disqus.html" . }}
-{{ template "theme/partials/related_posts.html" . }}
+<!DOCTYPE html>
+<html lang="en">
+{{ template "theme/partials/head.html" . }}
+<body id="post" class="feature">
+{{ template "theme/partials/nav.html" . }}
+
+  <div class="entry-header">
+    <div class="image-credit">Image source: <a href="http://www.dargadgetz.com/ios-7-abstract-wallpaper-pack-for-iphone-5-and-ipod-touch-retina/">dargadgetz</a></div>
+    <div class="entry-image">
+      <img src="http://mmistakes.github.io/hpstr-jekyll-theme/images/abstract-10.jpg">
+    </div>
+  </div>
+
+  <div id="main" role="main">
+    <article class="hentry">
+      <header class="header-title">
+        <div class="header-title-wrap">
+            <h1 class="entry-title"><a href="{{ .Permalink }}" rel="bookmark" title="{{ .Title }}">{{ .Title }}</a></h1>
+          <h2>{{ .PublishDate.Format .Site.Params.PublishedDateFormat }}</h2>
+          <p class="entry-reading-time">
+            <i class="fa fa-clock-o"></i>
+            Reading time ~{{ .ReadingTime }} minutes
+          </p>
+        </div>
+      </header>
+      <div class="entry-content">
+        {{ .Content }}
+
+        <footer class="entry-meta">
+          {{ if .Params.tags }}
+          <span class="entry-tags">
+            {{ with .Params.tags }}
+            <a href="" title="Pages tagged {{ . }}" class="tag">{{ . }}</a>
+            {{ end }}
+          </span>
+          {{ end }}
+          <span><a href="{{ .Permalink }}" rel="bookmark" title="{{ .Title }}">{{ .Title }}</a> was published on <span class="entry-date date published updated"><time datetime="2013-08-16T00:00:00-04:00">{{ .Date.Format .Site.Params.PublishedDateFormat }}</time></span></span>
+          <!-- (revised: <span class="entry-date date modified"><time datetime="2013-08-20">{{ .PublishDate.Format .Site.Params.PublishedDateFormat }}</time></span>) -->
+          {{ if .Site.Params.Auther }}<span class="author vcard"><span class="fn"><a href="{{ .Site.BaseUrl }}/about/" title="About {{ .Site.Params.Auther }}">{{ .Site.Params.Auther }}</a></span></span>{{ end }}
+          <div class="social-share">
+            <ul class="socialcount socialcount-small inline-list like js grade-a activate-on-hover">
+              <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" title="Share on Facebook"><span class="count"><i class="fa fa-facebook-square"></i> Like</span></a></li>
+              <li class="twitter"><a href="https://twitter.com/intent/tweet?text={{ .Permalink }}" title="Share on Twitter"><span class="count"><i class="fa fa-twitter-square"></i> Tweet</span></a></li>
+              <li class="googleplus"><a href="https://plus.google.com/share?url={{ .Permalink }}" title="Share on Google Plus"><span class="count"><i class="fa fa-google-plus-square"></i> +1</span></a></li>
+            </ul>
+          </div><!-- /.social-share -->
+        </footer>
+      </div>
+    </article>
+
+    {{ if .Site.DisqusShortname }}
+    <section id="disqus_thread">
+    {{ template "_internal/disqus.html" . }}
+    </section>
+    {{ end }}
+
+    <div class="read-more">
+      <div class="read-more-header">
+        <a href="http://mmistakes.github.io/hpstr-jekyll-theme/sample-link-post/" class="read-more-btn">Read More</a>
+      </div>
+      <!-- <div class="read-more-content">
+        <h3><a href="http://mmistakes.github.io/hpstr-jekyll-theme/background-image/" title="Post with a Background Image">Post with a Background Image</a></h3>
+        <p>Sample post with a background image CSS override. <a href="http://mmistakes.github.io/hpstr-jekyll-theme/background-image/">Continue reading</a></p>
+      </div> -->
+
+      <div class="read-more-list">
+        {{with .Prev}}
+        <div class="list-item">
+          <h4><a href="{{.Permalink}}" title="Sample Link Post">{{.Title}}</a></h4>
+          <span>Published on {{ .Date.Format .Site.Params.PublishedDateFormat }}</span>
+        </div>
+        {{end}}
+        {{with .Next}}
+        <div class="list-item">
+          <h4><a href="{{.Permalink}}" title="A Post with a Video">{{.Title}}</a></h4>
+          <span>Published on {{ .Date.Format .Site.Params.PublishedDateFormat }}</span>
+        </div>
+        {{end}}
+      </div>
+    </div>
+
+  </div>
+
 {{ template "theme/partials/footer.html" . }}
+</body>
+</html>

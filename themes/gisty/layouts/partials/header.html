@@ -1,23 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>{{ .Site.Title }}</title>
-  <link href="/css/gisty.css" rel="stylesheet">
-
-{{ template "theme/partials/ga.html" . }}
-
-</head>
-<body>
-  <div class="wrapper">
-    <header class="header">
-      <div class="image-container">
-        <canvas class="image"></canvas>
-      </div>
-      <div class="title-container">
-        <div class="title">
-          <h1><a href="{{ .Site.BaseUrl }}">{{ .Site.Title }}</a></h1>
-        </div>
-      </div>
-    </header>
-    <div class="body">
+<div class="entry-header">
+  <div class="image-credit">Image source: <a href="http://www.dargadgetz.com/ios-7-abstract-wallpaper-pack-for-iphone-5-and-ipod-touch-retina/">dargadgetz</a></div>
+  <div class="entry-image">
+    <img src="http://mmistakes.github.io/hpstr-jekyll-theme/images/abstract-1.jpg" alt="Latest Posts">
+  </div>
+  <div class="header-title">
+    <div class="header-title-wrap">
+      <h1>{{ .Site.Title }}</h1>
+      <h2>Latest Posts</h2>
+    </div>
+  </div>
+</div>

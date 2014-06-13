@@ -1,0 +1,32 @@
+<nav id="dl-menu" class="dl-menuwrapper" role="navigation">
+  <button class="dl-trigger">Open Menu</button>
+  <ul class="dl-menu">
+    <li><a href="{{ .Permalink }}">Home</a></li>
+    <li>
+      <a href="#">About</a>
+      <ul class="dl-submenu">
+        <li class="dl-back"><a href="#">back</a></li>
+        <li>
+          <img src="{{ .Site.Params.Photo }}" alt="{{ .Site.Params.Auther }} photo" class="author-photo">
+          <h4>{{ .Site.Params.Auther }}</h4>
+          <p>{{ .Site.Params.Profile }}</p>
+        </li>
+        <li><a href="{{ .Site.BaseUrl }}/about/">Learn More</a></li>
+        {{ if isset .Site.Params "EmailAddress" }}<li><a href="mailto:{{ .Site.Params.EmailAddress }}"><i class="fa fa-envelope"></i> Email</a></li>{{ end }}
+        {{ if isset .Site.Params "TwitterId" }}<li><a href="http://twitter.com/{{ .Site.Params.TwitterId }}"><i class="fa fa-twitter"></i> Twitter</a></li>{{ end }}
+        {{ if isset .Site.Params "GooglePlusId" }}<li><a href="http://plus.google.com/{{ .Site.Params.GooglePlusId }}"><i class="fa fa-google-plus"></i> Google+</a></li>{{ end }}
+        {{ if isset .Site.Params "GitHubId" }}<li><a href="http://github.com/{{ .Site.Params.GitHubId }}"><i class="fa fa-github"></i> GitHub</a></li>{{ end }}
+      </ul>
+    </li>
+    <li>
+      <a href="#">Posts</a>
+      <ul class="dl-submenu">
+        <li class="dl-back"><a href="#">back</a></li>
+        <li><a href="{{ .Permalink }}/post/">All Posts</a></li>
+        <li><a href="{{ .Permalink }}/tags/">All Tags</a></li>
+      </ul>
+    </li>
+    <li><a href="{{ .Permalink }}/theme-setup">Theme Setup</a></li>
+    <li><a href="http://mademistakes.com">External Link</a></li>
+  </ul>
+</nav>

@@ -10,7 +10,7 @@
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', '{http:\/\/localhost:1313\/index.xml 0xc2105c8728 map[Pages:[0xc2104d7b00 0xc21068b080 0xc21011a600 0xc2104d7dc0 0xc210607340 0xc21068b340 0xc21068a840 0xc2104d8340 0xc2104d7580 0xc21068a000 0xc2104d8b80]] I\/O  [] map[] 0001-01-01 00:00:00 \x2b0000 UTC { 0} {\/ http:\/\/localhost:1313\/  }}');
+  ga('create', '{http:\/\/localhost:1313\/index.xml 0xc21039e9e8 map[Pages:[0xc2101f5600 0xc2103c02c0 0xc21000b2c0 0xc2101f5b80 0xc2101f4840 0xc2104b5580 0xc2103c1b80 0xc2103c0840 0xc2104b6340 0xc2101f4dc0 0xc2104b5000]] I\/O  [] map[] 0001-01-01 00:00:00 \x2b0000 UTC { 0} {\/ http:\/\/localhost:1313\/  }}');
   ga('send', 'pageview');
 </script>
 
@@ -19,17 +19,21 @@
 <body>
   <div class="wrapper">
     <header class="header">
-      <div class="container">
-        <h1><a href="http://localhost:1313">I/O</a></h1>
+      <div class="image-container">
+        <canvas class="image"></canvas>
+      </div>
+      <div class="title-container">
+        <div class="title">
+          <h1><a href="http://localhost:1313">I/O</a></h1>
+        </div>
       </div>
     </header>
     <div class="body">
-      <div class="container">
 
 
-  
+
 <article class="article">
-  <h1 class="article-title">test</h1>
+  <h1 class="article-title"><a href="http://localhost:1313/post/test">test</a></h1>
   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 2014-06-12</small></p> <hr/>
   <div class="article-content">
     <p>abc</p>
@@ -37,9 +41,9 @@
   </div>
 </article>
 
-  
+
 <article class="article">
-  <h1 class="article-title">about</h1>
+  <h1 class="article-title"><a href="http://localhost:1313/about">about</a></h1>
   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 2014-06-12</small></p> <hr/>
   <div class="article-content">
     
@@ -55,25 +59,18 @@
   </div>
 </article>
 
-  
+
 <article class="article">
-  <h1 class="article-title">Backbone Tips</h1>
+  <h1 class="article-title"><a href="http://localhost:1313/post/docpad">DocPad</a></h1>
   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 0001-01-01</small></p> <hr/>
   <div class="article-content">
     
-
-<h2 id="toc_0">Backbone.history 関連</h2>
-
-<ul>
-<li><code>Backbone.history.start()</code> を実行したかどうかの判定には <code>Backbone.History.started</code> を使う <a href="https://github.com/jashkenas/backbone/blob/1.1.2/backbone.js#L1386">backbone/backbone.js at 1.1.2 · jashkenas/backbone</a></li>
-</ul>
-
   </div>
 </article>
 
-  
+
 <article class="article">
-  <h1 class="article-title">YouTube JavaScript API</h1>
+  <h1 class="article-title"><a href="http://localhost:1313/post/youtube-javascript-api">YouTube JavaScript API</a></h1>
   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 0001-01-01</small></p> <hr/>
   <div class="article-content">
     
@@ -133,9 +130,9 @@ function log() {
   </div>
 </article>
 
-  
+
 <article class="article">
-  <h1 class="article-title">Install node-canvas</h1>
+  <h1 class="article-title"><a href="http://localhost:1313/post/install-node-canvas">Install node-canvas</a></h1>
   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 0001-01-01</small></p> <hr/>
   <div class="article-content">
     
@@ -158,25 +155,9 @@ npm install canvas
   </div>
 </article>
 
-  
+
 <article class="article">
-  <h1 class="article-title">Access to title in IE8</h1>
-  <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 0001-01-01</small></p> <hr/>
-  <div class="article-content">
-    <p>jQueryではIE8で<code>title</code>へのアクセスができないので直接アクセスする。</p>
-
-<div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">);</span>
-</pre></div>
-
-<div class="highlight"><pre><span class="nb">document</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span><span class="p">;</span>
-</pre></div>
-
-  </div>
-</article>
-
-  
-<article class="article">
-  <h1 class="article-title">CoffeeScript Compiler</h1>
+  <h1 class="article-title"><a href="http://localhost:1313/post/coffeescript-compiler">CoffeeScript Compiler</a></h1>
   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 0001-01-01</small></p> <hr/>
   <div class="article-content">
     
@@ -217,9 +198,25 @@ npm install canvas
   </div>
 </article>
 
-  
+
 <article class="article">
-  <h1 class="article-title">AtomEditorのパッケージ開発</h1>
+  <h1 class="article-title"><a href="http://localhost:1313/post/access-to-title-in-ie8">Access to title in IE8</a></h1>
+  <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 0001-01-01</small></p> <hr/>
+  <div class="article-content">
+    <p>jQueryではIE8で<code>title</code>へのアクセスができないので直接アクセスする。</p>
+
+<div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">);</span>
+</pre></div>
+
+<div class="highlight"><pre><span class="nb">document</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span><span class="p">;</span>
+</pre></div>
+
+  </div>
+</article>
+
+
+<article class="article">
+  <h1 class="article-title"><a href="http://localhost:1313/post/development-atom-package">AtomEditorのパッケージ開発</a></h1>
   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 0001-01-01</small></p> <hr/>
   <div class="article-content">
     
@@ -291,9 +288,9 @@ npm install canvas
   </div>
 </article>
 
-  
+
 <article class="article">
-  <h1 class="article-title">CoffeeScript Tips</h1>
+  <h1 class="article-title"><a href="http://localhost:1313/post/coffeescript-tips">CoffeeScript Tips</a></h1>
   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 0001-01-01</small></p> <hr/>
   <div class="article-content">
     
@@ -410,9 +407,9 @@ npm install canvas
   </div>
 </article>
 
-  
+
 <article class="article">
-  <h1 class="article-title">Path Animation</h1>
+  <h1 class="article-title"><a href="http://localhost:1313/post/path-animation">Path Animation</a></h1>
   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 0001-01-01</small></p> <hr/>
   <div class="article-content">
     
@@ -483,18 +480,27 @@ npm install canvas
   </div>
 </article>
 
-  
+
 <article class="article">
-  <h1 class="article-title">DocPad</h1>
+  <h1 class="article-title"><a href="http://localhost:1313/post/backbone-tips">Backbone Tips</a></h1>
   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 0001-01-01</small></p> <hr/>
   <div class="article-content">
     
+
+<h2 id="toc_0">Backbone.history 関連</h2>
+
+<ul>
+<li><code>Backbone.history.start()</code> を実行したかどうかの判定には <code>Backbone.History.started</code> を使う <a href="https://github.com/jashkenas/backbone/blob/1.1.2/backbone.js#L1386">backbone/backbone.js at 1.1.2 · jashkenas/backbone</a></li>
+</ul>
+
   </div>
 </article>
 
-  
 
-      </div>
+
+      <footer class="footer">
+
+      </footer>
     </div>
   </div>
 <script>document.write('<script src="http://'

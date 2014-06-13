@@ -10,7 +10,7 @@
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', '{ [] []    false  map[tags:[DocPad CoffeeCup] ignored:true]  false 0001-01-01 00:00:00 \x2b0000 UTC [] 0xc2102c4140  true post  [45 45 45 10 108 97 121 111 117 116 58 32 112 111 115 116 10 116 105 116 108 101 58 32 68 111 99 80 97 100 10 100 97 116 101 58 32 50 48 49 52 45 48 53 45 49 53 32 49 49 58 53 50 58 48 48 32 43 48 57 48 48 10 116 97 103 115 58 10 45 32 68 111 99 80 97 100 10 45 32 67 111 102 102 101 101 67 117 112 10 105 103 110 111 114 101 100 58 32 116 114 117 101 10 45 45 45 10] [] [] {0 100 0 0} {docpad.md html post\/} {0xc21068a000 \x3cnil\x3e} { 0xc2105c8728 map[] DocPad  [] map[] 0001-01-01 00:00:00 \x2b0000 UTC { -1} {   post}}}');
+  ga('create', '{ [] []    false  map[tags:[DocPad CoffeeCup] ignored:true]  false 0001-01-01 00:00:00 \x2b0000 UTC [] 0xc2103fdd40  true post  [45 45 45 10 108 97 121 111 117 116 58 32 112 111 115 116 10 116 105 116 108 101 58 32 68 111 99 80 97 100 10 100 97 116 101 58 32 50 48 49 52 45 48 53 45 49 53 32 49 49 58 53 50 58 48 48 32 43 48 57 48 48 10 116 97 103 115 58 10 45 32 68 111 99 80 97 100 10 45 32 67 111 102 102 101 101 67 117 112 10 105 103 110 111 114 101 100 58 32 116 114 117 101 10 45 45 45 10] [] [] {0 100 0 0} {docpad.md html post\/} {0xc2103c02c0 0xc2101f5b80} { 0xc21039e9e8 map[] DocPad  [] map[] 0001-01-01 00:00:00 \x2b0000 UTC { -1} {   post}}}');
   ga('send', 'pageview');
 </script>
 
@@ -19,15 +19,19 @@
 <body>
   <div class="wrapper">
     <header class="header">
-      <div class="container">
-        <h1><a href="http://localhost:1313">I/O</a></h1>
+      <div class="image-container">
+        <canvas class="image"></canvas>
+      </div>
+      <div class="title-container">
+        <div class="title">
+          <h1><a href="http://localhost:1313">I/O</a></h1>
+        </div>
       </div>
     </header>
     <div class="body">
-      <div class="container">
 
 <article class="article">
-  <h1 class="article-title">DocPad</h1>
+  <h1 class="article-title"><a href="http://localhost:1313/post/docpad">DocPad</a></h1>
   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 0001-01-01</small></p> <hr/>
   <div class="article-content">
     
@@ -51,16 +55,45 @@
 </script>
 
 
-  <ul class="post-pagination">
-    <li class="prev"><a rel="prev" href="http://localhost:1313/post/path-animation">Path Animation</a></li>
+<section class="disqus container">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'dsk-mn';
+    var disqus_identifier = 'http:\/\/localhost:1313\/post\/docpad';
+    var disqus_title = 'DocPad';
+    var disqus_url = 'http:\/\/localhost:1313\/post\/docpad';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+<div class="related-posts">
+  <ul class="close-posts">
+    
+    <li class="prev">
+      <h4 class="title"><a rel="prev" href="http://localhost:1313/about">about</a></h4>
+      <span class="posted-date">Posted on 2014-06-12</span>
+    </li>
+    
+    
+    <li class="next">
+      <h4 class="title"><a rel="next" href="http://localhost:1313/post/youtube-javascript-api">YouTube JavaScript API</a></h4>
+      <span class="posted-date">Posted on 0001-01-01</span>
+    </li>
     
   </ul>
+</div>
 
+      <footer class="footer">
 
-
-    </ul>
-    </div>
-      </div>
+      </footer>
     </div>
   </div>
 <script>document.write('<script src="http://'

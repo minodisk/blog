@@ -11,9 +11,13 @@
 <body>
   <div class="wrapper">
     <header class="header">
-      <div class="container">
-        <h1><a href="{{ .Site.BaseUrl }}">{{ .Site.Title }}</a></h1>
+      <div class="image-container">
+        <canvas class="image"></canvas>
+      </div>
+      <div class="title-container">
+        <div class="title">
+          <h1><a href="{{ .Site.BaseUrl }}">{{ .Site.Title }}</a></h1>
+        </div>
       </div>
     </header>
     <div class="body">
-      <div class="container">

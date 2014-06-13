@@ -1,14 +1,6 @@
 {{ template "theme/partials/header.html" . }}
 {{ template "theme/partials/article.html" . }}
 {{ template "theme/partials/sns.html" . }}
-
-  <ul class="post-pagination">
-    {{with .Prev}}<li class="prev"><a rel="prev" href="{{.Permalink}}">{{.Title}}</a></li>{{end}}
-    {{with .Next}}<li class="next"><a rel="next" href="{{.Permalink}}">{{.Title}}</a></li>{{end}}
-  </ul>
-
-{{ template "_internal/disqus.html" . }}
-
-    </ul>
-    </div>
+{{ template "theme/partials/disqus.html" . }}
+{{ template "theme/partials/related_posts.html" . }}
 {{ template "theme/partials/footer.html" . }}

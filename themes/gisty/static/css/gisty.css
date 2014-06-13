@@ -1,10 +1,3 @@
-@font-face {
-  font-family: 'octicons';
-  src: url("https://assets-cdn.github.com/assets/octicons-8902ec113b2d6498748e41627c803eb2b27c8433.eot");
-  src: url("https://assets-cdn.github.com/assets/octicons-8902ec113b2d6498748e41627c803eb2b27c8433.eot#iefix") format("embedded-opentype"), url("https://assets-cdn.github.com/assets/octicons-a87554e18586f5215a57fa67c9421a3e088aeafa.woff") format("woff"), url("https://assets-cdn.github.com/assets/octicons-1a9fcfe5c5246787653e20667b04f5fd666e8884.ttf") format("truetype"), url("https://assets-cdn.github.com/assets/octicons-7f259d1a5d695e9278da60392acbee4b51e8a3ec.svg#octicons") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
 * {
   box-sizing: border-box;
 }
@@ -15,35 +8,10 @@ body {
   height: 100%;
 }
 body {
-  min-width: 1020px;
-  font-family: Helvetica, arial, sans-serif;
-  font-size: 14px;
-  line-height: 1.6;
-  background-color: #fff;
-  color: #333;
-}
-a {
-  color: #4183c4;
-  text-decoration: none;
-}
-a.absent {
-  color: #c00;
-}
-a.anchor {
-  display: block;
-  padding-left: 30px;
-  margin-left: -30px;
-  cursor: pointer;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-}
-.octicon {
-  font: normal normal 16px octicons;
-  line-height: 1;
-  text-decoration: none;
-  -webkit-font-smoothing: antialiased;
+  font-family: 'Lato', Calibri, Arial, sans-serif;
+  color: #222;
+  text-shadow: none;
+  background: #e8e8e8;
 }
 h1,
 h2,
@@ -51,280 +19,288 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 20px 0 10px;
-  padding: 0;
-  font-weight: bold;
-  -webkit-font-smoothing: antialiased;
-  cursor: text;
-  position: relative;
+  font-family: 'Lato', Calibri, Arial, sans-serif;
 }
-h1 a.anchor,
-h2 a.anchor,
-h3 a.anchor,
-h4 a.anchor,
-h5 a.anchor,
-h6 a.anchor {
-  display: block;
-  padding-right: 6px;
-  padding-left: 30px;
-  margin-left: -30px;
-  cursor: pointer;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
+h1 {
+  font-size: 32px;
+  font-size: 2rem;
 }
-h1 a.anchor:focus,
-h2 a.anchor:focus,
-h3 a.anchor:focus,
-h4 a.anchor:focus,
-h5 a.anchor:focus,
-h6 a.anchor:focus {
-  outline: none;
+ul,
+ol {
+  list-style: none;
 }
-h1 a.anchor .octicon-link,
-h2 a.anchor .octicon-link,
-h3 a.anchor .octicon-link,
-h4 a.anchor .octicon-link,
-h5 a.anchor .octicon-link,
-h6 a.anchor .octicon-link {
-  display: none;
+a {
+  color: #222;
+  text-decoration: none;
+}
+a a:visited {
+  color: #555;
+  outline: 0;
+}
+a a:hover {
   color: #000;
+  outline: 0;
 }
-h1:hover a.anchor,
-h2:hover a.anchor,
-h3:hover a.anchor,
-h4:hover a.anchor,
-h5:hover a.anchor,
-h6:hover a.anchor {
-  text-decoration: none;
-  line-height: 1;
-  padding-left: 8px;
-  margin-left: -30px;
-  top: 15%;
-}
-h1:hover a.anchor .octicon-link,
-h2:hover a.anchor .octicon-link,
-h3:hover a.anchor .octicon-link,
-h4:hover a.anchor .octicon-link,
-h5:hover a.anchor .octicon-link,
-h6:hover a.anchor .octicon-link {
-  display: inline-block;
-}
-h1:hover a.anchor .octicon-link:before,
-h2:hover a.anchor .octicon-link:before,
-h3:hover a.anchor .octicon-link:before,
-h4:hover a.anchor .octicon-link:before,
-h5:hover a.anchor .octicon-link:before,
-h6:hover a.anchor .octicon-link:before {
-  content: '\f05c';
-}
-h1:hover a.anchor,
-h2:hover a.anchor,
-h3:hover a.anchor,
-h4:hover a.anchor,
-h5:hover a.anchor,
-h6:hover a.anchor {
-  text-decoration: none;
-}
-ul {
-  margin: 0;
+a a:focus {
+  color: #000;
+  outline: thin dotted;
 }
 .wrapper {
   position: relative;
   min-height: 100%;
+  margin-top: 50px auto 20px;
 }
 .container {
   margin: 0 auto;
-  width: 960px;
+  max-width: 800px;
 }
-article {
-  margin: 40px 0;
+.header {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
 }
-article h1 tt,
-article h1 code {
+.header .image-container {
+  position: relative;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  min-height: 400px;
+  overflow: hidden;
+}
+.header .image-container .image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  min-width: 50%;
+  min-height: 50%;
+  margin: auto;
+  background: -webkit-linear-gradient(top, #1e5799 0%, #2989d8 50%, #207cca 51%, #7db9e8 100%);
+}
+.header .title-container {
+  position: absolute;
+  top: 0;
+  display: table;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+.header .title-container .title {
+  display: table-cell;
+  margin: 0 auto;
+  text-align: center;
+  vertical-align: middle;
+}
+.header .title-container .title h1 {
+  margin: 10px 60px;
+  font-weight: 700;
+  font-size: 3.75rem;
+  color: #fff;
+  text-shadow: 1px 1px 4px rgba(34,34,34,0.6);
+}
+.header .title-container .title h2 {
+  margin: 0;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1.875rem;
+}
+.body {
+  margin: 40px 2px 20px;
+}
+.article {
+  max-width: 800px;
+  padding: 50px 80px;
+  margin: 0 auto 30px;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(187,187,187,0.1), 0 6px 12px rgba(0,0,0,0.1);
+}
+.article h1 tt,
+.article h1 code {
   font-size: inherit;
 }
-article h2 tt,
-article h2 code {
+.article h2 tt,
+.article h2 code {
   font-size: inherit;
 }
-article h3 tt,
-article h3 code {
+.article h3 tt,
+.article h3 code {
   font-size: inherit;
 }
-article h4 tt,
-article h4 code {
+.article h4 tt,
+.article h4 code {
   font-size: inherit;
 }
-article h5 tt,
-article h5 code {
+.article h5 tt,
+.article h5 code {
   font-size: inherit;
 }
-article h6 tt,
-article h6 code {
+.article h6 tt,
+.article h6 code {
   font-size: inherit;
 }
-article h1 {
+.article h1 {
   font-size: 28px;
   color: #000;
 }
-article h2 {
+.article h2 {
   font-size: 24px;
   border-bottom: 1px solid #ccc;
   color: #000;
 }
-article h3 {
+.article h3 {
   font-size: 18px;
 }
-article h4 {
+.article h4 {
   font-size: 16px;
 }
-article h5 {
+.article h5 {
   font-size: 14px;
 }
-article h6 {
+.article h6 {
   color: #777;
   font-size: 14px;
 }
-article p,
-article blockquote,
-article ul,
-article ol,
-article dl,
-article table,
-article pre {
+.article p,
+.article blockquote,
+.article ul,
+.article ol,
+.article dl,
+.article table,
+.article pre {
   margin: 15px 0;
 }
-article hr {
+.article hr {
   background: transparent url("http://tinyurl.com/bq5kskr") repeat-x 0 0;
   border: 0 none;
   color: #ccc;
   height: 4px;
   padding: 0;
 }
-article body > h3:first-child,
-article body > h4:first-child,
-article body > h5:first-child,
-article body > h6:first-child {
+.article body > h3:first-child,
+.article body > h4:first-child,
+.article body > h5:first-child,
+.article body > h6:first-child {
   margin-top: 0;
   padding-top: 0;
 }
-article a:first-child h1,
-article a:first-child h2,
-article a:first-child h3,
-article a:first-child h4,
-article a:first-child h5,
-article a:first-child h6 {
+.article a:first-child h1,
+.article a:first-child h2,
+.article a:first-child h3,
+.article a:first-child h4,
+.article a:first-child h5,
+.article a:first-child h6 {
   margin-top: 0;
   padding-top: 0;
 }
-article h1 p,
-article h2 p,
-article h3 p,
-article h4 p,
-article h5 p,
-article h6 p {
+.article h1 p,
+.article h2 p,
+.article h3 p,
+.article h4 p,
+.article h5 p,
+.article h6 p {
   margin-top: 0;
 }
-article li p.first {
+.article li p.first {
   display: inline-block;
 }
-article ul,
-article ol {
+.article ul,
+.article ol {
   padding-left: 30px;
 }
-article ul :first-child,
-article ol :first-child {
+.article ul :first-child,
+.article ol :first-child {
   margin-top: 0;
 }
-article ul :last-child,
-article ol :last-child {
+.article ul :last-child,
+.article ol :last-child {
   margin-bottom: 0;
 }
-article dl {
+.article dl {
   padding: 0;
 }
-article dl dt {
+.article dl dt {
   font-size: 14px;
   font-weight: bold;
   font-style: italic;
   padding: 0;
   margin: 15px 0 5px;
 }
-article dl dt:first-child {
+.article dl dt:first-child {
   padding: 0;
 }
-article dl dt > :first-child {
+.article dl dt > :first-child {
   margin-top: 0;
 }
-article dl dt > :last-child {
+.article dl dt > :last-child {
   margin-bottom: 0;
 }
-article dl dd {
+.article dl dd {
   margin: 0 0 15px;
   padding: 0 15px;
 }
-article dl dd > :first-child {
+.article dl dd > :first-child {
   margin-top: 0;
 }
-article dl dd > :last-child {
+.article dl dd > :last-child {
   margin-bottom: 0;
 }
-article blockquote {
+.article blockquote {
   border-left: 4px solid #ddd;
   padding: 0 15px;
   color: #777;
 }
-article blockquote > :first-child {
+.article blockquote > :first-child {
   margin-top: 0;
 }
-article blockquote > :last-child {
+.article blockquote > :last-child {
   margin-bottom: 0;
 }
-article table {
+.article table {
   padding: 0;
   border-collapse: collapse;
   border-spacing: 0;
 }
-article table tr {
+.article table tr {
   border-top: 1px solid #ddd;
   background-color: #fff;
   margin: 0;
   padding: 0;
 }
-article table tr:nth-child(2n) {
+.article table tr:nth-child(2n) {
   background-color: #f8f8f8;
 }
-article table tr th {
+.article table tr th {
   font-weight: bold;
   border: 1px solid #ddd;
   text-align: left;
   margin: 0;
   padding: 6px 13px;
 }
-article table tr td {
+.article table tr td {
   border: 1px solid #ddd;
   text-align: left;
   margin: 0;
   padding: 6px 13px;
 }
-article table tr th :first-child,
-article table tr td :first-child {
+.article table tr th :first-child,
+.article table tr td :first-child {
   margin-top: 0;
 }
-article table tr th :last-child,
-article table tr td :last-child {
+.article table tr th :last-child,
+.article table tr td :last-child {
   margin-bottom: 0;
 }
-article img {
+.article img {
   max-width: 100%;
 }
-article span.frame {
+.article span.frame {
   display: block;
   overflow: hidden;
 }
-article span.frame > span {
+.article span.frame > span {
   border: 1px solid #ddd;
   display: block;
   float: left;
@@ -333,194 +309,155 @@ article span.frame > span {
   padding: 7px;
   width: auto;
 }
-article span.frame span img {
+.article span.frame span img {
   display: block;
   float: left;
 }
-article span.frame span span {
+.article span.frame span span {
   clear: both;
   color: #333;
   display: block;
   padding: 5px 0 0;
 }
-article span.align-center {
+.article span.align-center {
   display: block;
   overflow: hidden;
   clear: both;
 }
-article span.align-center > span {
+.article span.align-center > span {
   display: block;
   overflow: hidden;
   margin: 13px auto 0;
   text-align: center;
 }
-article span.align-center span img {
+.article span.align-center span img {
   margin: 0 auto;
   text-align: center;
 }
-article span.align-right {
+.article span.align-right {
   display: block;
   overflow: hidden;
   clear: both;
 }
-article span.align-right > span {
+.article span.align-right > span {
   display: block;
   overflow: hidden;
   margin: 13px 0 0;
   text-align: right;
 }
-article span.align-right span img {
+.article span.align-right span img {
   margin: 0;
   text-align: right;
 }
-article span.float-left {
+.article span.float-left {
   display: block;
   margin-right: 13px;
   overflow: hidden;
   float: left;
 }
-article span.float-left span {
+.article span.float-left span {
   margin: 13px 0 0;
 }
-article span.float-right {
+.article span.float-right {
   display: block;
   margin-left: 13px;
   overflow: hidden;
   float: right;
 }
-article span.float-right > span {
+.article span.float-right > span {
   display: block;
   overflow: hidden;
   margin: 13px auto 0;
   text-align: right;
 }
-article code,
-article tt,
-article pre {
-  background-color: #f8f8f8;
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  font-family: Consolas, "Liberation Mono", Courier, monospace;
-  font-size: 12px;
+.article code,
+.article tt,
+.article pre {
+  background-color: code-background-color;
+  border: 1px solid code-border-color;
+  border-radius: code-border-radius;
+  font-family: code-font-family;
+  font-size: code-font-size;
 }
-article code,
-article tt {
+.article code,
+.article tt {
   margin: 0 2px;
   padding: 0 5px;
   white-space: nowrap;
 }
-article pre {
+.article pre {
   font-size: 13px;
   line-height: 19px;
   overflow: auto;
   padding: 6px 10px;
 }
-article pre code {
+.article pre code {
   background: transparent;
   border: none;
   margin: 0;
   padding: 0;
   white-space: pre;
 }
-article h1 {
+.article h1 {
   font-size: 2.5em;
   border-bottom: 1px solid #ddd;
 }
-article h1 a,
-article h1 a:link,
-article h1 a:visited,
-article h1 a:hover,
-article h1 a:active {
+.article h1 a,
+.article h1 a:link,
+.article h1 a:visited,
+.article h1 a:hover,
+.article h1 a:active {
   color: inherit;
   text-decoration: none;
 }
-article h2 {
+.article h2 {
   font-size: 2em;
   border-bottom: 1px solid #ddd;
 }
-article h3 {
+.article h3 {
   font-size: 1.5em;
 }
-.post-pagination {
-  margin: 40px 0;
-  padding: 0;
-}
-.post-pagination li {
-  list-style: none;
-  margin: 0;
-}
-.post-pagination li.prev {
-  float: left;
-}
-.post-pagination li.prev:before {
-  content: '\00ab';
-}
-.post-pagination li.next {
-  float: right;
-}
-.post-pagination li.next:after {
-  content: '\00bb';
-}
-.post-pagination:after {
-  display: block;
-  content: '';
-  clear: both;
-}
 .disqus {
+  max-width: 800px;
+  padding: 50px 80px;
+  margin: 0 auto 30px;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(187,187,187,0.1), 0 6px 12px rgba(0,0,0,0.1);
+}
+.related-posts {
+  max-width: 800px;
+  padding: 50px 80px;
+  margin: 0 auto 30px;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(187,187,187,0.1), 0 6px 12px rgba(0,0,0,0.1);
+}
+.related-posts .close-posts {
   margin: 40px 0;
-}
-.header {
-  text-shadow: 0 -1px 1px #f3f3f3;
-  background-color: #f3f3f3;
-  background-image: linear-gradient(#f9f9f9, #f3f3f3);
-  background-repeat: repeat-x;
-  border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 40px;
-}
-.header h1 {
-  margin: 0;
-  font-size: 24px;
-  font-weight: bold;
-  line-height: 40px;
-  font-family: inherit;
-  text-rendering: optimizelegibility;
-}
-.header h1 a,
-.header h1 a:link,
-.header h1 a:visited,
-.header h1 a:hover,
-.header h1 a:active {
-  color: inherit;
-  text-decoration: none;
-}
-.body {
-  padding-bottom: 59px;
-}
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  padding: 20px 0;
-  font-size: 12px;
-  line-height: 1.5;
-  color: #777;
-  text-shadow: 0 1px 0 #fff;
-  background-color: #f5f5f5;
-  border-top: 1px solid #e5e5e5;
-}
-.footer .footer-links {
-  float: left;
   padding: 0;
-  list-style: none;
 }
-.footer .footer-links li {
-  display: inline-block;
-  line-height: 16px;
+.related-posts .close-posts li {
+  width: 49%;
 }
-.footer .footer-links li+li {
-  margin-left: 10px;
+.related-posts .close-posts li.prev {
+  float: left;
+  text-align: left;
 }
-.footer:after {
+.related-posts .close-posts li.next {
+  float: right;
+  text-align: right;
+}
+.related-posts .close-posts li .title {
+  font-size: 1.125rem;
+  margin: 0;
+}
+.related-posts .close-posts li .posted-date {
+  display: block;
+  font-size: 0.875rem;
+  color: #a2a2a2;
+}
+.related-posts .close-posts:after {
   display: block;
   content: '';
   clear: both;
@@ -561,8 +498,8 @@ article h3 {
   font-size: 11px;
   color: #999;
   background: #f0f0f0;
-  border: 1px solid #ddd;
-  border-radius: 0 3px;
+  border: 1px solid code-border-color;
+  border-radius: 0 code-border-radius;
 }
 .highlight .c {
   color: #586e75 !important;

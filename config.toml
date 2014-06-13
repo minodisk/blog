@@ -3,6 +3,7 @@ languageCode = "en-us"
 title = "I/O"
 
 pygmentsuseclasses = true
+disqusShortname = "dsk-mn"
 
 [params]
 GoogleAnalitics = "UA-48719488-1"

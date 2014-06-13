@@ -1,7 +1,7 @@
 {{ template "theme/partials/header.html" . }}
 
-  {{ range .Data.Pages }}
+{{ range .Data.Pages }}
 {{ template "theme/partials/article.html" . }}
-  {{ end }}
+{{ end }}
 
 {{ template "theme/partials/footer.html" . }}

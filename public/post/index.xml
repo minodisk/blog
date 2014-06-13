@@ -123,18 +123,45 @@ npm install canvas
     </item>
     
     <item>
-      <title>Access to title in IE8</title>
-      <link>http://localhost:1313/post/access-to-title-in-ie8</link>
+      <title>CoffeeScript Compiler</title>
+      <link>http://localhost:1313/post/coffeescript-compiler</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
       
-      <guid>http://localhost:1313/post/access-to-title-in-ie8</guid>
-      <description>&lt;p&gt;jQueryではIE8で&lt;code&gt;title&lt;/code&gt;へのアクセスができないので直接アクセスする。&lt;/p&gt;
+      <guid>http://localhost:1313/post/coffeescript-compiler</guid>
+      <description>
 
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nx&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/minodisk/coffee-refactor&#34;&gt;minodisk/coffee-refactor&lt;/a&gt;を作成中に&lt;a href=&#34;http://coffeescript.org/documentation/docs/&#34;&gt;index.coffee&lt;/a&gt;を読んでわかったことのメモ。&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;nodes.coffee&lt;/h2&gt;
+
+&lt;h3 id=&#34;toc_1&#34;&gt;Code#compileNode()&lt;/h3&gt;
+
+&lt;p&gt;ノードをコンパイルする。
+コンパイルの過程で&lt;code&gt;Scope&lt;/code&gt;インスタンスが作成される。
+オプションに親のスコープを渡すと&lt;code&gt;variables&lt;/code&gt;は親のスコープ内で宣言された変数を考慮した変数のリストとなる。&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nv&#34;&gt;options =&lt;/span&gt;
+  &lt;span class=&#34;nv&#34;&gt;scope: &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;parent&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;scope&lt;/span&gt;
+  &lt;span class=&#34;nv&#34;&gt;indent: &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;code&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;compileNode&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;options&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;scope = &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;options&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;scope&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;scope&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;variables&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nb&#34;&gt;document&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;title&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;toc_2&#34;&gt;scope.coffee&lt;/h2&gt;
+
+&lt;h3 id=&#34;toc_3&#34;&gt;Scope#declaredVariables()&lt;/h3&gt;
+
+&lt;p&gt;スコープ内で&lt;code&gt;var&lt;/code&gt;で宣言される変数の配列を返す。パラメータは含まれない。&lt;/p&gt;
+
+&lt;p&gt;スコープ内で定義される全ての名前空間を取得するためには、さらにパラメータを含む必要が有るため下記のコードを使う。
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nv&#34;&gt;declaredSymbols = &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;(scope) -&amp;gt;&lt;/span&gt;
+  &lt;span class=&#34;nv&#34;&gt;realVars = &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[]&lt;/span&gt;
+  &lt;span class=&#34;nv&#34;&gt;tempVars = &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[]&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;v&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;@variables&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;when&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;v&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;type&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;is&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#39;var&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;or&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;v&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;type&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;is&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#39;param&amp;#39;&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;v&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;charAt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;is&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#39;_&amp;#39;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;then&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;tempVars&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;realVars&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;push&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;v&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;name&lt;/span&gt;
+  &lt;span class=&#34;nx&#34;&gt;realVars&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;sort&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;concat&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;tempVars&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;sort&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -414,45 +441,18 @@ npm install canvas
     </item>
     
     <item>
-      <title>CoffeeScript Compiler</title>
-      <link>http://localhost:1313/post/coffeescript-compiler</link>
+      <title>Access to title in IE8</title>
+      <link>http://localhost:1313/post/access-to-title-in-ie8</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
       
-      <guid>http://localhost:1313/post/coffeescript-compiler</guid>
-      <description>
+      <guid>http://localhost:1313/post/access-to-title-in-ie8</guid>
+      <description>&lt;p&gt;jQueryではIE8で&lt;code&gt;title&lt;/code&gt;へのアクセスができないので直接アクセスする。&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://github.com/minodisk/coffee-refactor&#34;&gt;minodisk/coffee-refactor&lt;/a&gt;を作成中に&lt;a href=&#34;http://coffeescript.org/documentation/docs/&#34;&gt;index.coffee&lt;/a&gt;を読んでわかったことのメモ。&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_0&#34;&gt;nodes.coffee&lt;/h2&gt;
-
-&lt;h3 id=&#34;toc_1&#34;&gt;Code#compileNode()&lt;/h3&gt;
-
-&lt;p&gt;ノードをコンパイルする。
-コンパイルの過程で&lt;code&gt;Scope&lt;/code&gt;インスタンスが作成される。
-オプションに親のスコープを渡すと&lt;code&gt;variables&lt;/code&gt;は親のスコープ内で宣言された変数を考慮した変数のリストとなる。&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nv&#34;&gt;options =&lt;/span&gt;
-  &lt;span class=&#34;nv&#34;&gt;scope: &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;parent&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;scope&lt;/span&gt;
-  &lt;span class=&#34;nv&#34;&gt;indent: &lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;span class=&#34;nx&#34;&gt;code&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;compileNode&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;options&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;scope = &lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;options&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;scope&lt;/span&gt;
-&lt;span class=&#34;nx&#34;&gt;console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;scope&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;variables&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nx&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
-&lt;h2 id=&#34;toc_2&#34;&gt;scope.coffee&lt;/h2&gt;
-
-&lt;h3 id=&#34;toc_3&#34;&gt;Scope#declaredVariables()&lt;/h3&gt;
-
-&lt;p&gt;スコープ内で&lt;code&gt;var&lt;/code&gt;で宣言される変数の配列を返す。パラメータは含まれない。&lt;/p&gt;
-
-&lt;p&gt;スコープ内で定義される全ての名前空間を取得するためには、さらにパラメータを含む必要が有るため下記のコードを使う。
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nv&#34;&gt;declaredSymbols = &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;(scope) -&amp;gt;&lt;/span&gt;
-  &lt;span class=&#34;nv&#34;&gt;realVars = &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[]&lt;/span&gt;
-  &lt;span class=&#34;nv&#34;&gt;tempVars = &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[]&lt;/span&gt;
-  &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;v&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;@variables&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;when&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;v&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;type&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;is&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#39;var&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;or&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;v&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;type&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;is&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#39;param&amp;#39;&lt;/span&gt;
-    &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;v&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;charAt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;is&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#39;_&amp;#39;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;then&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;tempVars&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;realVars&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;push&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;v&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;name&lt;/span&gt;
-  &lt;span class=&#34;nx&#34;&gt;realVars&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;sort&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;concat&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;tempVars&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;sort&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nb&#34;&gt;document&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;title&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 </description>
     </item>
     

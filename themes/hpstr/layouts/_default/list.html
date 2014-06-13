@@ -18,7 +18,7 @@
     <article class="hentry">
       <header>
         <div class="entry-meta">
-          <span class="entry-date date published updated"><time datetime="2013-10-26T00:00:00-04:00">{{ .Date.Format  "2006-01-02" }}</time></span>
+          <span class="entry-date date published updated"><time datetime="{{ .Date.Format .Site.Params.TimestampFormat }}">{{ .Date.Format .Site.Params.PublishedDateFormat }}</time></span>
           {{ if .Site.Params.Auther }}
           <span class="author vcard"><span class="fn"><a href="{{ .Site.BaseUrl }}/about/" title="About {{ .Site.Params.Auther }}">{{ .Site.Params.Auther }}</a></span></span>
           {{ end }}

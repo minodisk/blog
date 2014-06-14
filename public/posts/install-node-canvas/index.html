@@ -45,8 +45,8 @@
     <li>
       <a href="#">Posts</a>
       <ul class="dl-submenu">
-        <li><a href="http://localhost:1313/post/docpad/post/">All Posts</a></li>
-        <li><a href="http://localhost:1313/post/docpad/tags/">All Tags</a></li>
+        <li><a href="http://localhost:1313/post/">All Posts</a></li>
+        <li><a href="http://localhost:1313/tags/">All Tags</a></li>
       </ul>
     </li>
   </ul>
@@ -56,7 +56,7 @@
   <div class="entry-header">
     <div class="image-credit">Image source: <a href="http://www.dargadgetz.com/ios-7-abstract-wallpaper-pack-for-iphone-5-and-ipod-touch-retina/">dargadgetz</a></div>
     <div class="entry-image">
-      <img src="http://mmistakes.github.io/hpstr-jekyll-theme/images/abstract-10.jpg">
+      <img src="http://localhost:1313/images/abstract-10.jpg">
     </div>
   </div>
 
@@ -64,36 +64,50 @@
     <article class="hentry">
       <header class="header-title">
         <div class="header-title-wrap">
-            <h1 class="entry-title"><a href="http://localhost:1313/post/docpad" rel="bookmark" title="DocPad">DocPad</a></h1>
-          <h2>0001-01-01</h2>
+            <h1 class="entry-title"><a href="http://localhost:1313/posts/install-node-canvas" rel="bookmark" title="Install node-canvas">Install node-canvas</a></h1>
+          <h2><time datetime="2014-03-25T09:45:30Z">2014-03-25</time></h2>
           <p class="entry-reading-time">
             <i class="fa fa-clock-o"></i>
-            Reading time ~0 minutes
+            Reading time ~1 minutes
           </p>
         </div>
       </header>
       <div class="entry-content">
         
 
+<p>依存バッケージをインストールしておかないと<code>node-canvas</code>のインストールでコケる。</p>
+
+<h2 id="toc_0">CentOS</h2>
+
+<div class="highlight"><pre>yum install cairo cairo-devel cairomm-devel libjpeg-turbo-devel pango pango-devel pangomm pangomm-devel giflib-devel
+npm install canvas
+</pre></div>
+
+<h2 id="toc_1">MacOSX</h2>
+
+<div class="highlight"><pre>brew install cairo
+<span class="nb">export </span><span class="nv">PKG_CONFIG_PATH</span><span class="o">=</span>/opt/X11/lib/pkgconfig
+npm install canvas
+</pre></div>
+
+
         <footer class="entry-meta">
           
           <span class="entry-tags">
             
             
-            <a href="http://localhost:1313/tags/docpad" title="Pages tagged DocPad" class="tag">DocPad</a>
-            
-            <a href="http://localhost:1313/tags/coffeecup" title="Pages tagged CoffeeCup" class="tag">CoffeeCup</a>
+            <a href="http://localhost:1313/tags/node" title="Pages tagged Node" class="tag">Node</a>
             
           </span>
           
-          <span><a href="http://localhost:1313/post/docpad" rel="bookmark" title="DocPad">DocPad</a> was published on <span class="entry-date date published updated"><time datetime="2013-08-16T00:00:00-04:00">0001-01-01</time></span></span>
+          <span><a href="http://localhost:1313/posts/install-node-canvas" rel="bookmark" title="Install node-canvas">Install node-canvas</a> was published on <span class="entry-date date published updated"><time datetime="2014-03-25T09:45:30Z">2014-03-25</time></span></span>
           
           <span class="author vcard"><span class="fn"><a href="http://localhost:1313/about/" title="About minodisk">minodisk</a></span></span>
           <div class="social-share">
             <ul class="socialcount socialcount-small inline-list like js grade-a activate-on-hover">
-              <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fpost%2fdocpad" title="Share on Facebook"><span class="count"><i class="fa fa-facebook-square"></i> Like</span></a></li>
-              <li class="twitter"><a href="https://twitter.com/intent/tweet?text=http%3a%2f%2flocalhost%3a1313%2fpost%2fdocpad" title="Share on Twitter"><span class="count"><i class="fa fa-twitter-square"></i> Tweet</span></a></li>
-              <li class="googleplus"><a href="https://plus.google.com/share?url=http%3a%2f%2flocalhost%3a1313%2fpost%2fdocpad" title="Share on Google Plus"><span class="count"><i class="fa fa-google-plus-square"></i> +1</span></a></li>
+              <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fposts%2finstall-node-canvas" title="Share on Facebook"><span class="count"><i class="fa fa-facebook-square"></i> Like</span></a></li>
+              <li class="twitter"><a href="https://twitter.com/intent/tweet?text=http%3a%2f%2flocalhost%3a1313%2fposts%2finstall-node-canvas" title="Share on Twitter"><span class="count"><i class="fa fa-twitter-square"></i> Tweet</span></a></li>
+              <li class="googleplus"><a href="https://plus.google.com/share?url=http%3a%2f%2flocalhost%3a1313%2fposts%2finstall-node-canvas" title="Share on Google Plus"><span class="count"><i class="fa fa-google-plus-square"></i> +1</span></a></li>
             </ul>
           </div>
         </footer>
@@ -105,9 +119,9 @@
     <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'dsk-mn';
-    var disqus_identifier = 'http:\/\/localhost:1313\/post\/docpad';
-    var disqus_title = 'DocPad';
-    var disqus_url = 'http:\/\/localhost:1313\/post\/docpad';
+    var disqus_identifier = 'http:\/\/localhost:1313\/posts\/install-node-canvas';
+    var disqus_title = 'Install node-canvas';
+    var disqus_url = 'http:\/\/localhost:1313\/posts\/install-node-canvas';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -121,18 +135,18 @@
     
 
     <div class="read-more">
-      <div class="read-more-header">
-        <a href="http://mmistakes.github.io/hpstr-jekyll-theme/sample-link-post/" class="read-more-btn">Read More</a>
-      </div>
-      
-
       <div class="read-more-list">
         
         <div class="list-item">
-          <h4><a href="http://localhost:1313/post/backbone-tips" title="Sample Link Post">Backbone Tips</a></h4>
-          <span>Published on 0001-01-01</span>
+          <h4><a href="http://localhost:1313/posts/access-to-title-in-ie8" title="Sample Link Post">Access to title in IE8</a></h4>
+          <span>Published on 2014-04-03</span>
         </div>
         
+        
+        <div class="list-item">
+          <h4><a href="http://localhost:1313/posts/path-animation" title="A Post with a Video">Path Animation</a></h4>
+          <span>Published on 2014-03-07</span>
+        </div>
         
       </div>
     </div>
@@ -141,7 +155,7 @@
 
 <div class="footer-wrapper">
   <footer role="contentinfo">
-    <span>© 2014 minodisk. Powered by <a href="http://hugo.spf13.com/">Hugo</a> using the <a href="http://mademistakes.com/hpstr/">HPSTR Theme</a>. <a href="http://mmistakes.github.io/hpstr-jekyll-theme/terms/">Privacy and Disclosure Policies</a>.</span>
+    <span>© 2014 minodisk. Powered by <a href="http://hugo.spf13.com/">Hugo</a> using the <a href="http://mademistakes.com/hpstr/">HPSTR Theme</a>. <a href="http://localhost:1313/terms/">Privacy and Disclosure Policies</a>.</span>
   </footer>
 </div>
 

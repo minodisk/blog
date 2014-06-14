@@ -11,10 +11,10 @@
     
     <item>
       <title>YouTube JavaScript API</title>
-      <link>http://localhost:1313/post/youtube-javascript-api</link>
+      <link>http://localhost:1313/posts/youtube-javascript-api</link>
       <pubDate>Tue, 04 Feb 2014 16:38:53 UTC</pubDate>
       
-      <guid>http://localhost:1313/post/youtube-javascript-api</guid>
+      <guid>http://localhost:1313/posts/youtube-javascript-api</guid>
       <description>
 
 &lt;p&gt;YouTubeをembedするとJavaScriptのAPIが使えるようになります。

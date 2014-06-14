@@ -11,10 +11,10 @@
     
     <item>
       <title>Access to title in IE8</title>
-      <link>http://localhost:1313/post/access-to-title-in-ie8</link>
+      <link>http://localhost:1313/posts/access-to-title-in-ie8</link>
       <pubDate>Thu, 03 Apr 2014 05:29:57 UTC</pubDate>
       
-      <guid>http://localhost:1313/post/access-to-title-in-ie8</guid>
+      <guid>http://localhost:1313/posts/access-to-title-in-ie8</guid>
       <description>&lt;p&gt;jQueryではIE8で&lt;code&gt;title&lt;/code&gt;へのアクセスができないので直接アクセスする。&lt;/p&gt;
 
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nx&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
@@ -27,10 +27,10 @@
     
     <item>
       <title>Path Animation</title>
-      <link>http://localhost:1313/post/path-animation</link>
+      <link>http://localhost:1313/posts/path-animation</link>
       <pubDate>Fri, 07 Mar 2014 03:36:01 UTC</pubDate>
       
-      <guid>http://localhost:1313/post/path-animation</guid>
+      <guid>http://localhost:1313/posts/path-animation</guid>
       <description>
 
 &lt;h2 id=&#34;toc_0&#34;&gt;パスアニメーションとは&lt;/h2&gt;
@@ -100,10 +100,10 @@
     
     <item>
       <title>Backbone Tips</title>
-      <link>http://localhost:1313/post/backbone-tips</link>
+      <link>http://localhost:1313/posts/backbone-tips</link>
       <pubDate>Tue, 25 Feb 2014 03:09:55 UTC</pubDate>
       
-      <guid>http://localhost:1313/post/backbone-tips</guid>
+      <guid>http://localhost:1313/posts/backbone-tips</guid>
       <description>
 
 &lt;h2 id=&#34;toc_0&#34;&gt;Backbone.history 関連&lt;/h2&gt;
@@ -116,10 +116,10 @@
     
     <item>
       <title>YouTube JavaScript API</title>
-      <link>http://localhost:1313/post/youtube-javascript-api</link>
+      <link>http://localhost:1313/posts/youtube-javascript-api</link>
       <pubDate>Tue, 04 Feb 2014 16:38:53 UTC</pubDate>
       
-      <guid>http://localhost:1313/post/youtube-javascript-api</guid>
+      <guid>http://localhost:1313/posts/youtube-javascript-api</guid>
       <description>
 
 &lt;p&gt;YouTubeをembedするとJavaScriptのAPIが使えるようになります。

@@ -18,10 +18,10 @@
     {{ $data := .Data }}
     <ul class="entry-meta inline-list">
       {{ range $key, $value := .Data.Terms }}
-      <li><a class="tag" href="#{{ $key | urlize }}">{{ $key }}<span>{{ len $value }}</span></a></li>
+      <li><a class="tag" href="{{ $baseUrl }}/tags/{{ $key | urlize }}">{{ $key }}<span>{{ len $value }}</span></a></li>
       {{ end }}
     </ul>
-    {{ range $key, $value := .Data.Terms }}
+    <!-- {{ range $key, $value := .Data.Terms }}
     <article>
       <h2 id="{{ $key }}">{{ $key }}</h2>
       {{ range $value }}
@@ -30,7 +30,7 @@
       {{ end }}
       {{ end }}
     </article>
-    {{ end }}
+    {{ end }} -->
   </div>
 
 {{ template "theme/partials/footer.html" . }}

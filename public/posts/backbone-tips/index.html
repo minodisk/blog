@@ -64,8 +64,8 @@
     <article class="hentry">
       <header class="header-title">
         <div class="header-title-wrap">
-            <h1 class="entry-title"><a href="http://localhost:1313/post/install-node-canvas" rel="bookmark" title="Install node-canvas">Install node-canvas</a></h1>
-          <h2><time datetime="2014-03-25T09:45:30Z">2014-03-25</time></h2>
+            <h1 class="entry-title"><a href="http://localhost:1313/posts/backbone-tips" rel="bookmark" title="Backbone Tips">Backbone Tips</a></h1>
+          <h2><time datetime="2014-02-25T03:09:55Z">2014-02-25</time></h2>
           <p class="entry-reading-time">
             <i class="fa fa-clock-o"></i>
             Reading time ~1 minutes
@@ -75,20 +75,11 @@
       <div class="entry-content">
         
 
-<p>依存バッケージをインストールしておかないと<code>node-canvas</code>のインストールでコケる。</p>
+<h2 id="toc_0">Backbone.history 関連</h2>
 
-<h2 id="toc_0">CentOS</h2>
-
-<div class="highlight"><pre>yum install cairo cairo-devel cairomm-devel libjpeg-turbo-devel pango pango-devel pangomm pangomm-devel giflib-devel
-npm install canvas
-</pre></div>
-
-<h2 id="toc_1">MacOSX</h2>
-
-<div class="highlight"><pre>brew install cairo
-<span class="nb">export </span><span class="nv">PKG_CONFIG_PATH</span><span class="o">=</span>/opt/X11/lib/pkgconfig
-npm install canvas
-</pre></div>
+<ul>
+<li><code>Backbone.history.start()</code> を実行したかどうかの判定には <code>Backbone.History.started</code> を使う <a href="https://github.com/jashkenas/backbone/blob/1.1.2/backbone.js#L1386">backbone/backbone.js at 1.1.2 · jashkenas/backbone</a></li>
+</ul>
 
 
         <footer class="entry-meta">
@@ -96,18 +87,20 @@ npm install canvas
           <span class="entry-tags">
             
             
-            <a href="http://localhost:1313/tags/node" title="Pages tagged Node" class="tag">Node</a>
+            <a href="http://localhost:1313/tags/javascript" title="Pages tagged JavaScript" class="tag">JavaScript</a>
+            
+            <a href="http://localhost:1313/tags/backbone" title="Pages tagged Backbone" class="tag">Backbone</a>
             
           </span>
           
-          <span><a href="http://localhost:1313/post/install-node-canvas" rel="bookmark" title="Install node-canvas">Install node-canvas</a> was published on <span class="entry-date date published updated"><time datetime="2014-03-25T09:45:30Z">2014-03-25</time></span></span>
+          <span><a href="http://localhost:1313/posts/backbone-tips" rel="bookmark" title="Backbone Tips">Backbone Tips</a> was published on <span class="entry-date date published updated"><time datetime="2014-02-25T03:09:55Z">2014-02-25</time></span></span>
           
           <span class="author vcard"><span class="fn"><a href="http://localhost:1313/about/" title="About minodisk">minodisk</a></span></span>
           <div class="social-share">
             <ul class="socialcount socialcount-small inline-list like js grade-a activate-on-hover">
-              <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fpost%2finstall-node-canvas" title="Share on Facebook"><span class="count"><i class="fa fa-facebook-square"></i> Like</span></a></li>
-              <li class="twitter"><a href="https://twitter.com/intent/tweet?text=http%3a%2f%2flocalhost%3a1313%2fpost%2finstall-node-canvas" title="Share on Twitter"><span class="count"><i class="fa fa-twitter-square"></i> Tweet</span></a></li>
-              <li class="googleplus"><a href="https://plus.google.com/share?url=http%3a%2f%2flocalhost%3a1313%2fpost%2finstall-node-canvas" title="Share on Google Plus"><span class="count"><i class="fa fa-google-plus-square"></i> +1</span></a></li>
+              <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fposts%2fbackbone-tips" title="Share on Facebook"><span class="count"><i class="fa fa-facebook-square"></i> Like</span></a></li>
+              <li class="twitter"><a href="https://twitter.com/intent/tweet?text=http%3a%2f%2flocalhost%3a1313%2fposts%2fbackbone-tips" title="Share on Twitter"><span class="count"><i class="fa fa-twitter-square"></i> Tweet</span></a></li>
+              <li class="googleplus"><a href="https://plus.google.com/share?url=http%3a%2f%2flocalhost%3a1313%2fposts%2fbackbone-tips" title="Share on Google Plus"><span class="count"><i class="fa fa-google-plus-square"></i> +1</span></a></li>
             </ul>
           </div>
         </footer>
@@ -119,9 +112,9 @@ npm install canvas
     <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'dsk-mn';
-    var disqus_identifier = 'http:\/\/localhost:1313\/post\/install-node-canvas';
-    var disqus_title = 'Install node-canvas';
-    var disqus_url = 'http:\/\/localhost:1313\/post\/install-node-canvas';
+    var disqus_identifier = 'http:\/\/localhost:1313\/posts\/backbone-tips';
+    var disqus_title = 'Backbone Tips';
+    var disqus_url = 'http:\/\/localhost:1313\/posts\/backbone-tips';
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -138,14 +131,14 @@ npm install canvas
       <div class="read-more-list">
         
         <div class="list-item">
-          <h4><a href="http://localhost:1313/post/access-to-title-in-ie8" title="Sample Link Post">Access to title in IE8</a></h4>
-          <span>Published on 2014-04-03</span>
+          <h4><a href="http://localhost:1313/posts/coffeescript-tips" title="Sample Link Post">CoffeeScript Tips</a></h4>
+          <span>Published on 2014-03-06</span>
         </div>
         
         
         <div class="list-item">
-          <h4><a href="http://localhost:1313/post/path-animation" title="A Post with a Video">Path Animation</a></h4>
-          <span>Published on 2014-03-07</span>
+          <h4><a href="http://localhost:1313/posts/youtube-javascript-api" title="A Post with a Video">YouTube JavaScript API</a></h4>
+          <span>Published on 2014-02-04</span>
         </div>
         
       </div>

@@ -3,6 +3,7 @@ languageCode = "en-us"
 title = "I/O"
 
 pygmentsuseclasses = true
+PygmentsLineNos = true
 disqusShortname = "dsk-mn"
 
 [Params]
@@ -10,6 +11,7 @@ PublishedDateFormat = "2006-01-02"
 TimestampFormat = "2006-01-02T15:04:05Z07:00"
 
 Auther = "minodisk"
+Profile = "UX/UI Engineer"
 EmailAddress = "daisuke.mino@gmail.com"
 TwitterId = "minodisk"
 GooglePlusId = "117361242608765720862"

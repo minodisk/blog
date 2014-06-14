@@ -1,6 +1,6 @@
-author = ""
-description = ""
+author = "minodisk"
+description = "foo"
 license = "GNU GPLv2"
 name = "hpstr"
-source_repo = ""
-tags = ["", ""]
+source_repo = "https://github.com/mmistakes/hpstr-jekyll-theme.git"
+tags = ["theme"]

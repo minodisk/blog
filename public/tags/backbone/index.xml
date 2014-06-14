@@ -11,10 +11,10 @@
     
     <item>
       <title>Backbone Tips</title>
-      <link>http://localhost:1313/posts/backbone-tips</link>
+      <link>http://localhost:1313/post/backbone-tips</link>
       <pubDate>Tue, 25 Feb 2014 03:09:55 UTC</pubDate>
       
-      <guid>http://localhost:1313/posts/backbone-tips</guid>
+      <guid>http://localhost:1313/post/backbone-tips</guid>
       <description>
 
 &lt;h2 id=&#34;toc_0&#34;&gt;Backbone.history 関連&lt;/h2&gt;

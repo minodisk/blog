@@ -10,7 +10,6 @@
           {{ if isset .Site.Params "Auther" }}<h4>{{ .Site.Params.Auther }}</h4>{{ end }}
           {{ if isset .Site.Params "Profile" }}<p>{{ .Site.Params.Profile }}</p>{{ end }}
         </li>
-        <li><a href="{{ .Site.BaseUrl }}/about/">Learn More</a></li>
         {{ if isset .Site.Params "EmailAddress" }}<li><a href="mailto:{{ .Site.Params.EmailAddress }}"><i class="fa fa-envelope"></i> Email</a></li>{{ end }}
         {{ if isset .Site.Params "TwitterId" }}<li><a href="http://twitter.com/{{ .Site.Params.TwitterId }}"><i class="fa fa-twitter"></i> Twitter</a></li>{{ end }}
         {{ if isset .Site.Params "GooglePlusId" }}<li><a href="http://plus.google.com/{{ .Site.Params.GooglePlusId }}"><i class="fa fa-google-plus"></i> Google+</a></li>{{ end }}

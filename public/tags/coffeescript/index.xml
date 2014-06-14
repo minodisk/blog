@@ -11,10 +11,10 @@
     
     <item>
       <title>CoffeeScript Compiler</title>
-      <link>http://localhost:1313/posts/coffeescript-compiler</link>
+      <link>http://localhost:1313/post/coffeescript-compiler</link>
       <pubDate>Fri, 02 May 2014 01:37:03 UTC</pubDate>
       
-      <guid>http://localhost:1313/posts/coffeescript-compiler</guid>
+      <guid>http://localhost:1313/post/coffeescript-compiler</guid>
       <description>
 
 &lt;p&gt;&lt;a href=&#34;https://github.com/minodisk/coffee-refactor&#34;&gt;minodisk/coffee-refactor&lt;/a&gt;を作成中に&lt;a href=&#34;http://coffeescript.org/documentation/docs/&#34;&gt;index.coffee&lt;/a&gt;を読んでわかったことのメモ。&lt;/p&gt;
@@ -54,10 +54,10 @@
     
     <item>
       <title>CoffeeScript Tips</title>
-      <link>http://localhost:1313/posts/coffeescript-tips</link>
+      <link>http://localhost:1313/post/coffeescript-tips</link>
       <pubDate>Thu, 06 Mar 2014 03:32:49 UTC</pubDate>
       
-      <guid>http://localhost:1313/posts/coffeescript-tips</guid>
+      <guid>http://localhost:1313/post/coffeescript-tips</guid>
       <description>
 
 &lt;h2 id=&#34;toc_0&#34;&gt;即時関数の引数に別名をつける&lt;/h2&gt;

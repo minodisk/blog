@@ -1,6 +1,6 @@
 pre,
 code {
-  font-family: "Source Code Pro";
+  font-family: "Source Code Pro", "Consolas", "Inconsolata", "Menlo", "Courier", monospace;
   font-weight: 600;
 }
 pre {
@@ -17,4 +17,7 @@ pre {
 }
 .list-item h4 {
   margin-top: 0;
+}
+.entry-content {
+  h1: , h2, h3, h4, h5, h6;
 }

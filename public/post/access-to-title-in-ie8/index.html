@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>I/O</title>
+  <link href="http://dsk.mn/css/main.min.css" rel="stylesheet">
+  <link href="http://dsk.mn/css/patch.css" rel="stylesheet">
+  <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css">
+  <meta http-equiv="cleartype" content="on">
+  <script src="http://dsk.mn/js/modernizr-2.6.2.custom.min.js"></script>
+  <script src="http://dsk.mn/js/jquery-1.9.1.min.js"></script>
+  <script src="http://dsk.mn/js/scripts.min.js"></script>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-48719488-1');
+    ga('send', 'pageview');
+  </script>
+  
+</head>
+
+<body id="post" class="feature">
+<nav id="dl-menu" class="dl-menuwrapper" role="navigation">
+  <button class="dl-trigger">Open Menu</button>
+  <ul class="dl-menu">
+    <li><a href="http://dsk.mn">Home</a></li>
+    <li>
+      <a href="#">About</a>
+      <ul class="dl-submenu">
+        <li>
+          
+          <h4>minodisk</h4>
+          <p>UX/UI Engineer</p>
+        </li>
+        <li><a href="mailto:daisuke.mino@gmail.com"><i class="fa fa-envelope"></i> Email</a></li>
+        <li><a href="http://twitter.com/minodisk"><i class="fa fa-twitter"></i> Twitter</a></li>
+        <li><a href="http://plus.google.com/117361242608765720862"><i class="fa fa-google-plus"></i> Google+</a></li>
+        <li><a href="http://github.com/minodisk"><i class="fa fa-github"></i> GitHub</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">Posts</a>
+      <ul class="dl-submenu">
+        <li><a href="http://dsk.mn/post/">All Posts</a></li>
+        <li><a href="http://dsk.mn/tags/">All Tags</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+  <div class="entry-header">
+    <div class="image-credit">Image source: <a href="http://www.dargadgetz.com/ios-7-abstract-wallpaper-pack-for-iphone-5-and-ipod-touch-retina/">dargadgetz</a></div>
+    <div class="entry-image">
+      <img src="http://dsk.mn/images/abstract-10.jpg">
+    </div>
+  </div>
+
+  <div id="main" role="main">
+    <article class="hentry">
+      <header class="header-title">
+        <div class="header-title-wrap">
+            <h1 class="entry-title"><a href="http://dsk.mn/post/access-to-title-in-ie8" rel="bookmark" title="Access to title in IE8">Access to title in IE8</a></h1>
+          <h2><time datetime="2014-04-03T05:29:57Z">2014-04-03</time></h2>
+          <p class="entry-reading-time">
+            <i class="fa fa-clock-o"></i>
+            Reading time ~1 minutes
+          </p>
+        </div>
+      </header>
+      <div class="entry-content">
+        <p>jQueryではIE8で<code>title</code>へのアクセスができないので直接アクセスする。</p>
+
+<div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">);</span>
+</pre></div>
+
+<div class="highlight"><pre><span class="nb">document</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span><span class="p">;</span>
+</pre></div>
+
+
+        <footer class="entry-meta">
+          
+          <span class="entry-tags">
+            
+            
+            <a href="http://dsk.mn/tags/jquery" title="Pages tagged jQuery" class="tag">jQuery</a>
+            
+            <a href="http://dsk.mn/tags/javascript" title="Pages tagged JavaScript" class="tag">JavaScript</a>
+            
+          </span>
+          
+          <span><a href="http://dsk.mn/post/access-to-title-in-ie8" rel="bookmark" title="Access to title in IE8">Access to title in IE8</a> was published on <span class="entry-date date published updated"><time datetime="2014-04-03T05:29:57Z">2014-04-03</time></span></span>
+          
+          <span class="author vcard"><span class="fn"><a href="http://dsk.mn/about/" title="About minodisk">minodisk</a></span></span>
+          <div class="social-share">
+            <ul class="socialcount socialcount-small inline-list like js grade-a activate-on-hover">
+              <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2fdsk.mn%2fpost%2faccess-to-title-in-ie8" title="Share on Facebook"><span class="count"><i class="fa fa-facebook-square"></i> Like</span></a></li>
+              <li class="twitter"><a href="https://twitter.com/intent/tweet?text=http%3a%2f%2fdsk.mn%2fpost%2faccess-to-title-in-ie8" title="Share on Twitter"><span class="count"><i class="fa fa-twitter-square"></i> Tweet</span></a></li>
+              <li class="googleplus"><a href="https://plus.google.com/share?url=http%3a%2f%2fdsk.mn%2fpost%2faccess-to-title-in-ie8" title="Share on Google Plus"><span class="count"><i class="fa fa-google-plus-square"></i> +1</span></a></li>
+            </ul>
+          </div>
+        </footer>
+      </div>
+    </article>
+
+    
+    <section id="disqus_thread">
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'dsk-mn';
+    var disqus_identifier = 'http:\/\/dsk.mn\/post\/access-to-title-in-ie8';
+    var disqus_title = 'Access to title in IE8';
+    var disqus_url = 'http:\/\/dsk.mn\/post\/access-to-title-in-ie8';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </section>
+    
+
+    <div class="read-more">
+      <div class="read-more-list">
+        
+        <div class="list-item">
+          <h4><a href="http://dsk.mn/post/development-atom-package" title="Sample Link Post">AtomEditorのパッケージ開発</a></h4>
+          <span>Published on 2014-04-03</span>
+        </div>
+        
+        
+        <div class="list-item">
+          <h4><a href="http://dsk.mn/post/install-node-canvas" title="A Post with a Video">Install node-canvas</a></h4>
+          <span>Published on 2014-03-25</span>
+        </div>
+        
+      </div>
+    </div>
+
+  </div>
+
+<div class="footer-wrapper">
+  <footer role="contentinfo">
+    <span>© 2014 minodisk. Powered by <a href="http://hugo.spf13.com/">Hugo</a> using the <a href="http://mademistakes.com/hpstr/">HPSTR Theme</a>. <a href="http://dsk.mn/terms/">Privacy and Disclosure Policies</a>.</span>
+  </footer>
+</div>
+
+</body>
+</html>

@@ -3,7 +3,7 @@
   <channel>
       <title>Node on I/O </title>
       <generator uri="https://hugo.spf13.com">Hugo</generator>
-    <link>http://localhost:1313/tags/node/index.xml</link>
+    <link>http://dsk.mn/tags/node/index.xml</link>
     <language>en-us</language>
     
     
@@ -11,10 +11,10 @@
     
     <item>
       <title>Install node-canvas</title>
-      <link>http://localhost:1313/post/install-node-canvas</link>
+      <link>http://dsk.mn/post/install-node-canvas</link>
       <pubDate>Tue, 25 Mar 2014 09:45:30 UTC</pubDate>
       
-      <guid>http://localhost:1313/post/install-node-canvas</guid>
+      <guid>http://dsk.mn/post/install-node-canvas</guid>
       <description>
 
 &lt;p&gt;依存バッケージをインストールしておかないと&lt;code&gt;node-canvas&lt;/code&gt;のインストールでコケる。&lt;/p&gt;

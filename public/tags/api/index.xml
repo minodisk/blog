@@ -3,7 +3,7 @@
   <channel>
       <title>Api on I/O </title>
       <generator uri="https://hugo.spf13.com">Hugo</generator>
-    <link>http://localhost:1313/tags/api/index.xml</link>
+    <link>http://dsk.mn/tags/api/index.xml</link>
     <language>en-us</language>
     
     
@@ -11,10 +11,10 @@
     
     <item>
       <title>YouTube JavaScript API</title>
-      <link>http://localhost:1313/post/youtube-javascript-api</link>
+      <link>http://dsk.mn/post/youtube-javascript-api</link>
       <pubDate>Tue, 04 Feb 2014 16:38:53 UTC</pubDate>
       
-      <guid>http://localhost:1313/post/youtube-javascript-api</guid>
+      <guid>http://dsk.mn/post/youtube-javascript-api</guid>
       <description>
 
 &lt;p&gt;YouTubeをembedするとJavaScriptのAPIが使えるようになります。

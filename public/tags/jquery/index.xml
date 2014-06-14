@@ -3,7 +3,7 @@
   <channel>
       <title>Jquery on I/O </title>
       <generator uri="https://hugo.spf13.com">Hugo</generator>
-    <link>http://localhost:1313/tags/jquery/index.xml</link>
+    <link>http://dsk.mn/tags/jquery/index.xml</link>
     <language>en-us</language>
     
     
@@ -11,10 +11,10 @@
     
     <item>
       <title>Access to title in IE8</title>
-      <link>http://localhost:1313/post/access-to-title-in-ie8</link>
+      <link>http://dsk.mn/post/access-to-title-in-ie8</link>
       <pubDate>Thu, 03 Apr 2014 05:29:57 UTC</pubDate>
       
-      <guid>http://localhost:1313/post/access-to-title-in-ie8</guid>
+      <guid>http://dsk.mn/post/access-to-title-in-ie8</guid>
       <description>&lt;p&gt;jQueryではIE8で&lt;code&gt;title&lt;/code&gt;へのアクセスができないので直接アクセスする。&lt;/p&gt;
 
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nx&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;foo&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;

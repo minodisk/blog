@@ -23,10 +23,10 @@
       <header>
         <div class="entry-meta">
           <span class="entry-date date published updated"><time datetime="{{ .Date.Format .Site.Params.TimestampFormat }}">{{ .Date.Format .Site.Params.PublishedDateFormat }}</time></span>
-          {{ if .Site.Params.Auther }}
-          <span class="author vcard"><span class="fn"><a href="{{ .Site.BaseUrl }}/about/" title="About {{ .Site.Params.Auther }}">{{ .Site.Params.Auther }}</a></span></span>
+          {{ if .Params.Auther }}
+          <span class="author vcard"><span class="fn"><a href="{{ .Site.BaseUrl }}/about/" title="About {{ .Params.Auther }}">{{ .Params.Auther }}</a></span></span>
           {{ end }}
-          •<span class="entry-comments"><a href="#disqus_thread">Comment</a></span>
+          •<span class="entry-comments"><a href="{{ .Permalink }}#disqus_thread">Comment</a></span>
           <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time {{ .ReadingTime }} minute</span>
         </div>
         <h1 class="entry-title"><a href="{{ .Permalink }}" rel="bookmark" title="{{ .Title }}" itemprop="url">{{ .Title }}</a></h1>

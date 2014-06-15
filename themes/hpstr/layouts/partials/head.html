@@ -4,6 +4,13 @@
   <link href="{{ .Site.BaseUrl }}/css/main.min.css" rel="stylesheet">
   <link href="{{ .Site.BaseUrl }}/css/patch.css" rel="stylesheet">
   <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css">
+  {{ if isset .Params "background" }}
+  <style type="text/css">
+    body {
+      background-image: url({{ .Site.BaseUrl }}/images/{{ .Params.background.image }});
+    }
+  </style>
+  {{ end }}
   <meta http-equiv="cleartype" content="on">
   <script src="{{ .Site.BaseUrl }}/js/modernizr-2.6.2.custom.min.js"></script>
   <script src="{{ .Site.BaseUrl }}/js/jquery-1.9.1.min.js"></script>

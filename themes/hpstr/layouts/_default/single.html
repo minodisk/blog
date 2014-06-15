@@ -1,21 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 {{ template "theme/partials/head.html" . }}
+
+{{ if isset .Params "feature" }}
 <body id="post" class="feature">
+{{ else }}
+<body id="post">
+{{ end }}
+
 {{ template "theme/partials/nav.html" . }}
 
+  {{ if isset .Params "feature" }}
   <div class="entry-header">
-    <div class="image-credit">Image source: <a href="http://www.dargadgetz.com/ios-7-abstract-wallpaper-pack-for-iphone-5-and-ipod-touch-retina/">dargadgetz</a></div>
+    {{ if isset .Params.feature "url" }}
+    <div class="image-credit">Image source: <a href="{{ .Params.feature.url }}">{{ .Params.feature.source }}</a></div>
+    {{ else if isset .Params.feature "source" }}
+    <div class="image-credit">Image source: {{ .Params.source }}</div>
+    {{ end }}
     <div class="entry-image">
-      <img src="{{ .Site.BaseUrl }}/images/abstract-10.jpg">
+      <img src="{{ .Site.BaseUrl }}/images/{{ .Params.feature.image }}">
     </div>
   </div>
+  {{ end }}
 
   <div id="main" role="main">
     <article class="hentry">
+
       <header class="header-title">
         <div class="header-title-wrap">
-            <h1 class="entry-title"><a href="{{ .Permalink }}" rel="bookmark" title="{{ .Title }}">{{ .Title }}</a></h1>
+          <h1 class="entry-title"><a href="{{ .Permalink }}" rel="bookmark" title="{{ .Title }}">{{ .Title }}</a></h1>
           <h2><time datetime="{{ .Date.Format .Site.Params.TimestampFormat }}">{{ .Date.Format .Site.Params.PublishedDateFormat }}</time></h2>
           <p class="entry-reading-time">
             <i class="fa fa-clock-o"></i>
@@ -23,9 +36,9 @@
           </p>
         </div>
       </header>
+
       <div class="entry-content">
         {{ .Content }}
-
         <footer class="entry-meta">
           {{ if .Params.tags }}
           <span class="entry-tags">

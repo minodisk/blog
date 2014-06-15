@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Ruby on I/O </title>
+      <generator uri="https://hugo.spf13.com">Hugo</generator>
+    <link>http://dsk.mn/tags/ruby/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Sun, 15 Jun 2014 06:04:06 UTC</updated>
+    
+    <item>
+      <title>Compassを改良する</title>
+      <link>http://dsk.mn/post/refine-compass</link>
+      <pubDate>Sun, 15 Jun 2014 06:04:06 UTC</pubDate>
+      
+      <guid>http://dsk.mn/post/refine-compass</guid>
+      <description>
+
+&lt;p&gt;Compassを使っていて発生する問題を、コンパイル時のパフォーマンスを損なわずに解決する方法。&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;このパッチで解決する問題点&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;スプライト画像の画像名内にキャッシュバスターが入っている。&lt;/li&gt;
+&lt;li&gt;異環境でコンパイル時に、背景画像のキャッシュバスターが書き換わってしまう。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;パッチ&lt;/h2&gt;
+
+&lt;p&gt;config.rubyで&lt;code&gt;Compass&lt;/code&gt;と&lt;code&gt;Sass&lt;/code&gt;モジュールにモンキーパッチを当てる。&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_2&#34;&gt;コールバックを使う方法では解決できない問題点&lt;/h2&gt;
+
+&lt;p&gt;既出の方法で&lt;code&gt;on_sprite_saved&lt;/code&gt;コールバックでスプライト画像をリネームし、
+&lt;code&gt;on_stylesheet_saved&lt;/code&gt;でコンパイルされたCSSを書きなおすという解決法がある。
+これは独立性の高い方法だが、CSSを書き直す度にスプライト画像が書き出されてしまい、
+大きなスプライト画像を設定した場合にSassの保存からCSSコンパイル完了までに
+非常に時間がかかってしまっていた。&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_3&#34;&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;スプライト画像を多く使うプロジェクトでは、コンパイル時に時間が掛かることで
+Sassの編集作業がストレスを感じる作業になりがちだった。
+作業軽減のために採用したCompassの利用でストレスを感じるのは本末転倒なので、
+多少汚い方法でも今回紹介した方法を使ってみるとよいかと思う。
+ただし、この方法は&lt;code&gt;Compass&lt;/code&gt;と&lt;code&gt;Sass&lt;/code&gt;モジュールのバージョンが変わったら
+動かなくなる可能性は十分にあるので注意。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

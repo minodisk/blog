@@ -3,8 +3,13 @@
   
   <url>
     <loc>http://dsk.mn/</loc>
-    <lastmod>2014-05-02T01:37:03+00:00</lastmod>
+    <lastmod>2014-06-15T06:04:06+00:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://dsk.mn/post/refine-compass</loc>
+    <lastmod>2014-06-15T06:04:06+00:00</lastmod>
   </url>
   
   <url>
@@ -35,11 +40,6 @@
   <url>
     <loc>http://dsk.mn/post/backbone-tips</loc>
     <lastmod>2014-02-25T03:09:55+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://dsk.mn/post/youtube-javascript-api</loc>
-    <lastmod>2014-02-04T16:38:53+00:00</lastmod>
   </url>
   
 </urlset>

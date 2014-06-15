@@ -1,1 +1,1 @@
-hugo server -t hpstr -Dw
+hugo server --theme="hpstr" -Dw

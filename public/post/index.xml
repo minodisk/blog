@@ -7,69 +7,7 @@
     <language>en-us</language>
     
     
-    <updated>Fri, 02 May 2014 01:37:03 UTC</updated>
-    
-    <item>
-      <title>YouTube JavaScript API</title>
-      <link>http://dsk.mn/post/youtube-javascript-api</link>
-      <pubDate>Tue, 04 Feb 2014 16:38:53 UTC</pubDate>
-      
-      <guid>http://dsk.mn/post/youtube-javascript-api</guid>
-      <description>
-
-&lt;p&gt;YouTubeをembedするとJavaScriptのAPIが使えるようになります。
-&lt;script type=&#34;text/javascript&#34; src=&#34;http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js&#34;&gt;&lt;/script&gt;
-&lt;div id=&#34;ytapiplayer&#34;&gt;
-  You need Flash player 8+ and JavaScript enabled to view this video.
-&lt;/div&gt;
-&lt;div id=&#34;log&#34; style=&#34;height:150px;overflow-y:scroll;white-space:pre-wrap;font-family:monospace;font-size:12px;line-height:16px;&#34;&gt;
-&lt;/div&gt;
-&lt;script type=&#34;text/javascript&#34;&gt;
-var STATES = {
-  &amp;lsquo;-1&amp;rsquo;: &amp;lsquo;未開始&amp;rsquo;,
-  &amp;lsquo;0&amp;rsquo;: &amp;lsquo;終了&amp;rsquo;,
-  &amp;lsquo;1&amp;rsquo;: &amp;lsquo;再生中&amp;rsquo;,
-  &amp;lsquo;2&amp;rsquo;: &amp;lsquo;一時停止中&amp;rsquo;,
-  &amp;lsquo;3&amp;rsquo;: &amp;lsquo;バッファリング中&amp;rsquo;,
-  &amp;lsquo;5&amp;rsquo;: &amp;lsquo;頭出し済み&amp;rsquo;
-};
-var params = { allowScriptAccess: &amp;ldquo;always&amp;rdquo; };
-var atts = { id: &amp;ldquo;myytplayer&amp;rdquo; };
-swfobject.embedSWF(
-  &amp;ldquo;&lt;a href=&#34;http://www.youtube.com/v/u1zgFlCw8Aw?enablejsapi=1&amp;amp;playerapiid=ytplayer&amp;quot;&#34;&gt;http://www.youtube.com/v/u1zgFlCw8Aw?enablejsapi=1&amp;amp;playerapiid=ytplayer&amp;quot;&lt;/a&gt;,
-  &amp;ldquo;ytapiplayer&amp;rdquo;, &amp;ldquo;425&amp;rdquo;, &amp;ldquo;356&amp;rdquo;, &amp;ldquo;8&amp;rdquo;, null, null, params, atts
-  );
-var $log = $(&amp;lsquo;#log&amp;rsquo;);&lt;/p&gt;
-
-&lt;p&gt;function onYouTubePlayerReady(playerId) {
-  var ytplayer = document.getElementById(&amp;ldquo;myytplayer&amp;rdquo;);
-  ytplayer.addEventListener(&amp;lsquo;onStateChange&amp;rsquo;, &amp;lsquo;onStateChange&amp;rsquo;);
-}
-function onStateChange(state) {
-  log(&amp;lsquo;onStateChange:&amp;lsquo;, state, &amp;lsquo;=&amp;rsquo;, STATES[&amp;rdquo; + state]);
-}
-function log() {
-  $log
-    .text($log.text() + Array.prototype.join.call(arguments, &amp;lsquo; &amp;lsquo;) + &amp;lsquo;\n&amp;rsquo;)
-    .scrollTop($log.prop(&amp;lsquo;scrollHeight&amp;rsquo;));
-}
-&lt;/script&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_0&#34;&gt;ExternalInterface に関する Tips&lt;/h2&gt;
-
-&lt;p&gt;YouTube JavaScript API からは &lt;code&gt;ExternalInterface.call&lt;/code&gt; 経由で JavaScript がコールされる。
-このAPIに限らず &lt;code&gt;ExternalInterface.call&lt;/code&gt; を使う際に共通の注意点だが、FlashPlayer は JavaScript のメソッドのその戻りを待っている間レンダリングをやめてしまう。
-対策として、JavaScript から何も返さない場合は次のイベントループで処理を行い、関数自体は &lt;code&gt;return&lt;/code&gt; して FlashPlayer のレンダリングを再開させてあげるのがスムーズに見える。&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;onStateChange&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;state&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-  &lt;span class=&#34;nx&#34;&gt;setTimeout&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-    &lt;span class=&#34;nx&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
-  &lt;span class=&#34;p&#34;&gt;});&lt;/span&gt;
-  &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-</description>
-    </item>
+    <updated>Sun, 15 Jun 2014 06:04:06 UTC</updated>
     
     <item>
       <title>Backbone Tips</title>
@@ -361,6 +299,46 @@ npm install canvas
     &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;v&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;charAt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;is&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#39;_&amp;#39;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;then&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;tempVars&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;realVars&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;push&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;v&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;name&lt;/span&gt;
   &lt;span class=&#34;nx&#34;&gt;realVars&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;sort&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;concat&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;tempVars&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;sort&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Compassを改良する</title>
+      <link>http://dsk.mn/post/refine-compass</link>
+      <pubDate>Sun, 15 Jun 2014 06:04:06 UTC</pubDate>
+      
+      <guid>http://dsk.mn/post/refine-compass</guid>
+      <description>
+
+&lt;p&gt;Compassを使っていて発生する問題を、コンパイル時のパフォーマンスを損なわずに解決する方法。&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;このパッチで解決する問題点&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;スプライト画像の画像名内にキャッシュバスターが入っている。&lt;/li&gt;
+&lt;li&gt;異環境でコンパイル時に、背景画像のキャッシュバスターが書き換わってしまう。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;パッチ&lt;/h2&gt;
+
+&lt;p&gt;config.rubyで&lt;code&gt;Compass&lt;/code&gt;と&lt;code&gt;Sass&lt;/code&gt;モジュールにモンキーパッチを当てる。&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_2&#34;&gt;コールバックを使う方法では解決できない問題点&lt;/h2&gt;
+
+&lt;p&gt;既出の方法で&lt;code&gt;on_sprite_saved&lt;/code&gt;コールバックでスプライト画像をリネームし、
+&lt;code&gt;on_stylesheet_saved&lt;/code&gt;でコンパイルされたCSSを書きなおすという解決法がある。
+これは独立性の高い方法だが、CSSを書き直す度にスプライト画像が書き出されてしまい、
+大きなスプライト画像を設定した場合にSassの保存からCSSコンパイル完了までに
+非常に時間がかかってしまっていた。&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_3&#34;&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;スプライト画像を多く使うプロジェクトでは、コンパイル時に時間が掛かることで
+Sassの編集作業がストレスを感じる作業になりがちだった。
+作業軽減のために採用したCompassの利用でストレスを感じるのは本末転倒なので、
+多少汚い方法でも今回紹介した方法を使ってみるとよいかと思う。
+ただし、この方法は&lt;code&gt;Compass&lt;/code&gt;と&lt;code&gt;Sass&lt;/code&gt;モジュールのバージョンが変わったら
+動かなくなる可能性は十分にあるので注意。&lt;/p&gt;
 </description>
     </item>
     

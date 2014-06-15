@@ -5,26 +5,67 @@ tags = [
   "Compass",
   "Ruby"
 ]
+links = [
+  "http://stackoverflow.com/questions/9183133/how-to-turn-off-compass-sass-cache-busting"
+]
 +++
 
-Compassを使っていて発生する問題を、コンパイル時のパフォーマンスを損なわずに解決する方法。
+キャッシュバスターの文字列が画像名に入ったスプライト画像が生成される問題を、
+パフォーマンスを損なわずに解決する方法。
 
-## このパッチで解決する問題点
+## 問題点
 
-- スプライト画像の画像名内にキャッシュバスターが入っている。
-- 異環境でコンパイル時に、背景画像のキャッシュバスターが書き換わってしまう。
+スプライト画像の画像名内にキャッシュバスターが入ることで、
+スプライト画像に変更が入ると画像名が変わってしまう。
+バージョン管理や差分管理する上で不都合。
 
-## パッチ
-
-config.rubyで`Compass`と`Sass`モジュールにモンキーパッチを当てる。
-
-## コールバックを使う方法では解決できない問題点
+## コールバックを使う方法で生まれる問題点
 
 既出の方法で`on_sprite_saved`コールバックでスプライト画像をリネームし、
 `on_stylesheet_saved`でコンパイルされたCSSを書きなおすという解決法がある。
-これは独立性の高い方法だが、CSSを書き直す度にスプライト画像が書き出されてしまい、
-大きなスプライト画像を設定した場合にSassの保存からCSSコンパイル完了までに
-非常に時間がかかってしまっていた。
+これはCompassのAPIに則った独立性の高い方法だが、
+CSSを書き直す度にスプライト画像が書き出され
+Sassの保存からCSSコンパイル完了までに時間がかってしまう。
+
+[css - How to turn off COMPASS SASS cache busting? - Stack Overflow](http://stackoverflow.com/questions/9183133/how-to-turn-off-compass-sass-cache-busting#answer-9332472)
+
+## モンキーパッチで根本的に解決する
+
+Compass v0.12.2 で動作確認。
+スプライト画像が`*-s[画像バイナリのMD5ハッシュ].png`として生成され、
+スプライトのソース画像に変更が入る度にスプライト画像名が変わってしまう問題に対応。
+元々このハッシュはキャッシュ対策(キャッシュバスター)として入れられているものなので、
+画像名内のハッシュを削除する代わりにCSSコンパイル時に`*.png?[画像バイナリのMD5ハッシュ]`
+のようにサーチクエリをつけて書き出すことで代替する。
+
+{{% highlight ruby %}}
+module Compass
+  module SassExtensions
+    module Functions
+      module Sprites
+        # CSSコンパイル時にハッシュをサーチクエリにつける
+        def sprite_url(map)
+          verify_map(map, "sprite-url")
+          map.generate
+          generated_image_url(Sass::Script::String.new("#{map.path}.png?#{map.uniqueness_hash}"))
+        end
+      end
+    end
+    module Sprites
+      module SpriteMethods
+        # ハッシュ抜きのファイル名を返す
+        def name_and_hash
+          "#{path}.png"
+        end
+        # ハッシュ入りの画像ファイルは書き出されなくなっているはずなので古いファイルの削除は行わない
+        def cleanup_old_sprites
+          # do nothing
+        end
+      end
+    end
+  end
+end
+{{% /highlight %}}
 
 ## まとめ
 

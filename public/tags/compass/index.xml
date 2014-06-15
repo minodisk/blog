@@ -17,26 +17,61 @@
       <guid>http://dsk.mn/post/refine-compass</guid>
       <description>
 
-&lt;p&gt;Compassを使っていて発生する問題を、コンパイル時のパフォーマンスを損なわずに解決する方法。&lt;/p&gt;
+&lt;p&gt;キャッシュバスターの文字列が画像名に入ったスプライト画像が生成される問題を、
+パフォーマンスを損なわずに解決する方法。&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_0&#34;&gt;このパッチで解決する問題点&lt;/h2&gt;
+&lt;h2 id=&#34;toc_0&#34;&gt;問題点&lt;/h2&gt;
 
-&lt;ul&gt;
-&lt;li&gt;スプライト画像の画像名内にキャッシュバスターが入っている。&lt;/li&gt;
-&lt;li&gt;異環境でコンパイル時に、背景画像のキャッシュバスターが書き換わってしまう。&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;スプライト画像の画像名内にキャッシュバスターが入ることで、
+スプライト画像に変更が入ると画像名が変わってしまう。
+バージョン管理や差分管理する上で不都合。&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_1&#34;&gt;パッチ&lt;/h2&gt;
-
-&lt;p&gt;config.rubyで&lt;code&gt;Compass&lt;/code&gt;と&lt;code&gt;Sass&lt;/code&gt;モジュールにモンキーパッチを当てる。&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_2&#34;&gt;コールバックを使う方法では解決できない問題点&lt;/h2&gt;
+&lt;h2 id=&#34;toc_1&#34;&gt;コールバックを使う方法で生まれる問題点&lt;/h2&gt;
 
 &lt;p&gt;既出の方法で&lt;code&gt;on_sprite_saved&lt;/code&gt;コールバックでスプライト画像をリネームし、
 &lt;code&gt;on_stylesheet_saved&lt;/code&gt;でコンパイルされたCSSを書きなおすという解決法がある。
-これは独立性の高い方法だが、CSSを書き直す度にスプライト画像が書き出されてしまい、
-大きなスプライト画像を設定した場合にSassの保存からCSSコンパイル完了までに
-非常に時間がかかってしまっていた。&lt;/p&gt;
+これはCompassのAPIに則った独立性の高い方法だが、
+CSSを書き直す度にスプライト画像が書き出され
+Sassの保存からCSSコンパイル完了までに時間がかってしまう。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://stackoverflow.com/questions/9183133/how-to-turn-off-compass-sass-cache-busting#answer-9332472&#34;&gt;css - How to turn off COMPASS SASS cache busting? - Stack Overflow&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_2&#34;&gt;モンキーパッチで根本的に解決する&lt;/h2&gt;
+
+&lt;p&gt;Compass v0.12.2 で動作確認。
+スプライト画像が&lt;code&gt;*-s[画像バイナリのMD5ハッシュ].png&lt;/code&gt;として生成され、
+スプライトのソース画像に変更が入る度にスプライト画像名が変わってしまう問題に対応。
+元々このハッシュはキャッシュ対策(キャッシュバスター)として入れられているものなので、
+画像名内のハッシュを削除する代わりにCSSコンパイル時に&lt;code&gt;*.png?[画像バイナリのMD5ハッシュ]&lt;/code&gt;
+のようにサーチクエリをつけて書き出すことで代替する。&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;k&#34;&gt;module&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;Compass&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;module&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;SassExtensions&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;module&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;Functions&lt;/span&gt;
+      &lt;span class=&#34;k&#34;&gt;module&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;Sprites&lt;/span&gt;
+        &lt;span class=&#34;c1&#34;&gt;# CSSコンパイル時にハッシュをサーチクエリにつける&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;sprite_url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;map&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+          &lt;span class=&#34;n&#34;&gt;verify_map&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;map&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;quot;sprite-url&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+          &lt;span class=&#34;n&#34;&gt;map&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;generate&lt;/span&gt;
+          &lt;span class=&#34;n&#34;&gt;generated_image_url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;no&#34;&gt;Sass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;no&#34;&gt;Script&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;String&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;map&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;path&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;.png?&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;map&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;uniqueness_hash&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+      &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;module&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;Sprites&lt;/span&gt;
+      &lt;span class=&#34;k&#34;&gt;module&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;SpriteMethods&lt;/span&gt;
+        &lt;span class=&#34;c1&#34;&gt;# ハッシュ抜きのファイル名を返す&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;name_and_hash&lt;/span&gt;
+          &lt;span class=&#34;s2&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;#{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;path&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;.png&amp;quot;&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+        &lt;span class=&#34;c1&#34;&gt;# ハッシュ入りの画像ファイルは書き出されなくなっているはずなので古いファイルの削除は行わない&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;cleanup_old_sprites&lt;/span&gt;
+          &lt;span class=&#34;c1&#34;&gt;# do nothing&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+      &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+  &lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;end&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id=&#34;toc_3&#34;&gt;まとめ&lt;/h2&gt;
 

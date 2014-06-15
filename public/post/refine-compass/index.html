@@ -76,26 +76,61 @@
       <div class="entry-content">
         
 
-<p>Compassを使っていて発生する問題を、コンパイル時のパフォーマンスを損なわずに解決する方法。</p>
+<p>キャッシュバスターの文字列が画像名に入ったスプライト画像が生成される問題を、
+パフォーマンスを損なわずに解決する方法。</p>
 
-<h2 id="toc_0">このパッチで解決する問題点</h2>
+<h2 id="toc_0">問題点</h2>
 
-<ul>
-<li>スプライト画像の画像名内にキャッシュバスターが入っている。</li>
-<li>異環境でコンパイル時に、背景画像のキャッシュバスターが書き換わってしまう。</li>
-</ul>
+<p>スプライト画像の画像名内にキャッシュバスターが入ることで、
+スプライト画像に変更が入ると画像名が変わってしまう。
+バージョン管理や差分管理する上で不都合。</p>
 
-<h2 id="toc_1">パッチ</h2>
-
-<p>config.rubyで<code>Compass</code>と<code>Sass</code>モジュールにモンキーパッチを当てる。</p>
-
-<h2 id="toc_2">コールバックを使う方法では解決できない問題点</h2>
+<h2 id="toc_1">コールバックを使う方法で生まれる問題点</h2>
 
 <p>既出の方法で<code>on_sprite_saved</code>コールバックでスプライト画像をリネームし、
 <code>on_stylesheet_saved</code>でコンパイルされたCSSを書きなおすという解決法がある。
-これは独立性の高い方法だが、CSSを書き直す度にスプライト画像が書き出されてしまい、
-大きなスプライト画像を設定した場合にSassの保存からCSSコンパイル完了までに
-非常に時間がかかってしまっていた。</p>
+これはCompassのAPIに則った独立性の高い方法だが、
+CSSを書き直す度にスプライト画像が書き出され
+Sassの保存からCSSコンパイル完了までに時間がかってしまう。</p>
+
+<p><a href="http://stackoverflow.com/questions/9183133/how-to-turn-off-compass-sass-cache-busting#answer-9332472">css - How to turn off COMPASS SASS cache busting? - Stack Overflow</a></p>
+
+<h2 id="toc_2">モンキーパッチで根本的に解決する</h2>
+
+<p>Compass v0.12.2 で動作確認。
+スプライト画像が<code>*-s[画像バイナリのMD5ハッシュ].png</code>として生成され、
+スプライトのソース画像に変更が入る度にスプライト画像名が変わってしまう問題に対応。
+元々このハッシュはキャッシュ対策(キャッシュバスター)として入れられているものなので、
+画像名内のハッシュを削除する代わりにCSSコンパイル時に<code>*.png?[画像バイナリのMD5ハッシュ]</code>
+のようにサーチクエリをつけて書き出すことで代替する。</p>
+
+<div class="highlight"><pre><span class="k">module</span> <span class="nn">Compass</span>
+  <span class="k">module</span> <span class="nn">SassExtensions</span>
+    <span class="k">module</span> <span class="nn">Functions</span>
+      <span class="k">module</span> <span class="nn">Sprites</span>
+        <span class="c1"># CSSコンパイル時にハッシュをサーチクエリにつける</span>
+        <span class="k">def</span> <span class="nf">sprite_url</span><span class="p">(</span><span class="n">map</span><span class="p">)</span>
+          <span class="n">verify_map</span><span class="p">(</span><span class="n">map</span><span class="p">,</span> <span class="s2">&quot;sprite-url&quot;</span><span class="p">)</span>
+          <span class="n">map</span><span class="o">.</span><span class="n">generate</span>
+          <span class="n">generated_image_url</span><span class="p">(</span><span class="no">Sass</span><span class="o">::</span><span class="no">Script</span><span class="o">::</span><span class="nb">String</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">map</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">.png?</span><span class="si">#{</span><span class="n">map</span><span class="o">.</span><span class="n">uniqueness_hash</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="k">module</span> <span class="nn">Sprites</span>
+      <span class="k">module</span> <span class="nn">SpriteMethods</span>
+        <span class="c1"># ハッシュ抜きのファイル名を返す</span>
+        <span class="k">def</span> <span class="nf">name_and_hash</span>
+          <span class="s2">&quot;</span><span class="si">#{</span><span class="n">path</span><span class="si">}</span><span class="s2">.png&quot;</span>
+        <span class="k">end</span>
+        <span class="c1"># ハッシュ入りの画像ファイルは書き出されなくなっているはずなので古いファイルの削除は行わない</span>
+        <span class="k">def</span> <span class="nf">cleanup_old_sprites</span>
+          <span class="c1"># do nothing</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
 
 <h2 id="toc_3">まとめ</h2>
 

@@ -1,6 +1,7 @@
 +++
 date = 2014-02-04T16:38:53Z
 title = "YouTube JavaScript API"
+draft = true
 tags = [
   "JavaScript",
   "YouTube",

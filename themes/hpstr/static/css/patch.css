@@ -18,7 +18,10 @@ pre {
   margin-top: 0;
 }
 .entry-content ol {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
+}
+.entry-content sup {
+  padding-right: 0.4em;
 }
 p code,
 li code {

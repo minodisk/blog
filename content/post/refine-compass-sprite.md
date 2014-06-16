@@ -1,6 +1,6 @@
 +++
 date = 2014-06-15T06:04:06Z
-title = "Compassを改良する"
+title = "CompassのSprite生成処理を改良する"
 tags = [
   "Compass",
   "Ruby"

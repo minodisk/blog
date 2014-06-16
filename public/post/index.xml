@@ -303,11 +303,11 @@ npm install canvas
     </item>
     
     <item>
-      <title>Compassを改良する</title>
-      <link>http://dsk.mn/post/refine-compass</link>
+      <title>CompassのSprite生成処理を改良する</title>
+      <link>http://dsk.mn/post/refine-compass-sprite</link>
       <pubDate>Sun, 15 Jun 2014 06:04:06 UTC</pubDate>
       
-      <guid>http://dsk.mn/post/refine-compass</guid>
+      <guid>http://dsk.mn/post/refine-compass-sprite</guid>
       <description>
 
 &lt;p&gt;キャッシュバスターの文字列が画像名に入ったスプライト画像が生成される問題を、

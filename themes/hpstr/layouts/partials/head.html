@@ -5,6 +5,36 @@
   {{ else }}
   <title>{{ .Title }} - {{ .Site.Title }}</title>
   {{ end }}
+
+  <meta name="description" content="{{ .Description }}">
+  <meta name="keywords" content="{{ .Keywords }}">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="{{ .Site.BaseUrl }}/images/abstract-1.jpg">
+  <meta name="twitter:title" content="{{ .Title }}">
+  <meta name="twitter:description" content="{{ .Description }}">
+  <meta name="twitter:creator" content="@{{ .Site.Params.TwitterId }}">
+
+  <!-- Open Graph -->
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{ .Title }}">
+  <meta property="og:description" content="{{ .Description }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:site_name" content="{{ .Site.Title }}">
+
+  <link rel="canonical" href="{{ .Permalink }}">
+  <link href="{{ .RSSlink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
+  <link rel="author" href="http://plus.google.com/{{ .Site.Params.GooglePlusId }}?rel=author">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta http-equiv="cleartype" content="on">
+
   <link href="{{ .Site.BaseUrl }}/css/main.min.css" rel="stylesheet">
   <link href="{{ .Site.BaseUrl }}/css/patch.css" rel="stylesheet">
   <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css">
@@ -15,7 +45,6 @@
     }
   </style>
   {{ end }}
-  <meta http-equiv="cleartype" content="on">
   <script src="{{ .Site.BaseUrl }}/js/modernizr-2.6.2.custom.min.js"></script>
   <script src="{{ .Site.BaseUrl }}/js/jquery-1.9.1.min.js"></script>
   <script src="{{ .Site.BaseUrl }}/js/scripts.min.js"></script>

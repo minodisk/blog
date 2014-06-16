@@ -69,13 +69,30 @@
         <div class="entry-meta">
           <span class="entry-date date published updated"><time datetime="2014-03-25T09:45:30Z">2014-03-25</time></span>
           
-          <span class="author vcard"><span class="fn"><a href="http://dsk.mn/about/" title="About minodisk">minodisk</a></span></span>
-          
-          •<span class="entry-comments"><a href="#disqus_thread">Comment</a></span>
-          <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time 1 minute</span>
+          •<span class="entry-comments"><a href="http://dsk.mn/post/install-node-canvas#disqus_thread">Comment</a></span>
+          <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time ~1 minute</span>
         </div>
         <h1 class="entry-title"><a href="http://dsk.mn/post/install-node-canvas" rel="bookmark" title="Install node-canvas" itemprop="url">Install node-canvas</a></h1>
       </header>
+      <div class="entry-content">
+        
+
+<p>依存バッケージをインストールしておかないと<code>node-canvas</code>のインストールでコケる。</p>
+
+<h2 id="toc_0">CentOS</h2>
+
+<div class="highlight"><pre>yum install cairo cairo-devel cairomm-devel libjpeg-turbo-devel pango pango-devel pangomm pangomm-devel giflib-devel
+npm install canvas
+</pre></div>
+
+<h2 id="toc_1">MacOSX</h2>
+
+<div class="highlight"><pre>brew install cairo
+<span class="nb">export </span><span class="nv">PKG_CONFIG_PATH</span><span class="o">=</span>/opt/X11/lib/pkgconfig
+npm install canvas
+</pre></div>
+
+      </div>
     </article>
     
   </div>

@@ -69,13 +69,21 @@
         <div class="entry-meta">
           <span class="entry-date date published updated"><time datetime="2014-04-03T05:29:57Z">2014-04-03</time></span>
           
-          <span class="author vcard"><span class="fn"><a href="http://dsk.mn/about/" title="About minodisk">minodisk</a></span></span>
-          
-          •<span class="entry-comments"><a href="#disqus_thread">Comment</a></span>
-          <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time 1 minute</span>
+          •<span class="entry-comments"><a href="http://dsk.mn/post/access-to-title-in-ie8#disqus_thread">Comment</a></span>
+          <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time ~1 minute</span>
         </div>
         <h1 class="entry-title"><a href="http://dsk.mn/post/access-to-title-in-ie8" rel="bookmark" title="Access to title in IE8" itemprop="url">Access to title in IE8</a></h1>
       </header>
+      <div class="entry-content">
+        <p>jQueryではIE8で<code>title</code>へのアクセスができないので直接アクセスする。</p>
+
+<div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">);</span>
+</pre></div>
+
+<div class="highlight"><pre><span class="nb">document</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span><span class="p">;</span>
+</pre></div>
+
+      </div>
     </article>
     
     <article class="hentry">
@@ -83,13 +91,21 @@
         <div class="entry-meta">
           <span class="entry-date date published updated"><time datetime="2014-02-25T03:09:55Z">2014-02-25</time></span>
           
-          <span class="author vcard"><span class="fn"><a href="http://dsk.mn/about/" title="About minodisk">minodisk</a></span></span>
-          
-          •<span class="entry-comments"><a href="#disqus_thread">Comment</a></span>
-          <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time 1 minute</span>
+          •<span class="entry-comments"><a href="http://dsk.mn/post/backbone-tips#disqus_thread">Comment</a></span>
+          <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time ~1 minute</span>
         </div>
         <h1 class="entry-title"><a href="http://dsk.mn/post/backbone-tips" rel="bookmark" title="Backbone Tips" itemprop="url">Backbone Tips</a></h1>
       </header>
+      <div class="entry-content">
+        
+
+<h2 id="toc_0">Backbone.history 関連</h2>
+
+<ul>
+<li><code>Backbone.history.start()</code> を実行したかどうかの判定には <code>Backbone.History.started</code> を使う <a href="https://github.com/jashkenas/backbone/blob/1.1.2/backbone.js#L1386">backbone/backbone.js at 1.1.2 · jashkenas/backbone</a></li>
+</ul>
+
+      </div>
     </article>
     
   </div>

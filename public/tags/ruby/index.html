@@ -69,13 +69,78 @@
         <div class="entry-meta">
           <span class="entry-date date published updated"><time datetime="2014-06-15T06:04:06Z">2014-06-15</time></span>
           
-          <span class="author vcard"><span class="fn"><a href="http://dsk.mn/about/" title="About minodisk">minodisk</a></span></span>
-          
-          •<span class="entry-comments"><a href="#disqus_thread">Comment</a></span>
-          <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time 1 minute</span>
+          •<span class="entry-comments"><a href="http://dsk.mn/post/refine-compass#disqus_thread">Comment</a></span>
+          <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time ~1 minute</span>
         </div>
         <h1 class="entry-title"><a href="http://dsk.mn/post/refine-compass" rel="bookmark" title="Compassを改良する" itemprop="url">Compassを改良する</a></h1>
       </header>
+      <div class="entry-content">
+        
+
+<p>キャッシュバスターの文字列が画像名に入ったスプライト画像が生成される問題を、
+パフォーマンスを損なわずに解決する方法。</p>
+
+<h2 id="toc_0">Compassでスプライト画像を書き出す際の問題点</h2>
+
+<p>スプライト画像が<code>*-s[画像バイナリのMD5ハッシュ].png</code>の様に画像名内にキャッシュバスターが入ることで、スプライト画像に変更が入ると画像名が変わってしまう。これはバージョン管理や差分管理する上で不都合となることが多い。
+このハッシュは<code>background-image:url();</code>で指定した画像を変更する際に、ブラウザがキャッシュを参照しないようにキャッシュ対策(キャッシュバスターと呼ばれている)として入れられている文字列だ。</p>
+
+<h2 id="toc_1">コールバックを使う方法で生まれる問題点</h2>
+
+<p>Compassに用意されているコールバックを使った既出の解決法がある。</p>
+
+<p><a href="http://stackoverflow.com/questions/9183133/how-to-turn-off-compass-sass-cache-busting#answer-9332472">css - How to turn off COMPASS SASS cache busting? - Stack Overflow</a></p>
+
+<p>この方法では、<code>on_sprite_saved</code>コールバックでスプライト画像をリネームし、<code>on_stylesheet_saved</code>でコンパイルされたCSSを書き直している。
+これはコードとしての独立性が高く、キャッシュバスターを有効にしたままスプライト画像の画像名からハッシュを取り除く上手い方法だが、CSSを書き直す度にスプライト画像が書き出されてしまい<sup><a href="#1">1</a></sup>Compassの処理完了までに時間がかってしまう。</p>
+
+<ol>
+<li><span id="1"></span>Compassは前回書き出したスプライト画像を<a href="https://github.com/chriseppstein/compass/blob/v0.12.2/lib/compass/sass_extensions/sprites/sprite_methods.rb#L78-L81">書き出し直す必要があるかを検査する</a>機構があり、<a href="https://github.com/chriseppstein/compass/blob/v0.12.2/lib/compass/sass_extensions/sprites/sprite_methods.rb#L58-L64">ファイルが存在しない場合書き出し直す</a>という処理を行っている。</li>
+</ol>
+
+<h2 id="toc_2">モンキーパッチで解決する</h2>
+
+<p>Compass v0.12.2 で動作確認。</p>
+
+<p>スプライト画像のファイル名にハッシュを入れない代わりに、CSSコンパイル時に<code>*.png?[画像バイナリのMD5ハッシュ]</code>のようにサーチクエリをつけて書き出す。
+「コールバックを使う方法」と処理結果は同じだが、Sassリコンパイル時にスプライト画像を再生成しないので前述の問題が発生しない。</p>
+
+<div class="highlight"><pre><span class="k">module</span> <span class="nn">Compass</span>
+  <span class="k">module</span> <span class="nn">SassExtensions</span>
+    <span class="k">module</span> <span class="nn">Functions</span>
+      <span class="k">module</span> <span class="nn">Sprites</span>
+        <span class="c1"># CSSコンパイル時にハッシュをサーチクエリにつける</span>
+        <span class="k">def</span> <span class="nf">sprite_url</span><span class="p">(</span><span class="n">map</span><span class="p">)</span>
+          <span class="n">verify_map</span><span class="p">(</span><span class="n">map</span><span class="p">,</span> <span class="s2">&quot;sprite-url&quot;</span><span class="p">)</span>
+          <span class="n">map</span><span class="o">.</span><span class="n">generate</span>
+          <span class="n">generated_image_url</span><span class="p">(</span><span class="ss">Sass</span><span class="p">:</span><span class="ss">:Script</span><span class="o">::</span><span class="nb">String</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">map</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">.png?</span><span class="si">#{</span><span class="n">map</span><span class="o">.</span><span class="n">uniqueness_hash</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="k">module</span> <span class="nn">Sprites</span>
+      <span class="k">module</span> <span class="nn">SpriteMethods</span>
+        <span class="c1"># ハッシュ抜きのファイル名を返す</span>
+        <span class="k">def</span> <span class="nf">name_and_hash</span>
+          <span class="s2">&quot;</span><span class="si">#{</span><span class="n">path</span><span class="si">}</span><span class="s2">.png&quot;</span>
+        <span class="k">end</span>
+        <span class="c1"># ハッシュ入りの画像ファイルは書き出されなくなっているはずなので古いファイルの削除は行わない</span>
+        <span class="k">def</span> <span class="nf">cleanup_old_sprites</span>
+          <span class="c1"># do nothing</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+
+<h2 id="toc_3">まとめ</h2>
+
+<p>「コールバックを使う方法」採用時はスプライト画像を多く使うプロジェクトでは、コンパイル時に時間が掛かることでSassの編集作業にストレスを感じることが多かった。
+作業軽減のために採用したCompassの利用でストレスを感じるのは本末転倒なので、この方法を採用したことで得られるものは大きかった。</p>
+
+<p>ただし、この方法は<code>Compass</code>モジュールのバージョンが変わったら動かなくなる可能性は十分にあるので注意が必要だ。</p>
+
+      </div>
     </article>
     
   </div>

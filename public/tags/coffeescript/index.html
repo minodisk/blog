@@ -69,13 +69,48 @@
         <div class="entry-meta">
           <span class="entry-date date published updated"><time datetime="2014-05-02T01:37:03Z">2014-05-02</time></span>
           
-          <span class="author vcard"><span class="fn"><a href="http://dsk.mn/about/" title="About minodisk">minodisk</a></span></span>
-          
-          •<span class="entry-comments"><a href="#disqus_thread">Comment</a></span>
-          <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time 1 minute</span>
+          •<span class="entry-comments"><a href="http://dsk.mn/post/coffeescript-compiler#disqus_thread">Comment</a></span>
+          <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time ~1 minute</span>
         </div>
         <h1 class="entry-title"><a href="http://dsk.mn/post/coffeescript-compiler" rel="bookmark" title="CoffeeScript Compiler" itemprop="url">CoffeeScript Compiler</a></h1>
       </header>
+      <div class="entry-content">
+        
+
+<p><a href="https://github.com/minodisk/coffee-refactor">minodisk/coffee-refactor</a>を作成中に<a href="http://coffeescript.org/documentation/docs/">index.coffee</a>を読んでわかったことのメモ。</p>
+
+<h2 id="toc_0">nodes.coffee</h2>
+
+<h3 id="toc_1">Code#compileNode()</h3>
+
+<p>ノードをコンパイルする。
+コンパイルの過程で<code>Scope</code>インスタンスが作成される。
+オプションに親のスコープを渡すと<code>variables</code>は親のスコープ内で宣言された変数を考慮した変数のリストとなる。</p>
+
+<div class="highlight"><pre><span class="nv">options =</span>
+  <span class="nv">scope: </span><span class="nx">parent</span><span class="p">.</span><span class="nx">scope</span>
+  <span class="nv">indent: </span><span class="s">&#39;&#39;</span>
+<span class="nx">code</span><span class="p">.</span><span class="nx">compileNode</span> <span class="nx">options</span>
+<span class="nv">scope = </span><span class="nx">options</span><span class="p">.</span><span class="nx">scope</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">scope</span><span class="p">.</span><span class="nx">variables</span>
+</pre></div>
+
+<h2 id="toc_2">scope.coffee</h2>
+
+<h3 id="toc_3">Scope#declaredVariables()</h3>
+
+<p>スコープ内で<code>var</code>で宣言される変数の配列を返す。パラメータは含まれない。</p>
+
+<p>スコープ内で定義される全ての名前空間を取得するためには、さらにパラメータを含む必要が有るため下記のコードを使う。
+<div class="highlight"><pre><span class="nv">declaredSymbols = </span><span class="nf">(scope) -&gt;</span>
+  <span class="nv">realVars = </span><span class="p">[]</span>
+  <span class="nv">tempVars = </span><span class="p">[]</span>
+  <span class="k">for</span> <span class="nx">v</span> <span class="k">in</span> <span class="nx">@variables</span> <span class="k">when</span> <span class="nx">v</span><span class="p">.</span><span class="nx">type</span> <span class="o">is</span> <span class="s">&#39;var&#39;</span> <span class="o">or</span> <span class="nx">v</span><span class="p">.</span><span class="nx">type</span> <span class="o">is</span> <span class="s">&#39;param&#39;</span>
+    <span class="p">(</span><span class="k">if</span> <span class="nx">v</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">is</span> <span class="s">&#39;_&#39;</span> <span class="k">then</span> <span class="nx">tempVars</span> <span class="k">else</span> <span class="nx">realVars</span><span class="p">).</span><span class="nx">push</span> <span class="nx">v</span><span class="p">.</span><span class="nx">name</span>
+  <span class="nx">realVars</span><span class="p">.</span><span class="nx">sort</span><span class="p">().</span><span class="nx">concat</span> <span class="nx">tempVars</span><span class="p">.</span><span class="nx">sort</span><span class="p">()</span>
+</pre></div></p>
+
+      </div>
     </article>
     
     <article class="hentry">
@@ -83,13 +118,124 @@
         <div class="entry-meta">
           <span class="entry-date date published updated"><time datetime="2014-03-06T03:32:49Z">2014-03-06</time></span>
           
-          <span class="author vcard"><span class="fn"><a href="http://dsk.mn/about/" title="About minodisk">minodisk</a></span></span>
-          
-          •<span class="entry-comments"><a href="#disqus_thread">Comment</a></span>
-          <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time 1 minute</span>
+          •<span class="entry-comments"><a href="http://dsk.mn/post/coffeescript-tips#disqus_thread">Comment</a></span>
+          <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time ~1 minute</span>
         </div>
         <h1 class="entry-title"><a href="http://dsk.mn/post/coffeescript-tips" rel="bookmark" title="CoffeeScript Tips" itemprop="url">CoffeeScript Tips</a></h1>
       </header>
+      <div class="entry-content">
+        
+
+<h2 id="toc_0">即時関数の引数に別名をつける</h2>
+
+<p>jQuery のプラグイン書くときとかに使う。
+<div class="highlight"><pre><span class="nx">do</span> <span class="nf">($ = jQuery) -&gt;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">$</span>
+</pre></div></p>
+
+<p>↓コンパイル
+<div class="highlight"><pre><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">$</span><span class="p">);</span>
+<span class="p">})(</span><span class="nx">jQuery</span><span class="p">);</span>
+</pre></div></p>
+
+<h2 id="toc_1">オブジェクトリテラルでオブジェクトを作る</h2>
+
+<div class="highlight"><pre><span class="nv">a = </span><span class="mi">3</span>
+<span class="nv">b = </span><span class="kc">true</span>
+<span class="nv">c = </span><span class="s">&#39;bar&#39;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="p">{</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span> <span class="p">}</span>  <span class="c1"># =&gt; { a: 3, b: true, c: &#39;bar&#39; }</span>
+</pre></div>
+
+<h2 id="toc_2">分解代入で纏めて変数宣言</h2>
+
+<div class="highlight"><pre><span class="nv">a = b = c = </span><span class="kc">null</span>
+</pre></div>
+
+<p>の代わりに下記のように書くことができる。
+<div class="highlight"><pre><span class="p">[</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span> <span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+</pre></div></p>
+
+<p>↓コンパイル
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">,</span> <span class="nx">_ref</span><span class="p">;</span></p>
+
+<p><span class="nx">_ref</span> <span class="o">=</span> <span class="p">[],</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">_ref</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">_ref</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">_ref</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+</pre></div></p>
+
+<h2 id="toc_3">superを引数付きでコールする</h2>
+
+<p><code>super()</code>ではなく<code>super</code>と書くことで引数を引き継いでコールしてくれる。
+<div class="highlight"><pre><span class="k">class</span> <span class="nx">Foo</span>
+  <span class="nv">constructor: </span><span class="nf">(@a) -&gt;</span>
+<span class="k">class</span> <span class="nx">Bar</span> <span class="k">extends</span> <span class="nx">Foo</span>
+  <span class="nv">constructor: </span><span class="nf">-&gt;</span>
+    <span class="k">super</span>
+<span class="nv">bar = </span><span class="k">new</span> <span class="nx">Bar</span> <span class="mi">3</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">bar</span><span class="p">.</span><span class="nx">a</span>  <span class="c1"># =&gt; 3</span>
+</pre></div></p>
+
+<p>便利な反面、<code>super</code>と書いた時点で継承元の関数が実行されることに気をつけなければならない。
+<div class="highlight"><pre><span class="k">class</span> <span class="nx">Foo</span>
+  <span class="nv">func: </span><span class="nf">-&gt;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&#39;executed!!&#39;</span>
+    <span class="s">&#39;foo&#39;</span>
+<span class="k">class</span> <span class="nx">Bar</span> <span class="k">extends</span> <span class="nx">Foo</span>
+  <span class="nv">func: </span><span class="nf">-&gt;</span>
+    <span class="vi">@superFunc = </span><span class="k">super</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">@superFunc</span>
+<span class="nv">bar = </span><span class="k">new</span> <span class="nx">Bar</span><span class="p">()</span>
+<span class="nx">bar</span><span class="p">.</span><span class="nx">func</span><span class="p">()</span>  <span class="c1"># =&gt; &#39;executed!!&#39;</span>
+            <span class="c1"># =&gt; &#39;foo&#39;</span>
+</pre></div></p>
+
+<p>このように<code>super</code>を<code>@superFunc</code>に格納するつもりで書いたコードを実行すると、
+<code>super</code>を実行した戻りが<code>@superFunc</code>に格納されることになる。</p>
+
+<h2 id="toc_4">比較演算子</h2>
+
+<p>比較が捗る。
+<div class="highlight"><pre><span class="nx">a</span> <span class="o">&lt;=</span> <span class="nx">b</span> <span class="o">&lt;</span> <span class="nx">c</span>
+</pre></div></p>
+
+<p>↓コンパイル
+<div class="highlight"><pre><span class="p">(</span><span class="nx">a</span> <span class="o">&lt;=</span> <span class="nx">b</span> <span class="o">&amp;&amp;</span> <span class="nx">b</span> <span class="o">&lt;</span> <span class="nx">c</span><span class="p">);</span>
+</pre></div></p>
+
+<h2 id="toc_5">分解代入とクラスのthis代入の合わせ技</h2>
+
+<div class="highlight"><pre><span class="k">class</span> <span class="nx">Foo</span>
+  <span class="nv">constructor: </span><span class="nf">({@a})-&gt;</span>
+
+<span class="nv">foo = </span><span class="k">new</span> <span class="nx">Foo</span> <span class="nv">a: </span><span class="mi">3</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">foo</span><span class="p">.</span><span class="nx">a</span>  <span class="c1"># =&gt; 3</span>
+</pre></div>
+
+<h2 id="toc_6">Array comprehensionsのシュガー</h2>
+
+<p>ワンライナーで。
+<div class="highlight"><pre><span class="nv">countdown = </span><span class="p">(</span><span class="nx">num</span> <span class="k">for</span> <span class="nx">num</span> <span class="k">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">..</span><span class="mi">1</span><span class="p">])</span>
+</pre></div></p>
+
+<p>即時関数で。
+<div class="highlight"><pre><span class="nv">countdown = </span><span class="nx">do</span> <span class="nf">-&gt;</span> <span class="nx">num</span> <span class="k">for</span> <span class="nx">num</span> <span class="k">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">..</span><span class="mi">1</span><span class="p">]</span>
+</pre></div></p>
+
+<h2 id="toc_7">引数の並置</h2>
+
+<div class="highlight"><pre><span class="nx">a</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
+<span class="nx">a</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="mi">2</span><span class="p">,</span>
+  <span class="mi">3</span>
+<span class="nx">a</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="mi">2</span>
+  <span class="mi">3</span>
+</pre></div>
+
+<p>↓コンパイル
+<div class="highlight"><pre><span class="nx">a</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+</pre></div></p>
+
+      </div>
     </article>
     
   </div>

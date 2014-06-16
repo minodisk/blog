@@ -3,7 +3,6 @@ languageCode = "en-us"
 title = "I/O"
 
 pygmentsuseclasses = true
-PygmentsLineNos = true
 disqusShortname = "dsk-mn"
 
 [Params]

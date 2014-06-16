@@ -56,7 +56,7 @@
 &lt;p&gt;&lt;code&gt;WorkspaceView#command()&lt;/code&gt;では&lt;code&gt;WorkspaceView.data(&#39;documentation&#39;)&lt;/code&gt;にeventName/docStringを登録してるだけで、イベント自体はjQueryの&lt;code&gt;on()&lt;/code&gt;で聞いてる。
 よってoffしたい時は普通に&lt;code&gt;WorkspaceView#off()&lt;/code&gt;すればよい。
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;nx&#34;&gt;atom&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;workspaceView&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;command&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#39;hoge:action&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;handler&lt;/span&gt;
-&lt;span class=&#34;nx&#34;&gt;atom&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;workspaceView&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;off&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#39;hoge:action&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;handler&lt;/span&gt;
+&lt;span class=&#34;nx&#34;&gt;atom&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;workspaceView&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;off&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#39;hoge:action&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;handler&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;toc_5&#34;&gt;Spec書く時に使う&lt;/h2&gt;

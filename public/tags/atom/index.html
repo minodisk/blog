@@ -69,13 +69,79 @@
         <div class="entry-meta">
           <span class="entry-date date published updated"><time datetime="2014-04-03T06:03:15Z">2014-04-03</time></span>
           
-          <span class="author vcard"><span class="fn"><a href="http://dsk.mn/about/" title="About minodisk">minodisk</a></span></span>
-          
-          •<span class="entry-comments"><a href="#disqus_thread">Comment</a></span>
-          <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time 1 minute</span>
+          •<span class="entry-comments"><a href="http://dsk.mn/post/development-atom-package#disqus_thread">Comment</a></span>
+          <span class="entry-reading-time pull-right"><i class="fa fa-clock-o"></i>Reading time ~1 minute</span>
         </div>
         <h1 class="entry-title"><a href="http://dsk.mn/post/development-atom-package" rel="bookmark" title="AtomEditorのパッケージ開発" itemprop="url">AtomEditorのパッケージ開発</a></h1>
       </header>
+      <div class="entry-content">
+        
+
+<p>逆引き的ななにか。</p>
+
+<h2 id="toc_0">Package書くときに使う</h2>
+
+<h3 id="toc_1">パッケージのSettingsにチェックボックスを表示する</h3>
+
+<div class="highlight"><pre><span class="nv">module.exports =</span>
+  <span class="nv">configDefaults:</span>
+    <span class="nv">highlightReference: </span><span class="kc">true</span>
+    <span class="nv">highlightError    : </span><span class="kc">true</span>
+</pre></div>
+
+<h3 id="toc_2">文法がCoffeeScriptかを調べる</h3>
+
+<ul>
+<li><code>Grammar::scopeName</code></li>
+</ul>
+
+<div class="highlight"><pre><span class="nv">editor = </span><span class="nx">atom</span><span class="p">.</span><span class="nx">workspaceView</span><span class="p">.</span><span class="nx">getActiveEditor</span><span class="p">()</span>
+<span class="nv">scopeName = </span><span class="nx">@editor</span><span class="p">.</span><span class="nx">getGrammar</span><span class="p">().</span><span class="nx">scopeName</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">scopeName</span> <span class="o">is</span> <span class="s">&#39;source.coffee&#39;</span> <span class="o">or</span> <span class="nx">scopeName</span> <span class="o">is</span> <span class="s">&#39;source.litcoffee&#39;</span>
+</pre></div>
+
+<h3 id="toc_3">カーソル下の単語の範囲の取得する</h3>
+
+<ul>
+<li><code>Cursor::getCurrentWordBufferRange()</code></li>
+</ul>
+
+<div class="highlight"><pre><span class="nv">editor = </span><span class="nx">atom</span><span class="p">.</span><span class="nx">workspaceView</span><span class="p">.</span><span class="nx">getActiveEditor</span><span class="p">()</span>
+<span class="nv">cursor = </span><span class="nx">editor</span><span class="p">.</span><span class="nx">cursors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nv">range = </span><span class="nx">cursor</span><span class="p">.</span><span class="nx">getCurrentWordBufferRange</span> <span class="nv">includeNonWordCharacters: </span><span class="kc">false</span>
+</pre></div>
+
+<h3 id="toc_4">WorkspaceView#commandをoffする</h3>
+
+<p><code>WorkspaceView#command()</code>では<code>WorkspaceView.data('documentation')</code>にeventName/docStringを登録してるだけで、イベント自体はjQueryの<code>on()</code>で聞いてる。
+よってoffしたい時は普通に<code>WorkspaceView#off()</code>すればよい。
+<div class="highlight"><pre><span class="nx">atom</span><span class="p">.</span><span class="nx">workspaceView</span><span class="p">.</span><span class="nx">command</span> <span class="s">&#39;hoge:action&#39;</span><span class="p">,</span> <span class="nx">handler</span>
+<span class="nx">atom</span><span class="p">.</span><span class="nx">workspaceView</span><span class="p">.</span><span class="nx">off</span> <span class="s">&#39;hoge:action&#39;</span><span class="p">,</span> <span class="nx">handler</span>
+</pre></div></p>
+
+<h2 id="toc_5">Spec書く時に使う</h2>
+
+<h3 id="toc_6">CoffeeScriptの言語パッケージをロードする</h3>
+
+<ul>
+<li><code>PackageManager::resolvePackagePath(packageName)</code>: パッケージ名からパッケージのパスを取得する</li>
+<li><code>Syntax::loadGrammarSync(grammarPath)</code>: 言語パッケージをロードする</li>
+</ul>
+
+<div class="highlight"><pre><span class="nv">languageCoffeeScriptPath = </span><span class="nx">atom</span><span class="p">.</span><span class="nx">packages</span><span class="p">.</span><span class="nx">resolvePackagePath</span> <span class="s">&#39;language-coffee-script&#39;</span>
+<span class="nv">grammarDir = </span><span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span> <span class="nx">languageCoffeeScriptPath</span><span class="p">,</span> <span class="s">&#39;grammars&#39;</span>
+<span class="k">for</span> <span class="nx">filename</span> <span class="k">in</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readdirSync</span> <span class="nx">grammarDir</span>
+  <span class="nx">atom</span><span class="p">.</span><span class="nx">syntax</span><span class="p">.</span><span class="nx">loadGrammarSync</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span> <span class="nx">grammarDir</span><span class="p">,</span> <span class="nx">filename</span>
+</pre></div>
+
+<h2 id="toc_7">参考サイト</h2>
+
+<ul>
+<li><a href="https://atom.io/docs/api/">Atom API Documentation</a></li>
+<li><a href="https://gist.github.com/ardcore/9262498">atom.io events</a></li>
+</ul>
+
+      </div>
     </article>
     
   </div>

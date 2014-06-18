@@ -336,7 +336,7 @@ npm install canvas
 &lt;p&gt;Compass v0.12.2 で動作確認。&lt;/p&gt;
 
 &lt;p&gt;スプライト画像のファイル名にハッシュを入れない代わりに、CSSコンパイル時に&lt;code&gt;*.png?[画像バイナリのMD5ハッシュ]&lt;/code&gt;のようにサーチクエリをつけて書き出す。
-「コールバックを使う方法」と処理結果は同じだが、Sassリコンパイル時にスプライト画像を再生成しないので前述の問題が発生しない。&lt;/p&gt;
+「コールバックを使う方法」と処理結果は同じだが、Sassリコンパイル時にスプライト画像を再生成する必要が無ければ生成処理を行わないため、前述の問題が発生しない。&lt;/p&gt;
 
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;span class=&#34;k&#34;&gt;module&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;Compass&lt;/span&gt;
   &lt;span class=&#34;k&#34;&gt;module&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;SassExtensions&lt;/span&gt;
@@ -371,7 +371,7 @@ npm install canvas
 &lt;p&gt;「コールバックを使う方法」採用時はスプライト画像を多く使うプロジェクトでは、コンパイル時に時間が掛かることでSassの編集作業にストレスを感じることが多かった。
 作業軽減のために採用したCompassの利用でストレスを感じるのは本末転倒なので、この方法を採用したことで得られるものは大きかった。&lt;/p&gt;
 
-&lt;p&gt;ただし、この方法は&lt;code&gt;Compass&lt;/code&gt;モジュールのバージョンが変わったら動かなくなる可能性は十分にあるので注意が必要だ。&lt;/p&gt;
+&lt;p&gt;ただし、今回紹介した方法は&lt;code&gt;Compass&lt;/code&gt;モジュールのバージョンが変わったら動かなくなる可能性があるので注意が必要だ。&lt;/p&gt;
 </description>
     </item>
     

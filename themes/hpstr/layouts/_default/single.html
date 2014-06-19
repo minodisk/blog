@@ -50,7 +50,7 @@
           {{ end }}
           <span><a href="{{ .Permalink }}" rel="bookmark" title="{{ .Title }}">{{ .Title }}</a> was published on <span class="entry-date date published updated"><time datetime="{{ .Date.Format .Site.Params.TimestampFormat }}">{{ .Date.Format .Site.Params.PublishedDateFormat }}</time></span></span>
           {{ if isset .Params "revisedDate" }}(revised: <span class="entry-date date modified"><time datetime="{{ .Params.revisedDate.Format .Site.Params.TimestampFormat }}">{{ .Params.revisedDate.Format .Site.Params.PublishedDateFormat }}</time></span>){{ end }}
-          {{ if .Site.Params.Auther }}<span class="author vcard"><span class="fn"><a href="{{ .Site.BaseUrl }}/about/" title="About {{ .Site.Params.Auther }}">{{ .Site.Params.Auther }}</a></span></span>{{ end }}
+          {{ if isset .Params "auther" }}<span class="author vcard"><span class="fn"><a href="{{ .Site.BaseUrl }}/about/" title="About {{ .Site.Params.Auther }}">{{ .Params.auther }}</a></span></span>{{ end }}
           <div class="social-share">
             <ul class="socialcount socialcount-small inline-list like js grade-a activate-on-hover">
               <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" title="Share on Facebook"><span class="count"><i class="fa fa-facebook-square"></i> Like</span></a></li>

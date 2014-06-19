@@ -7,7 +7,9 @@
   {{ end }}
 
   <meta name="description" content="{{ .Description }}">
-  <meta name="keywords" content="{{ .Keywords }}">
+  {{ if isset .Params "tags" }}
+  <meta name="keywords" content="{{ range .Params.tags }}{{ . }},{{ end }}">
+  {{ end }}
 
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image">

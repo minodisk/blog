@@ -1,3 +1,6 @@
+body {
+  word-wrap: break-word;
+}
 pre,
 code {
   font-family: "Source Code Pro", "Consolas", "Inconsolata", "Menlo", "Courier", monospace;

@@ -70,18 +70,18 @@
 
     <div class="read-more">
       <div class="read-more-list">
-        {{ with .Prev }}
         <div class="list-item">
+          {{ with .Prev }}
           <h4><a href="{{.Permalink}}" title="Sample Link Post">{{ .Title }}</a></h4>
           <span>Published on {{ .Date.Format .Site.Params.PublishedDateFormat }}</span>
+          {{ end }}
         </div>
-        {{ end }}
-        {{ with .Next }}
         <div class="list-item">
+          {{ with .Next }}
           <h4><a href="{{.Permalink}}" title="A Post with a Video">{{ .Title }}</a></h4>
           <span>Published on {{ .Date.Format .Site.Params.PublishedDateFormat }}</span>
+          {{ end }}
         </div>
-        {{ end }}
       </div>
     </div>
 

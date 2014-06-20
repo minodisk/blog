@@ -28,7 +28,8 @@ Compassに用意されているコールバックを使った既出の解決法�
 この方法では、`on_sprite_saved`コールバックでスプライト画像をリネームし、`on_stylesheet_saved`でコンパイルされたCSSを書き直している。
 これはコードとしての独立性が高く、キャッシュバスターを有効にしたままスプライト画像の画像名からハッシュを取り除く上手い方法だが、CSSを書き直す度にスプライト画像が書き出されてしまい<sup>[1](#1)</sup>Compassの処理完了までに時間がかってしまう。
 
-1. <span id="1"></span>Compassには前回書き出したスプライト画像を[書き出し直す必要があるかを検査する機構](https://github.com/chriseppstein/compass/blob/v0.12.2/lib/compass/sass_extensions/sprites/sprite_methods.rb#L78-L81)があり、[ファイルが存在しない場合書き出し直す](https://github.com/chriseppstein/compass/blob/v0.12.2/lib/compass/sass_extensions/sprites/sprite_methods.rb#L58-L64)という処理を行っている。
+1. <span id="1"></span>Compassには前回書き出したスプライト画像を[書き出し直す必要があるかを検査する機構](https://github.com/chriseppstein/compass/blob/v0.12.2/lib/compass/sass_extensions/sprites/sprite_methods.rb#L78-L81)があり、[前回書きだしたスプライト画像が存在しない場合書き出し直す](https://github.com/chriseppstein/compass/blob/v0.12.2/lib/compass/sass_extensions/sprites/sprite_methods.rb#L58-L64)という処理を行っている。
+「スプライト画像をリネーム」したことで「前回書きだしたスプライト画像が存在しない」と判定され、毎回スプライト画像の生成処理が走ってしまう。
 
 ## モンキーパッチで解決する
 

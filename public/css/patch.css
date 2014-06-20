@@ -7,6 +7,7 @@ code {
 }
 pre {
   font-size: 0.8rem;
+  word-wrap: normal;
 }
 .length {
   vertical-align: super;

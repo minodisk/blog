@@ -1,17 +1,30 @@
 +++
 date = 2014-08-05T04:14:57Z
 draft = true
-title = "Gulpでシリアルなタスクを作る"
+title = "Gulpでシリアルタスク"
 tags = [
-  "Gulp"
+  "gulp",
+  "gulp.watch",
+  "gulp.start"
 ]
 +++
 
-アンドキュメントじゃね？ってことで書いた。
+Gulpで直列的なタスクの書き方です。
 
-「タスクに関わるファイルが更新されたら、CoffeeScriptをコンパイルしてからmochaでテストする」というパターンを例にします。
+# Why?
 
-# gulpだけで解決するパターン
+```
+gulp.task 'coffee&mocha', [
+  'coffee'
+  'mocha'
+]
+```
+このように書くと並列的に実行されてしまい、テストされるコードのコンパイルが終わる前にテストが走ったりします。
+
+「タスクに関わるファイルが更新されたら、CoffeeScriptをコンパイルしてからmochaでテストする」
+という事例で2つの方法を紹介します。
+
+## gulpだけで解決する方法
 
 ```
 gulp = require 'gulp'
@@ -52,7 +65,7 @@ gulp.task 'default', [
 
 [`Stream#on('end')`](http://nodejs.org/api/stream.html#stream_event_end) でタスクの終了を待ってから `gulp.start()` で次のタスクを開始します。
 
-# [run-sequence](https://github.com/OverZealous/run-sequence) を使うパターン
+## [run-sequence](https://github.com/OverZealous/run-sequence) を使う方法
 
 ```
 gulp = require 'gulp'
@@ -96,6 +109,6 @@ gulp.task 'default', [
 `run-sequence` で `'coffee'` と `'mocha'` を順に実行するタスクを新たに作ります。
 タスクの中に次のタスクを書かないことでタスク同士の依存性が減るので、タスクの組み合わせが何通りかある場合は使い勝手が良いかもしれません。
 
-## 参考サイト
+# 参考サイト
 
 - [[Gulp.js] タスク単位のファイル分割 ｜ Developers.IO](http://dev.classmethod.jp/client-side/javascript/gulp-js-task-files/)

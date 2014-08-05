@@ -1,13 +1,16 @@
 +++
 date = 2014-08-04T06:12:39Z
 draft = true
-title = "gulp-rebuild-html"
+title = "GulpでHTMLを再構築する"
 tags = [
-  "Gulp",
+  "gulp",
+  "gulp-rebuild-html",
   "HTML",
   "HTMLParser"
 ]
 +++
+
+HTMLをパースしつつ、変更を加えたノードでHTMLを構築し直すプラグインの紹介です。
 
 # このプラグインがすること
 

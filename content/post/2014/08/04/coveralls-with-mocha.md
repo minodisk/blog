@@ -10,7 +10,7 @@ tags = [
 ]
 +++
 
-mochaでCoverallsのバッジ作る方法
+TravisCI終わりに `istanbul`と`mocha`で Coveralls のバッジ作る方法です。
 
 # 設定順序
 

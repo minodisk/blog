@@ -26,7 +26,7 @@ TravisCI終わりに `istanbul`と`mocha`で Coveralls のバッジ作る方法�
 ## 1. 必要なパッケージをインストール
 
 ```
-npm install -D coveralls istanbul mocha-lcov-reporter
+$ npm install -D coveralls istanbul mocha-lcov-reporter
 ```
 
 ## 2. istanbulでカバレッジを出力するテスト

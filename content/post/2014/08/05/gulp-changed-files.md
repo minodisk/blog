@@ -21,6 +21,7 @@ Jadeのコンパイルを紹介します。
 Jadeのコンパイルでは`include`やdataの出力を伴うので、ファイルの変更時に必要なファイルだけをコンパイルしようとするとそれなりにgulpfileを書く必要があります。
 
 ## 構成
+
 ```
 .
 ├── jade
@@ -31,6 +32,7 @@ Jadeのコンパイルでは`include`やdataの出力を伴うので、ファイ
 ```
 
 ## gulpfile.coffee
+
 ```coffeescript
 gulp = require 'gulp'
 debug = require 'gulp-debug'
@@ -74,7 +76,7 @@ gulp.task 'default', [
 ※ `gulp-debug`はどのファイルに処理を行うのかトレースしてくれるプラグインです。
 gulpfile完成後は必要ないと思うのでコメントアウトするとよいでしょう。
 
-## タスクに引数を渡せないの？
+# タスクに引数を渡せないの？
 
 `jade`タスクにしか関係の無い`shouldBeJadeCached`をグローバルなところに置いているのが若干の気持ち悪さがあります。
 gruntみたいにタスクに引数渡せればと思いましたが、コラボレータのphatedが「タスクにパラメータをサポートして欲しい」というスレッドで[否定的な意見](https://github.com/orchestrator/orchestrator/issues/17#issuecomment-33324929)を表明していて引数のサポートは今のところなさそうです。

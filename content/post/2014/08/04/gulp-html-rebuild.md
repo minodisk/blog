@@ -4,7 +4,7 @@ draft = true
 title = "GulpでHTMLを再構築する"
 tags = [
   "gulp",
-  "gulp-rebuild-html",
+  "gulp-html-rebuild",
   "HTML",
   "HTMLParser"
 ]

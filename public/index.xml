@@ -224,7 +224,7 @@
       <guid>http://dsk.mn/post/install-node-canvas</guid>
       <description>
 
-&lt;p&gt;依存バッケージをインストールしておかないと&lt;code&gt;node-canvas&lt;/code&gt;のインストールでコケる。&lt;/p&gt;
+&lt;p&gt;依存パッケージをインストールしておかないと&lt;code&gt;node-canvas&lt;/code&gt;のインストールでコケる。&lt;/p&gt;
 
 &lt;h2 id=&#34;toc_0&#34;&gt;CentOS&lt;/h2&gt;
 
